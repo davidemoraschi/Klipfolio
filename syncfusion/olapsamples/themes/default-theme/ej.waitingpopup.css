@@ -1,0 +1,12 @@
+/*-----------------------OLAP Definition-----------------*/
+/*-----------------------SymbolPalette Definition-----------------*/
+/*------------------------------------- MetroLight Skin -------------------------------------------*/
+
+.e-waitpopup-pane .e-image {
+  background-color: white;
+  background-image: url(images/waitingpopup.gif);
+}
+.e-waitpopup-pane {
+  background-color: #aaaaaa;
+  color: white;
+}

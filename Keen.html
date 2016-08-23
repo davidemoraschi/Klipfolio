@@ -1,0 +1,37 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <script src="https://d26b395fwzu5fz.cloudfront.net/3.2.4/keen.min.js"></script>
+    <script type="text/javascript">
+    var client = new Keen({
+        projectId: "556f5c97672e6c3f9ed0051e",       // String (required)
+        writeKey: "3ba2ee3ca5aca1ebb17eff4780acd0e5167ca7b657d4e38ed3ce5dcd3d981a7124156d998afdaa96060636b93e7bde4354d3f3528fc215b93e4bfa3072d53cbfcbfb64ffad36a5be70a49b78f41b299b59041034ba33a2aff1d47481eacaff1dc29994e59d2ec6453417585bca1297f1", // String (required for sending data)
+        readKey: "f2985945adcf170cda54d6c8893c6aa8ad4287d3ad023b58cdaa6324ce8359971c71886437564e4708f1753be087bd74fb7b19488cd9250718429015ecb86ea4e63b9f2a5dcc1cb60ea2b258c063e1cead16cff038dc70dbe7625980b1cf400c0c99934b40944ee84cb4411748eb24dd",   // String (required for querying data)
+        protocol: "https",                  // String (optional: https | http | auto)
+        host: "api.keen.io/3.0",            // String (optional)
+        requestType: "jsonp"                // String (optional: jsonp, xhr, beacon)
+    });
+
+    Keen.ready(function(){
+        var query = new Keen.Query("count", {
+            eventCollection: "SensorReadings",
+            //groupBy: "visitor.geo.country",
+            interval: "minutely",
+            timeframe: "this_1_days"
+    });
+    //var chart = client.draw(query, document.getElementById("chart-wrapper"), {
+    //    title: "Custom chart title",
+    //    chartType: "columnchart"
+    //});
+        client.draw(query, document.getElementById("chart-wrapper"), {
+            chartType: "linechart",
+            title: "Sensor Readings (1 day)"
+        });
+    });
+    </script>
+</head>
+<body>
+    <div id="chart-wrapper" />
+</body>
+</html>

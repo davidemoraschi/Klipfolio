@@ -1,0 +1,92 @@
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Essential Studio for JavaScript : DatePicker - Default Functionalities</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" charset="utf-8"  />
+   <link href="../themes/bootstrap.min.css" rel="stylesheet">
+    <link href="../themes/default-theme/ej.widgets.all.min.css" rel="stylesheet" />
+    <link href="../themes/default.css" rel="stylesheet" />
+    <link href="../themes/default-responsive.css" rel="stylesheet" />
+    <!--[if lt IE 9]>
+    <script src="../scripts/jquery-1.11.3.min.js" type="text/javascript"></script>
+    <![endif]-->
+    <!--[if gte IE 9]><!-->
+    <script src="../scripts/jquery-2.1.4.min.js" type="text/javascript"></script>
+    <!--<![endif]-->
+    <script src="../scripts/jquery.easing.1.3.min.js" type="text/javascript"></script>
+    <script src="../scripts/ej.web.all.min.js" type="text/javascript"></script>
+    <script src="../scripts/jquery.globalize.min.js" type="text/javascript"></script>
+    <script src="../scripts/cultures/globalize.culture.en-US.min.js"></script>
+    <script src="../scripts/properties.js" type="text/javascript"></script>    
+</head>
+<body>
+    <div class="content-container-fluid">
+        <div class="row">
+            <div class="cols-sample-area">
+                <div class="frame ">
+                    <div class="control">
+                        <label>Select Show Date </label>
+                        <input id="datepick" type="text" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        $(function () {
+		 var today = new Date(),
+                        spldays = [
+                               { date: new Date(today.getFullYear(), today.getMonth(), 1),tooltip: "In America", icon: "flag-am" },
+                               { date: new Date(today.getFullYear(), today.getMonth() + 1, 6), tooltip : "In Argendina", icon: "flag-ar" },
+                               { date: new Date(today.getFullYear(), today.getMonth() + 1, 27),tooltip : "In Bangladesh", icon: "flag-bd" },
+                               { date: new Date(today.getFullYear(), today.getMonth() - 1, 3),tooltip : "In Brasil", icon: "flag-br" },
+                               { date: new Date(today.getFullYear(), today.getMonth() - 2, 22),tooltip : "In Canada", icon: "flag-ca" },
+                        ]
+		    // declaration
+            $("#datepick").ejDatePicker({	
+			specialDates: spldays,				
+			highLight:"workdays",
+            highLightWeekend:true			
+			
+			});
+        });
+    </script>
+    <style type="text/css" class="cssStyles">
+        .frame .control
+        {
+            margin-left: 23px;
+        }       
+
+        .flag .e-image {            
+            background: transparent url(flags.png) no-repeat left center;
+            width: 25px;
+            height: 15px;                       
+        }      
+		
+        .flag.flag-am .e-image {
+            background-position: -25px 0;
+        }
+
+        .flag.flag-ar .e-image {
+            background-position: -50px 0;
+        }
+
+        .flag.flag-bd .e-image {
+            background-position: -75px 0;
+        }
+
+        .flag.flag-br .e-image {
+            background-position: -100px 0;
+        }
+
+        .flag.flag-ca .e-image {
+            background-position: -125px 0;
+        }
+       .e-datepicker.e-calendar {
+            width: 28em;
+        }	     
+
+		
+    </style>
+</body>
+</html>

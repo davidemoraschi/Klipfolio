@@ -1,0 +1,71 @@
+<!doctype html>
+<html>
+<head>
+    <title>Essential Studio for JavaScript : Rotator Default Functionalities</title>
+   <meta name="viewport" content="width=device-width, initial-scale=1.0" charset="utf-8"  />
+	<link href="../themes/bootstrap.min.css" rel="stylesheet">
+    <link href="../themes/default-theme/ej.widgets.all.min.css" rel="stylesheet" />
+    <link href="../themes/default.css" rel="stylesheet" />
+    <link href="../themes/default-responsive.css" rel="stylesheet" />
+	<!--[if lt IE 9]>
+	<script src="../scripts/jquery-1.11.3.min.js" type="text/javascript" ></script> 
+	<![endif]-->
+	<!--[if IE 9]><!-->
+	<script src="../scripts/jquery-2.1.4.min.js" type="text/javascript"> </script>
+	<!--<![endif]-->
+    <script src="../scripts/jquery.easing.1.3.min.js" type="text/javascript"></script>
+    <script src="../scripts/ej.web.all.min.js" type="text/javascript"></script>
+    <script src="../scripts/properties.js" type="text/javascript"></script>
+</head>
+<body>
+    <div class="content-container-fluid">      
+            <div class="row">                
+                <div class="cols-sample-area">                                  
+					<div class="frame">
+                        <ul id="sliderContent">
+						     <li><img class="image" src="../images/rotator/nature.jpg"  title="Nature"/></li>
+                            <li><img class="image" src="../images/rotator/bird.jpg"   title="Beautiful Bird"/></li>
+                            <li><img class="image" src="../images/rotator/sculpture.jpg"  title="Amazing Sculptures"/></li>
+                            <li><img class="image" src="../images/rotator/seaview.jpg"  title="Sea-View"/></li>
+                            <li><img class="image" src="../images/rotator/snowfall.jpg"  title="Snow Fall"/></li>
+                            <li><img class="image" src="../images/rotator/card.jpg"  title="Credit Card"/></li>
+                            <li><img class="image" src="../images/rotator/night.jpg"  title="Colorful Night"/></li>
+                        </ul>
+                    </div>                
+                </div>
+            </div>
+    </div>
+    <script type="text/javascript">
+        $(function () {
+            // declaration
+          
+            $("#sliderContent").ejRotator({
+                slideWidth: "600px",
+                frameSpace: "0px",
+                displayItemsCount: "1",
+                slideHeight: "350px",
+                navigateSteps: "1",
+                enableResize: true,
+                pagerPosition: ej.Rotator.PagerPosition.Outside,
+                orientation:ej.Orientation.Horizontal,
+                showPager: true,
+                enabled: true,
+                showCaption: true,
+                allowKeyboardNavigation: true,
+                showPlayButton: true,
+                enableRTL: true,
+                animationType: "slide",
+            });
+        });
+    </script>
+    <style type="text/css" class="cssStyles">
+        .frame {
+            width: 600px;
+        }
+        #sliderContent > li .image {
+            width:600px;
+            height:350px;
+        }
+    </style>
+</body>
+</html>

@@ -1,0 +1,202 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{984AC24F-8B80-4A28-A9C1-449EF38CB921}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>sample_2013</RootNamespace>
+    <AssemblyName>sample_2013</AssemblyName>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.AnalysisServices.AdomdClient">
+      <HintPath>lib\net40\Microsoft.AnalysisServices.AdomdClient.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data.SqlServerCe" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Syncfusion.Linq.Base" />
+    <Reference Include="Syncfusion.Compression.Base" />
+    <Reference Include="Syncfusion.Olap.Base" />
+    <Reference Include="Syncfusion.PivotAnalysis.Base" />
+    <Reference Include="Syncfusion.EJ" />
+    <Reference Include="Syncfusion.EJ.Olap" />
+    <Reference Include="Syncfusion.XlsIO.Base" />
+    <Reference Include="Syncfusion.DocIO.Base" />
+    <Reference Include="Syncfusion.Pdf.Base" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="default.htm" />
+    <Content Include="olapchart\angularsupport.html" />
+    <Content Include="olapchart\default.html" />
+    <Content Include="olapchart\knockout.html" />
+    <Content Include="olapchart\types.html" />
+    <Content Include="olapchart\localization.html" />
+    <Content Include="olapclient\angularsupport.html" />
+    <Content Include="olapclient\customization.html" />
+    <Content Include="olapclient\default.html" />
+    <Content Include="olapchart\exporting.html" />
+    <Content Include="olapclient\knockout.html" />
+    <Content Include="olapclient\localization.html" />
+    <Content Include="olapgauge\angularsupport.html" />
+    <Content Include="olapgauge\default.html" />
+    <Content Include="olapclient\exportingmodes.html" />
+    <Content Include="olapgauge\events.html" />
+    <Content Include="olapgauge\knockout.html" />
+    <Content Include="olapgauge\layout.html" />
+    <Content Include="olapgauge\pointer.html" />
+    <Content Include="olapgauge\range.html" />
+    <Content Include="olapgauge\scale.html" />
+    <Content Include="olapgauge\localization.html" />
+    <Content Include="pivotgrid\angularsupport.html" />
+	<Content Include="pivotgrid\conditionalformatting.html" />
+    <Content Include="pivotgrid\cellselection.html" />
+    <Content Include="pivotgrid\default.html" />
+    <Content Include="pivotgrid\exporting.html" />
+    <Content Include="pivotgrid\groupingbar.html" />
+    <Content Include="pivotgrid\hyperlink.html" />
+    <Content Include="pivotgrid\cellcontext.html" />
+    <Content Include="pivotgrid\drillposition.html" />
+    <Content Include="pivotgrid\knockout.html" />
+    <Content Include="pivotgrid\kpi.html" />
+    <Content Include="pivotgrid\layout.html" />
+    <Content Include="pivotgrid\paging.html" />
+    <Content Include="pivotgrid\localization.html" />
+    <Content Include="pivotgrid\rtl.html" />
+    <Content Include="pivotgrid\olap.html" />
+    <Content Include="pivotgrid\pivot.html" />
+    <Content Include="wcf\DrillPositionService.svc" />
+    <Content Include="wcf\KPIService.svc" />
+    <Content Include="wcf\OlapChartService.svc" />
+    <Content Include="wcf\OlapClientService.svc" />
+    <Content Include="wcf\OlapGaugeService.svc" />
+    <Content Include="wcf\OLAPService.svc" />
+    <Content Include="wcf\PagingService.svc" />
+    <Content Include="wcf\RelationalService.svc" />
+    <Content Include="Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="wcf\DrillPositionService.svc.cs">
+      <DependentUpon>DrillPositionService.svc</DependentUpon>
+    </Compile>
+    <Compile Include="wcf\IOlapChartService.cs" />
+    <Compile Include="wcf\IOlapClientService.cs" />
+    <Compile Include="wcf\IOlapGaugeService.cs" />
+    <Compile Include="wcf\IOLAPService.cs" />
+    <Compile Include="wcf\IRelationalService.cs" />
+    <Compile Include="wcf\KPIService.svc.cs">
+      <DependentUpon>KPIService.svc</DependentUpon>
+    </Compile>
+    <Compile Include="wcf\OlapChartService.svc.cs">
+      <DependentUpon>OlapChartService.svc</DependentUpon>
+    </Compile>
+    <Compile Include="wcf\OlapClientService.svc.cs">
+      <DependentUpon>OlapClientService.svc</DependentUpon>
+    </Compile>
+    <Compile Include="wcf\OlapGaugeService.svc.cs">
+      <DependentUpon>OlapGaugeService.svc</DependentUpon>
+    </Compile>
+    <Compile Include="wcf\OLAPService.svc.cs">
+      <DependentUpon>OLAPService.svc</DependentUpon>
+    </Compile>
+    <Compile Include="wcf\PagingService.svc.cs">
+      <DependentUpon>PagingService.svc</DependentUpon>
+    </Compile>
+    <Compile Include="wcf\RelationalService.svc.cs">
+      <DependentUpon>RelationalService.svc</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Properties\" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>54580</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:54580/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+   <Target Name="BeforeBuild">
+    <Copy Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU' Or '$(Configuration)|$(Platform)' == 'Release|AnyCPU'" SourceFiles="$(ProjectDir)web_2013.config" DestinationFiles="$(ProjectDir)web.config">
+    </Copy>
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

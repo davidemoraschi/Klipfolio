@@ -1,0 +1,77 @@
+/*-----------------------OLAP Definition-----------------*/
+/*-----------------------SymbolPalette Definition-----------------*/
+/*Theme Color*/
+
+.e-tab {
+  font-family: Segoe UI;
+}
+.e-tab .e-header,
+.e-tab .e-left,
+.e-tab .e-right {
+  background: #1b95cf;
+  /* Old browsers */
+
+  border-bottom: 1px solid #1b95cf;
+}
+.e-tab .e-left li,
+.e-tab .e-right li {
+  border-bottom: 1px solid #bbbcbb;
+}
+.e-tab.e-vertical {
+  background: white;
+  border: 1px solid #bbbcbb;
+}
+.e-tab .e-header > .e-item:hover,
+.e-tab .e-left > .e-item:hover,
+.e-tab .e-right > .e-item:hover {
+  background: #5eabde;
+  /* Old browsers */
+
+  color: white;
+  border-image: initial;
+}
+.e-tab .e-content {
+  border-color: #bbbcbb;
+  background: white;
+  color: #5c5c5c;
+  font-size: 14px;
+}
+.e-tab .e-header > .e-select,
+.e-tab .e-header > .e-active,
+.e-tab .e-left > .e-active,
+.e-tab .e-right > .e-active,
+.e-tab .e-left > .e-select,
+.e-tab .e-right > .e-select {
+  background: #1b95cf;
+  /* Old browsers */
+
+  border-color: #bbbcbb;
+  color: white;
+  font-weight: normal;
+  font-size: 16px;
+}
+.e-tab .e-header > .e-select a,
+.e-tab .e-left > .e-select a,
+.e-tab .e-right > .e-select a {
+  color: white;
+}
+.e-tab .e-header > .e-active,
+.e-tab .e-header > .e-active:hover,
+.e-tab .e-left > .e-active,
+.e-tab .e-left > .e-active:hover,
+.e-tab .e-right > .e-active,
+.e-tab .e-right > .e-active:hover {
+  background: white;
+  border-color: #bbbcbb;
+  color: #5c5c5c;
+}
+.e-tab .e-header > .e-active a,
+.e-tab .e-left > .e-active a,
+.e-tab .e-right > .e-active a {
+  color: #5c5c5c;
+}
+.e-tab .e-load {
+  background-image: url(images/ajax-loader.gif);
+  background-position: center;
+  background-repeat: no-repeat;
+}

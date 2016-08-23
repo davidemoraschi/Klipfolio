@@ -1,0 +1,393 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Essential Studio for JavaScript</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Essential Studio for JavaScript">
+    <meta name="author" content="Syncfusion">
+    <link rel="shortcut icon" href="themes/images/favicon.ico">
+    <!-- Sample Browser related references-->
+    <link href="themes/bootstrap.min.css" rel="stylesheet">
+	<link href="themes/ej.widgets.core.min.css" rel="stylesheet" />
+    <link href="themes/default-theme/ej.widgets.all.min.css" rel="stylesheet" />
+    <link href="themes/default.css" rel="stylesheet" />
+    <!--Dependency files references-->
+    <!--[if lt IE 9]>
+	<script src="scripts/jquery-1.11.3.min.js" type="text/javascript" ></script> 
+	<![endif]-->
+	<!--[if IE 9]><!-->
+	<script src="scripts/jquery-2.1.4.min.js" type="text/javascript"> </script>
+	<!--<![endif]-->
+    <script src="scripts/jquery.easing.1.3.min.js" type="text/javascript"></script>
+    <!--Localization references-->
+    <script src="scripts/jquery.globalize.min.js" type="text/javascript"></script>
+    <script src="scripts/path.js"></script>
+    <script src="scripts/jsrender.min.js" type="text/javascript"></script>
+
+    <script src="scripts/ej.web.all.min.js" type="text/javascript"></script>
+    <!-- Sample Browser related references-->
+    <script src="scripts/otherProducts.js"></script>
+    <script src="scripts/default.js" type="text/javascript"></script>
+    <script src="scripts/sampleslist.js" type="text/javascript"></script>
+
+    <!--highlighter references-->
+    <script src="scripts/CodeMirror/codemirror.js" type="text/javascript"></script>
+    <script src="scripts/CodeMirror/javascript.js" type="text/javascript"></script>
+    <script src="scripts/CodeMirror/css.js" type="text/javascript"></script>
+    <script src="scripts/CodeMirror/xml.js" type="text/javascript"></script>
+    <script src="scripts/CodeMirror/htmlmixed.js" type="text/javascript"></script>
+    <script src="scripts/CodeMirror/clike.js" type="text/javascript"></script>    
+	<link href="scripts/CodeMirror/codemirror.min.css" rel="stylesheet" />
+
+     <!--ZeroClipboard Reference-->
+     <script src="scripts/ZeroClipboard.js"></script>
+</head>
+<body class="fixedlayout">
+    <div class="htmljssamplebrowser" style="display: block !important">
+        <div class="header">
+            <div class="sbheader">
+                <div class="title">
+                    <a title="Essential Studio for JavaScript" href="default.htm" class="anchorclass site-title">
+                        <div title="Essential Studio for JavaScript" class="jslogo"></div>
+                    </a>
+                </div>
+                <div class="product-naviation hideIt">				
+				<div class="selectedproduct">Desktop</div>      
+				<div class="not-selected">Mobile</div></div>
+<div id="Res-prodnav" class="menulogo"></div>				
+                <div style="float: right;">
+                    <div class="wrapper-demo">
+                        <a href="http://www.syncfusion.com/downloads/javascript" class="anchorclass">
+                            <button id="buybutton" class="float-right ejbutton downbutton" title="Download" type="button"></button>
+                        </a>
+                    </div>
+                    <div class="themegallery">
+                        <button id="themebutton" class="ejbutton" title="Select Theme" type="button"></button>
+                        <div id="sbtooltipbox">
+                            <div class="sbtooltip"></div>
+                        </div>
+                        <div id="themeDialog" style="display: none;">
+                            <div class="themestyle">
+                                <input type="radio" id="metrotext" name="themestyle" class="themestyleradio" value="flat" />
+                                <label for="metrotext" class="skin-name">Flat</label>
+                                <input type="radio" id="gradienttext" name="themestyle" class="themestyleradio" value="gradient" />
+                                <label for="gradienttext" class="skin-name">Gradient</label>
+                            </div>
+                            <div class="themevarient">
+                                <input type="radio" id="lighttext" name="themevarient" class="themevarientradio" value="light" />
+                                <label for="lighttext" class="skin-name">Light</label>
+                                <input type="radio" id="darktext" name="themevarient" class="themevarientradio" value="dark" />
+                                <label for="darktext" class="skin-name">Dark</label>
+                            </div>
+                            <div class="themecolors">
+                                <div id="themeazure" class="circlebaseouter colorsel">
+                                    <div class="circlebaseinner azure"></div>
+                                </div>
+                                <div id="themelime" class="circlebaseouter">
+                                    <div class="circlebaseinner lime"></div>
+                                </div>
+                                <div id="themesaffron" class="circlebaseouter">
+                                    <div class="circlebaseinner saffron"></div>
+                                </div>
+                            </div>
+                            <div class="bootstraptheme" >
+                                <input type="checkbox" id="bootstrapcheck" />
+                                <label for="bootstrapcheck" class="skin-name">Bootstrap</label>                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="content-container-fluid">
+            <div class="row">
+                <div class="accordion-panel cols-fixed-sidebar">
+                    <div class="search">
+                        <input type="text" id="auto" class="autotext" /><span class='search-icon' ></span>
+                        <span class="navigation"></span>
+                    </div>
+                    <div id="dashboardheader">
+                            <div id="sbdashboard" class="dashboardhead">
+                                <span class="anchor">SHOWCASE SAMPLES</span>
+                         </div> 
+                            </div>
+                    <div id="scrollcontainer">
+                        <div>
+							<div class="accordion" id="accordion2">
+                            </div>
+							 <script id="accordionGroupTmpl" type="text/x-jsrender">
+								<div class="SB-groupIt downArrow"><span>{{:#view.data}}</span><span class="SB-Arrow"></span></div>
+								<div class="SB-group {{RemoveWhiteSpace:#view.data}}"></div>
+                            </script>
+                            <script id="accordionTmpl" type="text/x-jsrender">
+							   {{if (publish=="online" && online==true) || publish !="online"}} 
+                                <div id="{{>id}}" class="anchorclass mainlevel" hashbang="#!/flat/{{>id}}/{{ensureURL:url}}">
+                                    <div class="dashboard">
+                                        <span class="anchor">{{>name}}</span>
+										{{if type}} <span class="samplestatus {{>type}}"></span>{{/if}}
+                                    </div>
+                                </div>
+								{{/if}}
+                            </script>
+                            <div class="accordion samplesCollection" id="samplesDiv"></div>
+                            <script type="text/x-jsrender" id="accordionTmplchild">
+							  
+										{{if (publish=="online" && online==true) || publish !="online"}} 
+                                    								<div id="{{>id}}" class="samples">
+                                    <div id="{{>id}}_back" class="firstlevelback dashboardhead">
+									<span class="arrowback"></span><span class="anchor sbheading">ALL CONTROLS</span>
+									</div>
+									<div id="{{>id}}_header" class="dashboardhead">
+									<span class="anchor sbheading">{{:name}}</span>
+									</div>
+                                    {{for samples ~pId=id}} 
+									 	{{if (childcount>0)}}
+											<div class="subsample-1">
+                                                      <div class="SB-groupIt downArrow"><span>{{Upperstring:name}}</span><span class="SB-Arrow"></span></div>                                              
+                                                    <div id="{{>id}}"  width="200px">                                                        
+                                                        {{for samples ~rId=~pId ~sId=url}}                                                                                                 
+															{{if (publish=="online" && online==true) || publish !="online"}} 														
+							<div  hashbang="#!/flat/{{ensureURL:~rId}}/{{ensureURL:~sId}}/{{ensureURL:url}}" class="subsamples SB-group SB-hashcollection secondlevelload anchorclass"  >
+                                                        <div id="{{>id}}" class="dashboard" childcount="{{>childcount}}" querystring="{{>querystring}}">
+                                                            <span class="anchor">{{>name}}</span>
+															{{if type}} <span class="samplestatus {{>type}}"></span>{{/if}}
+                                                        </div>
+                                                    </div>
+													{{/if}}
+                                                        {{/for}}
+                                                    </div></div>
+
+										{{else}}
+										<div class="anchorclass SB-hashcollection subsamples samples" hashbang="#!/flat/{{ensureURL:~pId}}/{{ensureURL:url}}">
+                                            <div id="{{>id}}" class="firstlevelload dashboard" childcount="{{>childcount}}" querystring="{{>querystring}}">
+                                                <span class="anchor">{{>name}}</span>
+												{{if type}} <span class="samplestatus {{>type}}"></span>{{/if}}
+												</div>
+												</div>
+										{{/if}}									
+                                    {{/for}}
+                                </div>
+								{{/if}}
+                            </script>
+                            <div id="subsamplesDiv" style="display: none">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <span class="navigation collapsePanel"></span>
+				<div class="control-panel scrollit">
+                    <div class="row">
+                        <div class="productpage showpage">
+                            <div class="controlText-section">
+                                <span class="producttitle">Showcase samples</span>
+                                <div class="controlSamples-section">
+                                    <ul class="featuredsamples">
+                                        <li class="listsampleimage">
+                                            <div class="lisampleimage">
+                                                <a href="dashboard/healthtracker/default.html" target="_blank">
+                                                    <div class="imgstyle img1"></div>
+                                                </a>
+                                            </div>
+                                            <div class="litext">
+                                                <a class="anchorclass aclass">Health Tracker</a>
+                                                <p>
+                                                    Visualize food intake and calories burnt using gauges, charts and grids.
+                                                </p>
+                                            </div>
+                                            <div class="samplebutton">
+                                                <a class="anchorclass" href="dashboard/healthtracker/default.html" target="_blank">
+                                                    <div><span>VIEW SAMPLE</span></div>
+                                                </a>
+                                            </div>
+                                            <span class="qrcode"><span class="qrimage qrhealth"></span></span>
+                                        </li>
+										<li class="listsampleimage">
+                                            <div class="lisampleimage">
+                                                <a href="dashboard/projecttracker/projecttracker.html" target="_blank">
+                                                    <div class="imgstyle img8"></div>
+                                                </a>
+                                            </div>
+                                            <div class="litext">
+                                                <a class="anchorclass aclass">Project Tracker</a>
+                                                <p>Visualize and edit project schedule, and track project progress.</p>
+                                            </div>
+                                            <div class="samplebutton">
+                                                <a class="anchorclass" href="dashboard/projecttracker/projecttracker.html" target="_blank">
+                                                    <div><span>VIEW SAMPLE</span></div>
+                                                </a>
+                                            </div>
+                                            <span class="qrcode"><span class="qrimage qrprojecttracker"></span></span>
+                                        </li>
+										<li class="listsampleimage">
+                                            <div class="lisampleimage">
+                                                <a href="dashboard/diagrambuilder/default.html" target="_blank">
+                                                    <div class="imgstyle img6"></div>
+                                                </a>
+                                            </div>
+                                            <div class="litext">
+                                                <a class="anchorclass aclass">Diagram Builder</a>
+                                                <p>Create flowcharts, workflows, and diagrams by using Diagram Builder.</p>
+                                            </div>
+                                            <div class="samplebutton">
+                                                <a class="anchorclass" href="dashboard/diagrambuilder/default.html" target="_blank">
+                                                    <div><span>VIEW SAMPLE</span></div>
+                                                </a>
+                                            </div>
+                                            <span class="qrcode"><span class="qrimage qrdiagramBuilder"></span></span>
+                                        </li>                                        
+                                        <li class="listsampleimage">
+                                            <div class="lisampleimage">
+                                                <a href="dashboard/expenseanalysis/default.html" target="_blank">
+                                                    <div class="imgstyle img4"></div>
+                                                </a>
+                                            </div>
+                                            <div class="litext">
+                                                <a class="anchorclass aclass">Expense Analysis</a>
+                                                <p>Categorize and analyze expenses to understand how money was spent.</p>
+                                            </div>
+                                            <div class="samplebutton">
+                                                <a class="anchorclass" href="dashboard/expenseanalysis/default.html" target="_blank">
+                                                    <div><span>VIEW SAMPLE</span></div>
+                                                </a>
+                                            </div>
+                                            <span class="qrcode"><span class="qrimage qrexpense"></span></span>
+                                        </li>
+                                        <li class="listsampleimage">
+                                            <div class="lisampleimage">
+                                                <a href="dashboard/salesAnalysis/salesAnalysis.html" target="_blank">
+                                                    <div class="imgstyle img5"></div>
+                                                </a>
+                                            </div>
+                                            <div class="litext">
+                                                <a class="anchorclass aclass">Sales Analysis</a>
+                                                <p>Sales analysis app which uses Maps and Range Navigator controls .</p>
+                                            </div>
+                                            <div class="samplebutton">
+                                                <a class="anchorclass" href="dashboard/salesAnalysis/salesAnalysis.html" target="_blank">
+                                                    <div><span>VIEW SAMPLE</span></div>
+                                                </a>
+                                            </div>
+                                            <span class="qrcode"><span class="qrimage qrsales"></span></span>
+                                        </li>
+										<li class="listsampleimage">
+                                            <div class="lisampleimage">
+                                                <a href="dashboard/stockAnalysis/default.html" target="_blank">
+                                                    <div class="imgstyle img2"></div>
+                                                </a>
+                                            </div>
+                                            <div class="litext">
+                                                <a class="anchorclass aclass">Stock Analysis</a>
+                                                <p>Analyze historical stock price and volume data using charts.</p>
+                                            </div>
+                                            <div class="samplebutton">
+                                                <a class="anchorclass" href="dashboard/stockAnalysis/default.html" target="_blank">
+                                                    <div><span>VIEW SAMPLE</span></div>
+                                                </a>
+                                            </div>
+                                            <span class="qrcode"><span class="qrimage qrstock"></span></span>
+                                        </li>
+                                        <li class="listsampleimage">
+                                            <div class="lisampleimage">
+                                                <a href="dashboard/weather/default.html" target="_blank">
+                                                    <div class="imgstyle img3"></div>
+                                                </a>
+                                            </div>
+                                            <div class="litext">
+                                                <a class="anchorclass aclass">Weather Analysis</a>
+                                                <p>Analyze historical weather data using charts and grids.</p>
+                                            </div>
+                                            <div class="samplebutton">
+                                                <a class="anchorclass" href="dashboard/weather/default.html" target="_blank">
+                                                    <div><span>VIEW SAMPLE</span></div>
+                                                </a>
+                                            </div>
+                                            <span class="qrcode"><span class="qrimage qrweather"></span></span>
+                                        </li>
+                                         <li class="listsampleimage">
+                                            <div class="lisampleimage">
+                                                <a href="dashboard/airlinereservation/default.html" target="_blank">
+                                                    <div class="imgstyle img7"></div>
+                                                </a>
+                                            </div>
+                                            <div class="litext">
+                                                <a class="anchorclass aclass">Airline Reservation</a>
+                                                <p>Search and book flight tickets along with selecting your seat.</p>
+                                            </div>
+                                            <div class="samplebutton">
+                                                <a class="anchorclass" href="dashboard/airlinereservation/default.html" target="_blank">
+                                                    <div><span>VIEW SAMPLE</span></div>
+                                                </a>
+                                            </div>
+                                            <span class="qrcode"><span class="qrimage qrairlineReservation"></span></span>
+                                        </li>                                      
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="cols-iframe" style="display: none;">
+                            <div>
+                                <div class="sampleheadingtext">
+                                </div>
+                            </div>
+                            <div>
+                                <iframe id="samplefile" frameborder="0" tabindex="1" class="sample-container" onload="refreshIFrameTheme()"></iframe>
+                            </div>
+                        </div>
+                        <div id="sourceTab" class="cols-source" style="display: none">                         
+                        </div>
+                        <div id="sbeditcodedialog" class="sourcetab" style="display: none;">
+                        </div>
+                        <div class="liveeditctrls">
+                            <div>
+                                <div class="lddivider"></div>
+                            </div>
+                            <input type="checkbox" id="cssarea" class="e-chkbox" value="CSS" />CSS
+                        </div>
+                        <div id="sbloadingcontent" class="waiting"></div>
+                        <div id="sbwaitingTemplate" class="sbloadingtemplate" style="display: none">
+                            <span class="sbloadingtext">Loading...
+                            </span>
+                            <span class="sbloadingimg"></span>
+                        </div>
+                    </div>
+        <div id="footer">
+            <div class="bottom-links">
+                <div class="left">
+                    <div class="sync-text">
+                        Copyright © 2001-2015 Syncfusion Inc.
+                    </div>
+                </div>
+                <div class="right">
+                    <a href="http://www.syncfusion.com">
+                        <div class="syncfusion-image">
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+            </div></div>
+    </div>
+    </div>
+    <script type="text/javascript">
+        window.heightval = window.innerHeight - ($(".header").outerHeight() + $("#footer").outerHeight() + $(".search").outerHeight());
+        $(function () {           
+            //CodeView Tab in new Window           
+            
+            $("#sourceTab").on("click",'#EditWindow',function () {
+				if(!ej.isNullOrUndefined(window.sample))				
+					window.open('http://jsplayground.syncfusion.com/'+window.sample.liveediturl);				
+            });
+
+            //Copy to clipboard behavior 
+            
+            $('#sourceTab').on("mouseover", '.copycode', function () {
+                var tabObj = $("#sourceTab").data("ejTab");
+                var selectedtab = tabObj.option("selectedItemIndex");
+                $("#copytextarea").val(window.htmlEditor[selectedtab].doc.getSelection());
+            });           
+            
+        });
+
+    </script>
+</body>
+</html>

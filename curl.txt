@@ -1,0 +1,11 @@
+{  'name': 'SensorData',  'description': 'This is a real time data source',  'format': 'json',  'connector': 'simple_rest',  'refresh_interval': 60,  'properties': {    'endpoint_url': 'http://test/data/scatter.xml',    'method': 'GET'  }}
+
+{  'name': 'SensorData',  'description': 'This is a real time data source',  'format': 'json',  'connector': 'simple_rest',  'refresh_interval': 60  }}
+
+{  'name': 'SensorData',  'description': 'This is a real time data source',  'format': 'json',  'connector': 'simple_rest',  'refresh_interval': 60,  'properties': {    'endpoint_url': 'http://echo.jsontest.com/key/value/one/two',    'method': 'GET'  }}
+
+
+
+{"Humidity":"0.66","Temperature":"43","Timestamp":"2012-05-23T18:25:43.511Z"}
+
+

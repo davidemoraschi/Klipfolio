@@ -1,0 +1,134 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Essential Studio for JavaScript : HyperLink and Comments</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="utf-8" />
+    <link href="../themes/bootstrap.min.css" rel="stylesheet" />
+    <link href="../themes/default-theme/ej.widgets.all.min.css" rel="stylesheet" />
+    <link href="../themes/default.css" rel="stylesheet" />
+    <link href="../themes/default-responsive.css" rel="stylesheet" />
+    <link href="../themes/responsive-css/ej.responsive.css" rel="stylesheet" />
+    <!--[if lt IE 9]>
+    	<script src="../scripts/jquery-1.11.3.min.js" type="text/javascript" ></script> 
+    <![endif]-->
+    <!--[if IE 9]><!-->
+    	<script src="../scripts/jquery-2.1.4.min.js" type="text/javascript"> </script>
+    <!--<![endif]-->
+    <script src="../scripts/jquery.globalize.min.js"></script>
+    <script src="../scripts/jquery.easing.1.3.min.js"></script>
+	<script src="../scripts/jquery.validate.min.js"></script>
+    <script src="../scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="../scripts/jsrender.min.js"></script>
+    <script src="../scripts/ej.web.all.min.js" type="text/javascript"></script>
+    <script src="../scripts/properties.js" type="text/javascript"></script>
+	<script src="../scripts/xljsondata.js" type="text/javascript"></script>
+	<style type="text/css">
+		.cols-sample-area {
+			height: 90%;
+		}
+	</style>
+    <script>
+		function getSportSource(){
+			return [{ ItemName: "Sports Shoes", Qty: 20, MRP: "$30", Amount: "$600"}];
+		}
+		function getFormalSource(){
+			return [{ ItemName: "Formal Shoes", Qty: 20, MRP: "$15", Amount: "$300"}];
+		}
+		function getFlipFlopperSource(){
+			return [{ ItemName: "Flip- Flops & Slippers", Qty: 30, MRP: "$10", Amount: "$300"}];
+		}
+		function getRunningSource(){
+			return [{ ItemName: "Running Shoes", Qty: 20, MRP: "$10", Amount: "$200"}];
+		}
+		function getLoaferSource(){
+			return [{ ItemName: "Loafers", Qty: 31, MRP: "$10", Amount: "$310"}];
+		}
+        $(function () {
+            $("#Spreadsheet").ejSpreadsheet({
+                sheetCount: 3,
+                columnWidth: 60,
+                showRibbon: false,
+                allowFormulaBar: false,
+                scrollSettings:
+                {
+					width: "100%",
+                    height: 550,
+					isResponsive: true
+                },
+                sheets: [{
+                    rangeSettings: { dataSource: window.hyperlinkData, startCell: "A3", showHeader: true, },
+                }],
+                onLoadComplete: "onLoadComplete"
+            });
+        });
+        function onLoadComplete(args) {
+            var xlFormat, sheetIdx, xlComment, xlEdit, xlObj = $("#Spreadsheet").data("ejSpreadsheet");
+            xlFormat = xlObj.XLFormat;
+            xlEdit = xlObj.XLEdit;
+			xlComment = xlObj.XLComment;
+            //sheet1
+            sheetIdx = 1;
+            xlObj.renameSheet("Hyperlink");
+            xlObj.setWidthToColumns([{ cellIndex: 0, width: 130 }, { cellIndex: 1, width: 130 }, { cellIndex: 2, width: 130 }, { cellIndex: 3, width: 130 }, { cellIndex: 4, width: 140 }, { cellIndex: 5, width: 130 }]);
+            xlObj.setHyperlink("E5:E5", { "cellAdr": "A2:D3" }, 2);
+            xlObj.setHyperlink("E6:E6", { "cellAdr": "G2:J3" }, 2);
+            xlObj.setHyperlink("E8:E8", { "cellAdr": "B2:E3" }, 3);
+            xlObj.setHyperlink("E10:E10", { "cellAdr": "L2:O3" }, 2);
+            xlObj.setHyperlink("E11:E11", { "cellAdr": "H2:K3" }, 3);
+            xlObj.setHyperlink("F4:F4", { "webAdr": "www.amazon.com" }, 1);
+            xlObj.setHyperlink("F6:F6", { "webAdr": "www.aliexpress.in" }, 1);
+            xlObj.setHyperlink("F7:F7", { "webAdr": "www.alibaba.com" }, 1);
+            xlObj.setHyperlink("F10:F10", { "webAdr": "www.ebay.in" }, 1);
+            xlFormat.format({ "style": { "font-weight": "bold", "font-size": "12px" } }, "A3:F3");
+			xlComment.setComment(xlObj.getCell(3, 0, sheetIdx), "Casual Footwears with wide variety of colors.", false);	
+			xlComment.setComment(xlObj.getCell(5, 0, sheetIdx), "Formal Footwears with wide range of sizes.", false);	
+			xlComment.setComment(xlObj.getCell(3, 0, sheetIdx), "Sneakers with recent designs.", false);
+			xlComment.setComment(xlObj.getCell(5, 3, sheetIdx), "Good price for good quality.", false);
+			xlComment.setComment(xlObj.getCell(11, 3, sheetIdx), "High price for tough and stylish design.", false);
+			xlComment.setComment(xlObj.getCell(7, 2, sheetIdx), "Cheap and best with price and quality.", false);
+			xlComment.setComment(xlObj.getCell(8, 1, sheetIdx), "Low cost good design.", false);
+			xlComment.setComment(xlObj.getCell(12, 1, sheetIdx), "T-Shirts for a class.", false);
+			xlComment.deleteComment([12, 1, 12, 1]);
+			xlComment.showHideComment(xlObj.getCell(8, 1, sheetIdx));
+			xlFormat.format({ "type": "currency" }, "C4:D13");
+			//sheet2
+			sheetIdx = 2;
+			xlObj.gotoPage( sheetIdx, false);
+			xlObj.setWidthToColumns([{ cellIndex: 0, width: 130 },{ cellIndex: 6, width: 130 },{ cellIndex: 11, width: 130 }]);
+			xlFormat.format({ "style": { "font-weight": "bold", "font-size": "16px", "color": "#666699" } }, "A2:D2");
+			xlFormat.format({ "style": { "font-weight": "bold", "font-size": "16px", "color": "#666699" } }, "G2:J2");
+			xlFormat.format({ "style": { "font-weight": "bold", "font-size": "16px", "color": "#666699" } }, "L2:O2");
+			xlObj.updateRange(sheetIdx,{ dataSource: getFormalSource(), startCell: "G2", showHeader: true, });
+			xlObj.updateRange(sheetIdx,{ dataSource: getRunningSource(), startCell: "L2", showHeader: true, });
+			xlObj.updateRange(sheetIdx, { dataSource: getSportSource(), startCell: "A2", showHeader: true, });
+			xlFormat.format({ "type": "currency" }, "C3:D3");
+			xlFormat.format({ "type": "currency" }, "I3:J3");
+			xlFormat.format({ "type": "currency" }, "N3:O3");
+			//sheet3
+			sheetIdx = 3;
+			xlObj.gotoPage( sheetIdx, false);
+			xlObj.setWidthToColumns([{ cellIndex: 1, width: 130 },{ cellIndex: 7, width: 130 }]);
+			xlFormat.format({ "style": { "font-weight": "bold", "font-size": "16px", "color": "#666699" } }, "B2:E2");
+			xlFormat.format({ "style": { "font-weight": "bold", "font-size": "16px", "color": "#666699" } }, "H2:K2");
+			xlObj.updateRange(sheetIdx,{ dataSource: getFlipFlopperSource(), startCell: "B2", showHeader: true, });
+			xlObj.updateRange(sheetIdx, { dataSource: getLoaferSource(), startCell: "H2", showHeader: true, });
+			xlFormat.format({ "type": "currency" }, "D3:E3");
+			xlFormat.format({ "type": "currency" }, "J3:K3");
+			xlObj.gotoPage( 1, false);
+			xlObj.setActiveCell(2, 0);
+			xlObj.performSelection({ rowIndex: 2, colIndex: 0 }, { rowIndex: 2, colIndex: 0 });
+			xlObj.clearUndoRedo();
+        }
+   </script>
+</head>
+<body>
+    <div class="content-container-fluid">
+        <div class="row">
+            <div class="cols-sample-area">
+                <div id="Spreadsheet"></div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

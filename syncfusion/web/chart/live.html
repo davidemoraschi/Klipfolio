@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+ <head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href="../themes/bootstrap.min.css" rel="stylesheet">
+    <link href="../themes/default-theme/ej.widgets.all.min.css" rel="stylesheet" />
+    <link href="../themes/default.css" rel="stylesheet" />
+	<link href="../themes/default-responsive.css" rel="stylesheet" />
+    <!--[if lt IE 9]>
+         <script src="../scripts/jquery-1.11.3.min.js" type="text/javascript"></script>
+     <!--<![endif]-->
+    <!--[if gte IE 9]><!-->
+    <script src="../scripts/jquery-2.1.4.min.js" type="text/javascript"></script>
+    <!--<![endif]-->
+	<script src="../scripts/jquery.globalize.min.js"></script>
+    <script src="../scripts/ej.web.all.min.js" type="text/javascript"></script>
+	<script src="../scripts/properties.js" type="text/javascript"></script>
+ </head>
+ <body>  
+	<div class="content-container-fluid">      
+        <div class="row">                
+            <div class="cols-sample-area">                                  				
+				<div id="livechart"></div> 					                   
+            </div>				
+         </div>
+	</div>
+ <script type="text/javascript" language="javascript">
+	$(function () 
+	{
+        $("#livechart").ejChart(
+        {
+			//Initializing Primary X Axis
+            primaryXAxis:
+            {
+                majorGridLines: { visible: false },
+				valueType:'datetime',
+				labelFormat:'dd, hh:mm'
+			},
+			
+			//Initializing Primary Y Axis
+            primaryYAxis:
+            {
+      			range:{min:1000, max:1006, interval:1}
+            },
+			
+			//Initializing Series
+			series: 
+			[
+				{
+                    type: 'line',
+                    enableAnimation: false,
+					fill: "#E46455", opacity:0.8
+                },
+				{
+                    type: 'line',
+                    enableAnimation: false,
+					opacity:0.8
+                 }
+			],
+            load: 'onchartload',                    
+			canResize:true,
+            background: "transparent",
+			enableCanvasRendering:true,
+            size: { height: "600" },
+            legend: { visible: false, position: 'right' }
+        });
+    });
+	
+	var chartobj;	
+    var intervalId;	
+    var count = 0;	
+	
+    function OnRefresh() 
+	{	
+        if (chartobj.model.series[0].points.length > 50)
+		{
+            chartobj.model.series[0].points.splice(0, 2);
+			chartobj.model.series[1].points.splice(0, 2);
+            count += 2;
+        }
+        AddPoint(chartobj.model.series[0], count, 1000);
+		AddPoint(chartobj.model.series[1], count, 1001);
+        $("#livechart").ejChart("redraw");
+    }	
+	
+    function onchartload(sender) 
+	{
+		loadTheme(sender);  
+		for(var i=0;i<50;i=i+1)
+		{
+	     AddPoint(sender.model.series[0],0, 1000);
+	     AddPoint(sender.model.series[1],0, 1001);
+		}
+        chartobj = this;
+       intervalId = window.setInterval(OnRefresh, 20);
+    }
+	
+	function AddPoint(series, count, value) 
+	{
+        if (series.points == undefined)
+            series.points = [];			
+        series.points[series.points.length] = { x:new Date(1500, series.points.length+count , series.points.length+count) , y: getRandomNum(value) };
+    }
+	
+    function getRandomNum(value) 
+	{	    
+	    var value2 = 1002;
+		if((Math.random() + value2) < 1004.85)
+		{
+		    var random = Math.random();
+            value += (random+2);            
+		}
+		else
+        {
+            var random = Math.random();
+            value -= (random+2);                   
+        }    
+       return value;
+    }
+ </script>
+ </body>
+</html>
+
+

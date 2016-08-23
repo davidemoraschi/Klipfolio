@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title>Essential Studio for JavaScript : Gantt</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="../themes/bootstrap.min.css" rel="stylesheet" />
+    <link href="../themes/default-theme/ej.widgets.all.min.css" rel="stylesheet" />
+    <link href="../themes/default.css" rel="stylesheet" />
+    <link href="../themes/default-responsive.css" rel="stylesheet" />
+    <link href="../themes/responsive-css/ej.responsive.css" rel="stylesheet" />
+    <!--[if lt IE 9]>
+     <script type="text/javascript" src="../scripts/jquery-1.11.3.min.js" ></script>
+    <![endif]-->
+    <!--[if gte IE 9]><!-->
+    <script type="text/javascript" src="../scripts/jquery-2.1.4.min.js" ></script>
+    <!--<![endif]-->
+    <script src="../scripts/jquery.easing.1.3.min.js"></script>
+    <script src="../scripts/jquery.globalize.min.js"></script>    
+    <script src="../scripts/jsrender.min.js"></script>
+    <script src="../scripts/ej.web.all.min.js" type="text/javascript"></script>
+    <script src="../scripts/properties.js" type="text/javascript"></script>    
+</head>
+
+<body>   
+    <div class="content-container-fluid">
+	     <div class="row">
+		    <div class="cols-sample-area">			 		         
+				 <div id="GanttContainer" style="height:450px;width:100%;"/>
+			</div> 
+		 </div>
+	</div>	
+
+    <script type="text/javascript">
+
+	    //RESOURCE DECALARATION OF GANTT CONTROL
+        var resources = [
+       { "Id": 1, "Name": "Resource 1" },
+       { "Id": 2, "Name": "Resource 2" },
+       { "Id": 3, "Name": "Resource 3" },
+       { "Id": 4, "Name": "Resource 4" },
+       { "Id": 5, "Name": "Resource 5" },
+       { "Id": 6, "Name": "Resource 6" },
+       { "Id": 7, "Name": "Resource 7" }
+        ];
+       
+        //DATASOURCE DECLARATION OF GANTT CONTROL
+        var data = [
+            {
+                "TaskId": 1,
+                "TaskName": "Task 1",
+                "StartDate": "10/23/2013",
+				"BaselineStartDate":"10/23/2013",			
+                "BaselineEndDate":"10/28/2013",
+                "Duration": 10,
+                "Progress": 70,
+				"Resources": [1, 2, 4,5],
+                "Children": [
+                    { "TaskId": 2, "TaskName": "Child task 1", "StartDate": "10/23/2013", "BaselineStartDate": "10/23/2013", "BaselineEndDate": "10/26/2013", "Duration": 4, "Progress": 80, "Resources": [2, 4], },
+                    { "TaskId": 3, "TaskName": "Child task 2", "StartDate": "10/24/2013", "BaselineStartDate": "10/24/2013", "BaselineEndDate": "10/28/2013", "Duration": 5, "Progress": 65, "Predecessor": "2", "Resources": [1], },
+                    {
+                        "TaskId": 4,
+                        "TaskName": "Child task 3",
+                        "StartDate": "10/25/2013",
+						"BaselineStartDate":"10/26/2013",			
+                        "BaselineEndDate":"10/28/2013",
+                        "Duration": 6,
+                        "Progress": 77,
+						"Resources": [5],
+                        "Children": [
+                            { "TaskId": 5, "TaskName": "Grand child task 1", "StartDate": "10/28/2013", "BaselineStartDate": "10/27/2013", "BaselineEndDate": "11/1/2013", "Duration": 5, "Progress": 60, "Resources": [1, 3, 7], },
+                            { "TaskId": 6, "TaskName": "Grand child task 2", "StartDate": "10/29/2013", "BaselineStartDate": "10/29/2013", "BaselineEndDate": "10/31/2013", "Duration": 6, "Progress": 77, "Predecessor": "5", "Resources": [7], },
+                            { "TaskId": 7, "TaskName": "Grand child task 3", "StartDate": "10/25/2013", "BaselineStartDate": "10/25/2013", "BaselineEndDate": "10/25/2013", "Duration": 0, "Progress": 0, "Predecessor": "6", "Resources": [1, 3] }
+                        ]
+                    }
+                ]
+            }
+        ];
+
+     
+
+        $(function () {
+            $("#GanttContainer").ejGantt({
+                dataSource: data,
+                allowSelection:true,
+                allowColumnResize: true,
+                taskIdMapping: "TaskId",
+                taskNameMapping: "TaskName",
+                scheduleStartDate: "10/20/2013",
+                scheduleEndDate: "11/30/2014",
+                startDateMapping: "StartDate",
+                durationMapping: "Duration",
+                progressMapping: "Progress",
+                childMapping: "Children",
+                treeColumnIndex: 1,
+                predecessorMapping: "Predecessor",
+                resourceInfoMapping: "Resources",
+                resourceNameMapping: "Name",
+                resourceIdMapping: "Id",
+				allowGanttChartEditing: false,
+                resources: resources,
+				enableResize:true,				
+            });
+        });
+    </script>
+
+</body>
+
+</html>

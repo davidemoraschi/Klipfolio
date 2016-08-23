@@ -1,0 +1,97 @@
+﻿.img6 {
+    background: url('../themes/images/dashboard_img/Diagram_Builder.png');
+}
+
+.img7 {
+    background: url('../themes/images/dashboard_img/Airline_reservation.png');
+}
+
+.oimg1
+{
+    background: url('../themes/images/dashboard_img/ogrid.png');
+}
+
+.oimg2
+{
+    background: url('../themes/images/dashboard_img/ochart.png');
+}
+
+.oimg3
+{
+    background: url('../themes/images/dashboard_img/oclient.png');
+}
+
+.oimg4
+{
+    background: url('../themes/images/dashboard_img/ogauge.png');
+}
+.odimg1
+{
+    background: url('../themes/images/dashboard_img/odgrid.png');
+}
+
+.odimg2
+{
+    background: url('../themes/images/dashboard_img/odchart.png');
+}
+
+.odimg3
+{
+    background: url('../themes/images/dashboard_img/odclient.png');
+}
+
+.odimg4
+{
+    background: url('../themes/images/dashboard_img/odgauge.png');
+}
+
+.imgstyle
+{
+    cursor: pointer;
+    min-width: 316px;
+    min-height: 344px;
+    position: relative;
+    background-repeat:no-repeat;
+}
+.samplebutton
+{
+    background: none repeat scroll 0 0 #66C1DC;
+    color: #FFFFFF !important;
+    cursor: pointer;
+    display: inline-block;
+    float: left;
+    font-size: 13px;
+    font-weight: 600;
+    height: 25px;
+    line-height: 23px;
+    margin-left: 20px;
+    margin-top: -43px;
+    padding-left: 10px;
+    position: relative;
+    vertical-align: middle;
+    width: 97px;
+}
+
+.olitext
+{
+    position:relative;
+    display:inline-block;
+    float:left;
+    margin-top:-128px;
+    margin-left:20px;   
+    margin-right:20px;     
+    height:auto;
+    color:#838383;
+    text-align:justify; 
+}
+.litext > a, .olitext > a
+{
+    color:#4F4F4C;
+    font-size: 13px;
+    font-weight: 800;
+}
+.litext > p, .olitext > p
+{
+    margin-top:6px;
+    font-size: 12px;
+}

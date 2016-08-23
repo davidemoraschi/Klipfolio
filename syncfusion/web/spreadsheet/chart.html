@@ -1,0 +1,219 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Essential Studio for JavaScript : Chart</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="utf-8" />
+    <link href="../themes/bootstrap.min.css" rel="stylesheet" />
+    <link href="../themes/default-theme/ej.widgets.all.min.css" rel="stylesheet" />
+    <link href="../themes/default.css" rel="stylesheet" />
+    <link href="../themes/default-responsive.css" rel="stylesheet" />
+    <link href="../themes/responsive-css/ej.responsive.css" rel="stylesheet" />
+    <!--[if lt IE 9]>
+    	<script src="../scripts/jquery-1.11.3.min.js" type="text/javascript" ></script> 
+    <![endif]-->
+    <!--[if IE 9]><!-->
+    	<script src="../scripts/jquery-2.1.4.min.js" type="text/javascript"> </script>
+    <!--<![endif]-->
+    <script src="../scripts/jquery.globalize.min.js"></script>
+    <script src="../scripts/jquery.easing.1.3.min.js"></script>
+	<script src="../scripts/jquery.validate.min.js"></script>
+    <script src="../scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="../scripts/jsrender.min.js"></script>
+    <script src="../scripts/ej.web.all.min.js" type="text/javascript"></script>
+    <script src="../scripts/properties.js" type="text/javascript"></script>
+    <script src="../scripts/xljsondata.js" type="text/javascript"></script>
+	<style type="text/css">
+		.cols-sample-area {
+			height: 90%;
+		}
+	</style>
+	<script>
+        $(function () {
+            $("#Spreadsheet").ejSpreadsheet({
+                sheetCount: 11,          
+                columnWidth: 60,
+                rowCount: 31,
+                colCount: 30,
+                allowDragFillOption: false,
+                allowFormulaBar: false,
+                showRibbon: false,
+                scrollSettings:
+                {
+                    width: "100%",
+                    height: 550,
+					isResponsive: true
+                },
+                pageSettings: {
+                    pageCount: 11,
+                },
+                sheets: [
+                    { rangeSettings: { dataSource: window.chartDetails, startCell: "A1", showHeader: true, }, sheetName: "2D Column" },
+					{ rangeSettings: { dataSource: window.chartDetails, startCell: "A1", showHeader: true, }, sheetName: "2D & 3D Column" },
+                    { rangeSettings: { dataSource: window.chartDetails, startCell: "A1", showHeader: true, }, sheetName: "3D Column" },
+                    { rangeSettings: { dataSource: window.chartDetails, startCell: "A1", showHeader: true, }, sheetName: "2D Bar" },
+                    { rangeSettings: { dataSource: window.chartDetails, startCell: "A1", showHeader: true, }, sheetName: "2D & 3D Bar" },
+                    { rangeSettings: { dataSource: window.chartDetails, startCell: "A1", showHeader: true, }, sheetName: "3D Bar" },
+                    { rangeSettings: { dataSource: window.chartDetails, startCell: "A1", showHeader: true, }, sheetName: "Radar" },
+                    { rangeSettings: { dataSource: window.chartDetails, startCell: "A1", showHeader: true, }, sheetName: "Line" },
+                    { rangeSettings: { dataSource: window.chartDetails, startCell: "A1", showHeader: true, }, sheetName: "Area" },
+                    { rangeSettings: { dataSource: window.chartDetails, startCell: "A1", showHeader: true, }, sheetName: "Pie" },
+                    { rangeSettings: { dataSource: window.chartDetails, startCell: "A1", showHeader: true, }, sheetName: "Scatter" }
+                ],
+                onLoadComplete: "onLoadComplete",
+                actionBegin:"actionBegin"
+            });
+        });
+        function onLoadComplete(args) {
+            var xlObj = $("#Spreadsheet").data("ejSpreadsheet");
+            xlObj.setWidthToColumns([{ cellIndex: 0, width: 90 }, { cellIndex: 1, width: 85 }, { cellIndex: 2, width: 100 }, { cellIndex: 11, width: 70 }]);
+            xlObj.mergeCells("F16:G16", true);
+            xlObj.mergeCells("L16:M16", true);
+            xlObj.XLEdit.updateCellValue(xlObj.getCell(15, 5), "2D Column");
+            xlObj.XLEdit.updateCellValue(xlObj.getCell(15, 11), "2D Stacking Column");
+            xlObj.XLFormat.format({ "style": { "font-weight": "bold" } }, "F16:F16");
+            xlObj.XLFormat.format({ "style": { "font-weight": "bold" } }, "L16:L16");
+            xlObj.XLFormat.format({ "style": { "font-weight": "bold", "font-size":"12px" } }, "A1:C1");
+            xlObj.XLChart.createChart("A1:B6", { type: "column", enable3D: false, marker: false, top: 40, left: 260, width: 340, height: 250 });
+            xlObj.performSelection({ rowIndex: 0, colIndex: 0 }, { rowIndex: 0, colIndex: 0 });
+            xlObj.XLChart.createChart("B1:C6", { type: "stackingcolumn", enable3D: false, marker: { visible: false }, top: 40, left: 600, width: 340, height: 250 });                     
+			xlObj.gotoPage(2, false);			
+			xlObj.setWidthToColumns([{ cellIndex: 0, width: 90 }, { cellIndex: 1, width: 85 }, { cellIndex: 2, width: 100 }, { cellIndex: 11, width: 70 }]);
+			xlObj.mergeCells("F16:G16", true);
+			xlObj.mergeCells("L16:M16", true);
+			xlObj.XLEdit.updateCellValue(xlObj.getCell(15, 5), "2D Stacking Column 100");
+			xlObj.XLEdit.updateCellValue(xlObj.getCell(15, 11), "3D Column");
+			xlObj.XLFormat.format({ "style": { "font-weight": "bold" } }, "F16:F16");
+			xlObj.XLFormat.format({ "style": { "font-weight": "bold" } }, "L16:L16");
+			xlObj.XLFormat.format({ "style": { "font-weight": "bold" , "font-size":"12px" } }, "A1:C1");
+			xlObj.XLChart.createChart("A1:B6", { type: "stackingcolumn100", enable3D: false, marker: { visible: false }, top: 40, left: 260, width: 340, height: 250 });
+			xlObj.performSelection({ rowIndex: 0, colIndex: 0 }, { rowIndex: 0, colIndex: 0 });
+            xlObj.XLChart.createChart("B1:C6", { type: "column", enable3D: true, marker: { visible: false }, top: 40, left: 600, width: 340, height: 250 });
+            xlObj.gotoPage(3, false);
+            xlObj.setWidthToColumns([{ cellIndex: 0, width: 90 }, { cellIndex: 1, width: 85 }, { cellIndex: 2, width: 100 }, { cellIndex: 11, width: 70 }]);
+            xlObj.mergeCells("F16:G16", true);
+            xlObj.mergeCells("L16:M16", true);
+            xlObj.XLEdit.updateCellValue(xlObj.getCell(15, 5), "3D Stacking Column");
+            xlObj.XLEdit.updateCellValue(xlObj.getCell(15, 11), "3D Stacking Column 100");
+            xlObj.XLFormat.format({ "style": { "font-weight": "bold" } }, "F16:F16");
+            xlObj.XLFormat.format({ "style": { "font-weight": "bold" } }, "L16:L16");
+            xlObj.XLFormat.format({ "style": { "font-weight": "bold", "font-size":"12px" } }, "A1:C1");
+            xlObj.XLChart.createChart("A1:B6", { type: "stackingcolumn", enable3D: true, marker: { visible: false }, top: 40, left: 260, width: 340, height: 250 });
+            xlObj.performSelection({ rowIndex: 0, colIndex: 0 }, { rowIndex: 0, colIndex: 0 });
+            xlObj.XLChart.createChart("B1:C6", { type: "stackingcolumn100", enable3D: true, marker: { visible: false }, top: 40, left: 600, width: 340, height: 250 });
+            xlObj.gotoPage(4, false);
+            xlObj.setWidthToColumns([{ cellIndex: 0, width: 90 }, { cellIndex: 1, width: 85 }, { cellIndex: 2, width: 100 }, { cellIndex: 11, width: 70 }]);
+            xlObj.mergeCells("F16:G16", true);
+            xlObj.mergeCells("L16:M16", true);
+            xlObj.XLEdit.updateCellValue(xlObj.getCell(15, 5), "2D Bar");
+            xlObj.XLEdit.updateCellValue(xlObj.getCell(15, 11), "2D Stacking Bar");
+            xlObj.XLFormat.format({ "style": { "font-weight": "bold" } }, "F16:F16");
+            xlObj.XLFormat.format({ "style": { "font-weight": "bold" } }, "L16:L16");
+            xlObj.XLFormat.format({ "style": { "font-weight": "bold", "font-size":"12px" } }, "A1:C1");
+            xlObj.XLChart.createChart("A1:B6", { type: "bar", enable3D: false, marker: { visible: false }, top: 40, left: 260, width: 340, height: 250 });
+            xlObj.performSelection({ rowIndex: 0, colIndex: 0 }, { rowIndex: 0, colIndex: 0 });
+            xlObj.XLChart.createChart("B1:C6", { type: "stackingbar", enable3D: false, marker: { visible: false }, top: 40, left: 600, width: 340, height: 250 });
+            xlObj.gotoPage(5, false);
+            xlObj.setWidthToColumns([{ cellIndex: 0, width: 90 }, { cellIndex: 1, width: 85 }, { cellIndex: 2, width: 100 }, { cellIndex: 11, width: 70 }]);
+            xlObj.mergeCells("F16:G16", true);
+            xlObj.mergeCells("L16:M16", true);
+            xlObj.XLEdit.updateCellValue(xlObj.getCell(15, 5), "2D Stacking Bar 100");
+            xlObj.XLEdit.updateCellValue(xlObj.getCell(15, 11), "3D Bar");
+            xlObj.XLFormat.format({ "style": { "font-weight": "bold" } }, "F16:F16");
+            xlObj.XLFormat.format({ "style": { "font-weight": "bold" } }, "L16:L16");
+            xlObj.XLFormat.format({ "style": { "font-weight": "bold" , "font-size":"12px" } }, "A1:C1");
+            xlObj.XLChart.createChart("A1:B6", { type: "stackingbar100", enable3D: false, marker: { visible: false }, top: 40, left: 260, width: 340, height: 250 });
+            xlObj.performSelection({ rowIndex: 0, colIndex: 0 }, { rowIndex: 0, colIndex: 0 });
+            xlObj.XLChart.createChart("B1:C6", { type: "bar", enable3D: true, marker: { visible: false }, top: 40, left: 600, width: 340, height: 250 });
+            xlObj.gotoPage(6, false);
+            xlObj.setWidthToColumns([{ cellIndex: 0, width: 90 }, { cellIndex: 1, width: 85 }, { cellIndex: 2, width: 100 }, { cellIndex: 11, width: 70 }]);
+            xlObj.mergeCells("F16:G16", true);
+            xlObj.mergeCells("L16:M16", true);
+            xlObj.XLEdit.updateCellValue(xlObj.getCell(15, 5), "3D Stacking Bar");
+            xlObj.XLEdit.updateCellValue(xlObj.getCell(15, 11), "3D Stacking Bar 100");
+            xlObj.XLFormat.format({ "style": { "font-weight": "bold" } }, "F16:F16");
+            xlObj.XLFormat.format({ "style": { "font-weight": "bold" } }, "L16:L16");
+            xlObj.XLFormat.format({ "style": { "font-weight": "bold" , "font-size":"12px" } }, "A1:C1");
+            xlObj.XLChart.createChart("A1:B6", { type: "stackingbar", enable3D: true, marker: { visible: false }, top: 40, left: 260, width: 340, height: 250 });
+            xlObj.performSelection({ rowIndex: 0, colIndex: 0 }, { rowIndex: 0, colIndex: 0 });
+            xlObj.XLChart.createChart("B1:C6", { type: "stackingbar100", enable3D: true, marker: { visible: false }, top: 40, left: 600, width: 340, height: 250 });
+            xlObj.gotoPage(7, false);
+            xlObj.setWidthToColumns([{ cellIndex: 0, width: 90 }, { cellIndex: 1, width: 85 }, { cellIndex: 2, width: 100 }, { cellIndex: 11, width: 70 }]);
+            xlObj.mergeCells("F16:G16", true);
+            xlObj.mergeCells("L16:M16", true);
+            xlObj.XLEdit.updateCellValue(xlObj.getCell(15, 5), "Radar");
+            xlObj.XLEdit.updateCellValue(xlObj.getCell(15, 11), "Radar with Markers");
+            xlObj.XLFormat.format({ "style": { "font-weight": "bold" } }, "F16:F16");
+            xlObj.XLFormat.format({ "style": { "font-weight": "bold" } }, "L16:L16");
+            xlObj.XLFormat.format({ "style": { "font-weight": "bold" , "font-size":"12px" } }, "A1:C1");
+            xlObj.XLChart.createChart("A1:B6", { type: "radar", enable3D: false, marker: { visible: false }, top: 40, left: 260, width: 340, height: 250 });
+            xlObj.performSelection({ rowIndex: 0, colIndex: 0 }, { rowIndex: 0, colIndex: 0 });
+            xlObj.XLChart.createChart("B1:C6", { type: "radar", enable3D: false, marker: { visible: true }, top: 40, left: 600, width: 340, height: 250 });
+            xlObj.gotoPage(8, false);
+            xlObj.setWidthToColumns([{ cellIndex: 0, width: 90 }, { cellIndex: 1, width: 85 }, { cellIndex: 2, width: 100 }, { cellIndex: 11, width: 70 }]);
+            xlObj.mergeCells("F16:G16", true);
+            xlObj.mergeCells("L16:M16", true);
+            xlObj.XLEdit.updateCellValue(xlObj.getCell(15, 5), "Line");
+            xlObj.XLEdit.updateCellValue(xlObj.getCell(15, 11), "Line with Markers");
+            xlObj.XLFormat.format({ "style": { "font-weight": "bold" } }, "F16:F16");
+            xlObj.XLFormat.format({ "style": { "font-weight": "bold" } }, "L16:L16");
+            xlObj.XLFormat.format({ "style": { "font-weight": "bold" , "font-size":"12px" } }, "A1:C1");
+            xlObj.XLChart.createChart("A1:B6", { type: "line", enable3D: false, marker: { visible: false }, top: 40, left: 260, width: 340, height: 250 });
+            xlObj.performSelection({ rowIndex: 0, colIndex: 0 }, { rowIndex: 0, colIndex: 0 });
+            xlObj.XLChart.createChart("B1:C6", { type: "line", enable3D: false, marker: { visible: true }, top: 40, left: 600, width: 340, height: 250 });
+            xlObj.gotoPage(9, false);
+            xlObj.setWidthToColumns([{ cellIndex: 0, width: 90 }, { cellIndex: 1, width: 85 }, { cellIndex: 2, width: 100 }, { cellIndex: 7, width: 90 }, { cellIndex: 11, width: 70 }]);
+            xlObj.mergeCells("F16:G16", true);
+            xlObj.mergeCells("L16:M16", true);
+            xlObj.mergeCells("H30:I30", true);
+            xlObj.XLEdit.updateCellValue(xlObj.getCell(15, 5), "2D Area");
+            xlObj.XLEdit.updateCellValue(xlObj.getCell(15, 11), "2D Stacking Area");
+            xlObj.XLEdit.updateCellValue(xlObj.getCell(29, 7), "2D Stacking Area 100");
+            xlObj.XLFormat.format({ "style": { "font-weight": "bold" } }, "F16:F16");
+            xlObj.XLFormat.format({ "style": { "font-weight": "bold" } }, "L16:L16");
+            xlObj.XLFormat.format({ "style": { "font-weight": "bold" } }, "H30:H30");
+            xlObj.XLFormat.format({ "style": { "font-weight": "bold" , "font-size":"12px" } }, "A1:C1");
+            xlObj.XLChart.createChart("A1:B6", { type: "Area", enable3D: false, marker: { visible: false }, top: 40, left: 260, width: 340, height: 250 });
+            xlObj.performSelection({ rowIndex: 0, colIndex: 0 }, { rowIndex: 0, colIndex: 0 });
+            xlObj.XLChart.createChart("B1:C6", { type: "stackingarea", enable3D: false, marker: { visible: false }, top: 40, left: 600, width: 340, height: 250 });
+            xlObj.performSelection({ rowIndex: 0, colIndex: 0 }, { rowIndex: 0, colIndex: 0 });
+            xlObj.XLChart.createChart("B1:C6", { type: "stackingarea100", enable3D: false, marker: { visible: false }, top: 325, left: 400, width: 340, height: 250 });
+            xlObj.gotoPage(10, false);
+            xlObj.setWidthToColumns([{ cellIndex: 0, width: 90 }, { cellIndex: 1, width: 85 }, { cellIndex: 2, width: 100 }, { cellIndex: 7, width: 90 }, { cellIndex: 11, width: 70 }]);
+            xlObj.mergeCells("F16:G16", true);
+            xlObj.mergeCells("L16:M16", true);
+            xlObj.mergeCells("H30:I30", true);
+            xlObj.XLEdit.updateCellValue(xlObj.getCell(15, 5), "2D Pie");
+            xlObj.XLEdit.updateCellValue(xlObj.getCell(15, 11), "3D Pie");
+            xlObj.XLEdit.updateCellValue(xlObj.getCell(29, 7), "Doughnut");
+            xlObj.XLFormat.format({ "style": { "font-weight": "bold" } }, "F16:F16");
+            xlObj.XLFormat.format({ "style": { "font-weight": "bold" } }, "L16:L16");
+            xlObj.XLFormat.format({ "style": { "font-weight": "bold" } }, "H30:H30");
+            xlObj.XLFormat.format({ "style": { "font-weight": "bold" , "font-size":"12px" } }, "A1:C1");
+            xlObj.XLChart.createChart("A1:B6", { type: "pie", enable3D: false, marker: { visible: false }, top: 40, left: 260, width: 360, height: 250 });
+            xlObj.performSelection({ rowIndex: 0, colIndex: 0 }, { rowIndex: 0, colIndex: 0 });
+            xlObj.XLChart.createChart("B1:C6", { type: "pie", enable3D: true, marker: { visible: false }, top: 40, left: 600, width: 340, height: 250 });
+            xlObj.performSelection({ rowIndex: 0, colIndex: 0 }, { rowIndex: 0, colIndex: 0 });
+            xlObj.XLChart.createChart("B1:C6", { type: "doughnut", enable3D: false, marker: { visible: false }, top: 325, left: 400, width: 340, height: 250 });
+            xlObj.gotoPage(11, false);
+            xlObj.setWidthToColumns([{ cellIndex: 0, width: 90 }, { cellIndex: 1, width: 85 }, { cellIndex: 2, width: 100 }]);
+            xlObj.mergeCells("F16:G16", true);
+            xlObj.XLEdit.updateCellValue(xlObj.getCell(15, 5), "Scatter");
+            xlObj.XLFormat.format({ "style": { "font-weight": "bold" } }, "F16:F16");
+            xlObj.XLFormat.format({ "style": { "font-weight": "bold" , "font-size":"12px" } }, "A1:C1");
+            xlObj.XLChart.createChart("A1:B6", { type: "scatter", enable3D: false, marker: { visible: false }, top: 40, left: 260, width: 340, height: 250 });
+            xlObj.gotoPage(1, false);
+			xlObj.clearUndoRedo();
+        }
+    </script>
+</head>
+<body>
+    <div class="content-container-fluid">
+        <div class="row">
+            <div class="cols-sample-area">
+                <div id="Spreadsheet"></div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

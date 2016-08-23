@@ -1,0 +1,12 @@
+/*----------------------OLAP Definition------------------*/
+/*-----------------------SymbolPalette Definition-----------------*/
+.e-progressbar {
+  background-color: #050505;
+  border-color: #303030;
+  color: #aaaaaa;
+}
+.e-progressbar .e-progress {
+  background: #1b95cf;
+  /* Old browsers */
+
+}

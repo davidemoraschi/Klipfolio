@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+ <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="../themes/bootstrap.min.css" rel="stylesheet"/>
+    <link href="../themes/default-theme/ej.widgets.all.min.css" rel="stylesheet" />
+    <link href="../themes/default.css" rel="stylesheet" />
+    <link href="../themes/default-responsive.css" rel="stylesheet" />
+	<!--[if lt IE 9]>
+         <script src="../scripts/jquery-1.11.3.min.js" type="text/javascript"></script>
+     <!--<![endif]-->
+    <!--[if gte IE 9]><!-->
+    <script src="../scripts/jquery-2.1.4.min.js" type="text/javascript"></script>
+    <!--<![endif]-->
+	<script src="../scripts/jquery.globalize.min.js"></script>
+    <script src="../scripts/ej.web.all.min.js" type="text/javascript"></script>
+	<script src="../scripts/properties.js" type="text/javascript"></script>
+ </head>
+ <body> 
+	<div class="content-container-fluid">      
+        <div class="row">               
+            <div class="cols-sample-area">                                  				
+				<div id="container"></div>                    				
+			</div>				
+			<div id="sampleProperties" style="float:left;">
+                <div class="prop-grid">
+					  <b>&nbsp X-Axis</b>
+                       <br />
+                    <div class="row">
+					   <div class="col-md-3">
+					     Maximum Title Width:
+                        </div>
+                        <div class="col-md-3">
+                            <input type="text" id="xmaxTitleWidth" name="xmaxTitleWidth"  style="width:104px"  value="60"> <br>
+                        </div>
+						<br><br><br>
+                        <div class="col-md-3">
+                             Enable Trim:
+                        </div>								 
+                        <div class="col-md-3">
+                            <select name="xtruncateaction"  id="truncatex" >
+                               <option value="0">True</option>
+                               <option value="1">False</option>                                                  
+							</select>
+                        </div>
+					</div>
+						<b>&nbsp Y-Axis</b>
+						<br />
+					<div class="row">
+						<div class="col-md-3">
+							Maximum Title Width:
+                        </div>
+                        <div class="col-md-3">
+                            <input type="textbox" id="ymaxTitleWidth"  name="ymaxTitleWidth"  style="width:104px" value="110"/>
+                        </div>
+						<br><br><br>                
+						<div class="col-md-3">
+						  Enable Trim:
+                        </div>                       
+                        <div class="col-md-3">
+                            <select name="ytruncateaction"  id="truncatey" >
+                                <option value="1">True</option>
+                                <option value="2">False</option>								
+							</select>
+                        </div>					
+					</div>                    
+                </div>
+            </div>       
+		</div>
+    </div>	  
+<div id="Tooltip" style="display: none;">
+		<div id="icon">	
+			<div id="eficon"></div>
+	    </div>
+        <div id="value">
+            <div>
+				<label id="efpercentage">&nbsp;#point.y#%</label>
+                <label id="ef">Efficiency</label>
+            </div>
+        </div>
+</div>
+ <script type="text/javascript" language="javascript">
+	$(function ()
+	{
+        $("#container").ejChart(
+		{	
+			//Initializing Primary X Axis
+			primaryXAxis:
+			{
+				title:
+				{
+					text:'List of countries which are using solar power in the year 2014',
+					enableTrim:true,
+					maximumTitleWidth:60
+				},
+			},
+			
+			//Initializing Primary Y Axis
+			primaryYAxis:
+			{
+				title:
+				{
+					text:'Measurements of Solar power used in different countries in the year 2014( in GW)',
+					enableTrim:true,
+					maximumTitleWidth:110
+				},
+				range: { min: 0, max: 40, interval: 5 },
+				labelFormat:"{value}GW",		
+				},
+				
+			//Initializing Common Properties for all the series	
+			commonSeriesOptions:
+			{
+				tooltip:
+				{
+					visible: true
+				}
+			},
+			
+			//Initializing Series
+			series:
+			[
+				{ 
+					points:[{x:'Germany',y:35.5}, {x:'China',y:18.3}, {x:'Italy',y:17.6}, {x:'Japan',y:13.6},
+							{x:'US',y:12}, {x:'Spain',y:5.6}, {x:'France',y:4.6}, {x:'Australia',y:3.3},
+							{x:'Belgium',y:3}, {x:'UK',y:2.9}],		
+					name: 'Countries Using Solar Power', 
+					type: 'column',
+					enableAnimation : false,
+					tooltip :
+					{ 
+						format: " Date : #point.x#  <br/> Profit : #point.y#"
+					}
+				}
+			],
+			canResize: true,
+			load:"loadTheme",
+			title: { text: 'Top 10 countries using solar power' },
+            legend: { visible: true }
+		});
+	});
+	
+	$('#truncatex').change(function () 
+	{
+        var option = $("#truncatex option:selected").text();
+        var chart = $("#container").ejChart("instance");
+        switch (option) 
+		{
+            case 'True':
+				chart.model.primaryXAxis.title.enableTrim=true;
+				chart.redraw();
+			break;
+            case 'False':
+				chart.model.primaryXAxis.title.enableTrim=false;
+				chart.redraw();
+            break;
+            default:
+        }
+    });
+	
+	$('#truncatey').change(function ()
+	{
+        var option = $("#truncatey option:selected").text();
+        var chart = $("#container").ejChart("instance");
+        switch (option) 
+		{
+            case 'True':
+				chart.model.primaryYAxis.title.enableTrim=true;
+				chart.redraw();
+            break;
+            case 'False':
+				chart.model.primaryYAxis.title.enableTrim=false;
+				chart.redraw();
+            break;
+            default:
+        }
+    });		
+	
+	$("#xmaxTitleWidth").change(function ()
+	{
+        var chart = $("#container").ejChart("instance");
+		chart.model.primaryXAxis.title.maximumTitleWidth = parseFloat($("#xmaxTitleWidth").val());
+		chart.redraw();
+    });
+	
+	$("#ymaxTitleWidth").change(function () 
+	{
+        var chart = $("#container").ejChart("instance");
+        chart.model.primaryYAxis.title.maximumTitleWidth = parseFloat($("#ymaxTitleWidth").val());
+        chart.redraw();
+    });
+	
+	$("#sampleProperties").ejPropertiesPanel();
+ </script>
+ </body>
+</html>

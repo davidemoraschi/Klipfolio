@@ -1,0 +1,256 @@
+﻿<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" ng-app="syncApp">
+<head>
+    <title>Essential Studio for JavaScript : Diagram - Angular Support</title>
+    <link href="../themes/bootstrap.min.css" rel="stylesheet" />
+    <link href="../themes/default-theme/ej.widgets.all.min.css" rel="stylesheet" />
+    <link href="../themes/default.css" rel="stylesheet" />
+    <link href="../themes/default-responsive.css" rel="stylesheet" />
+    <!--[if lt IE 9]>
+         <script src="../scripts/jquery-1.11.3.min.js" type="text/javascript"></script>
+     <!--<![endif]-->
+    <!--[if gte IE 9]><!-->
+    <script src="../scripts/jquery-2.1.4.min.js" type="text/javascript"></script>
+    <!--<![endif]-->
+    <script src="../scripts/jquery.easing.1.3.min.js" type="text/javascript"></script>
+    <script src="../scripts/angular.min.js"></script>
+    <script src="../scripts/ej.web.all.min.js"></script>
+    <script src="../scripts/ej.unobtrusive.min.js"></script>
+    <script src="../scripts/jquery.globalize.min.js" type="text/javascript"></script>
+    <script src="../scripts/cultures/globalize.culture.en-US.min.js"></script>
+    <script src="../scripts/properties.js" type="text/javascript"></script>
+    <script src="../scripts/ej.widget.angular.min.js"></script>
+    <script src="../scripts/jsrender.min.js"></script>
+</head>
+<body ng-controller="diagram">
+    <div class="content-container-fluid">
+        <div class="row">
+            <div class="cols-sample-area">
+                <ej-diagram id="diagramCore" e-height="500px" e-width="700px" e-nodes="nodes" e-backgroundcolor="backgroundColor"
+                    e-zoomfactor="zoomFactor"
+                    e-showtooltip="showTooltip"
+                    e-pagesettings-pageheight="pageSettings.pageHeight"
+                    e-pagesettings-pagewidth="pageSettings.pageWidth"
+                    e-pagesettings-pagebackgroundcolor="pageSettings.pageBackgroundColor"
+                    e-pagesettings-pageborderwidth="pageSettings.pageBorderWidth"
+                    e-pagesettings-pagebordercolor="pageSettings.pageBorderColor"
+                    e-pagesettings-pagemargin="pageSettings.pageMargin"
+                    e-pagesettings-showpagebreak="pageSettings.showPageBreak"
+                    e-pagesettings-pageorientation="pageSettings.pageOrientation"
+                    e-pagesettings-scrollLimit="pageSettings.scrollLimit"
+                    e-pagesettings-multiplepage="pageSettings.multiplePage"
+                    e-snapsettings-enablesnaptoobject="snapSettings.enableSnapToObject"
+                    e-snapsettings-snapangle="snapSettings.snapAngle"
+                    e-snapsettings-snapobjectdistance="snapSettings.snapObjectDistance"
+                    e-enablecontextmenu="enableContextMenu">
+                </ej-diagram>
+            </div>
+            <div id="sampleProperties">
+                <div class="prop-grid">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <b>Page Settings</b>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            Height
+                        </div>
+                        <div class="col-md-3 aligntop">
+                            <input type="text" id="Text1" ng-model="pageSettings.pageHeight" style="width: 110px" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            Width
+                        </div>
+                        <div class="col-md-3 aligntop">
+                            <input type="text" id="Text2" ng-model="pageSettings.pageWidth" style="width: 110px" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            Multiple Page
+                        </div>
+                        <div class="col-md-3 aligntop">
+                            <input type="checkbox" ng-model="pageSettings.multiplePage" style="outline: none;">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            Border Width
+                        </div>
+                        <div class="col-md-3 aligntop">
+                            <input type="text" id="Text3" ng-model="pageSettings.pageBorderWidth" style="width: 110px" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            Background  
+                        </div>
+                        <div class="col-md-3 aligntop">
+                            <input ej-dropdownlist e-datasource="pageColor" e-text="pageSettings.pageBackgroundColor" e-value="pageSettings.pageBackgroundColor" e-width="100px" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            Border Color
+                        </div>
+                        <div class="col-md-3 aligntop">
+                            <input ej-dropdownlist e-datasource="pageColor" e-text="pageSettings.pageBorderColor" e-value="pageSettings.pageBorderColor" e-width="100px" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            Margin
+                        </div>
+                        <div class="col-md-3 aligntop">
+                            <input type="text" id="Text6" ng-model="pageSettings.pageMargin" style="width: 110px" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            Page break
+                        </div>
+                        <div class="col-md-3 aligntop">
+                            <input type="checkbox" ng-model="pageSettings.showPageBreak" style="outline: none;">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            Orientation
+                        </div>
+                        <div class="col-md-3 aligntop">
+                            <input ej-dropdownlist e-datasource="pageStyle" e-text="pageSettings.pageOrientation" e-value="pageSettings.pageOrientation" e-width="100px" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <b>Snap Settings</b>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            Snap  
+                        </div>
+                        <div class="col-md-3 aligntop">
+                            <input type="checkbox" ng-model="snapSettings.enableSnapToObject" style="outline: none;">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            Snap Angle
+                        </div>
+                        <div class="col-md-3 aligntop">
+                            <input type="text" id="Text10" ng-model="snapSettings.snapAngle" style="width: 110px" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            Snap Distance
+                        </div>
+                        <div class="col-md-3 aligntop">
+                            <input type="text" id="Text11" ng-model="snapSettings.snapObjectDistance" style="width: 110px" />
+                        </div>
+                    </div>
+                     <div class="row">
+                        <div class="col-md-3">
+                            <b>Model</b>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            Zoom Factor
+                        </div>
+                        <div class="col-md-3 aligntop">
+                            <input type="text" name="name" class="e-ejinputtext" value="" ej-numerictextbox e-value="zoomFactor" e-showspinbutton="false" e-decimalplaces="2" e-width="100px" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            Tooltip
+                        </div>
+                        <div class="col-md-3 aligntop">
+                            <input type="checkbox" ng-model="showTooltip" style="outline: none;">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            Context Menu
+                        </div>
+                        <div class="col-md-3 aligntop">
+                            <input type="checkbox" ng-model="enableContextMenu" style="outline: none;">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        var datalist = [
+                { name: "node1", height: 60, width: 60, offsetX: 170, offsetY: 105, borderWidth: 1, borderColor: "#99SF13", shape: "ellipse", gradient: { type: "radial", cx: 50, cy: 50, fx: 50, fy: 50, stops: [{ offset: 0, color: "white", opacity: 0 }, { offset: 100, color: "#FBB040", opacity: 1 }] } },
+                { name: "node2", height: 90, width: 60, offsetX: 240, offsetY: 105, borderWidth: 1, borderColor: "#8BB23F", shape: "ellipse", gradient: { type: "radial", cx: 50, cy: 50, fx: 50, fy: 50, stops: [{ offset: 0, color: "white", opacity: 0 }, { offset: 100, color: "#A0D05F", opacity: 1 }] } },
+                { name: "node3", height: 120, width: 60, offsetX: 310, offsetY: 105, borderWidth: 1, borderColor: "#27A9CC", shape: "ellipse", gradient: { type: "radial", cx: 50, cy: 50, fx: 50, fy: 50, stops: [{ offset: 0, color: "white", opacity: 0 }, { offset: 100, color: "#7FDEFF", opacity: 1 }] } },
+                { name: "node4", height: 90, width: 60, offsetX: 160, offsetY: 255, borderWidth: 1, borderColor: "#99SF13", shape: "ellipse", gradient: { type: "radial", cx: 50, cy: 50, fx: 50, fy: 50, stops: [{ offset: 0, color: "white", opacity: 0 }, { offset: 100, color: "#FBB040", opacity: 1 }] } },
+                { name: "node5", height: 90, width: 90, offsetX: 240, offsetY: 255, borderWidth: 1, borderColor: "#8BB23F", shape: "ellipse", gradient: { type: "radial", cx: 50, cy: 50, fx: 50, fy: 50, stops: [{ offset: 0, color: "white", opacity: 0 }, { offset: 100, color: "#A0D05F", opacity: 1 }] } },
+                { name: "node6", height: 90, width: 60, offsetX: 320, offsetY: 255, borderWidth: 1, borderColor: "#27A9CC", shape: "ellipse", gradient: { type: "radial", cx: 50, cy: 50, fx: 50, fy: 50, stops: [{ offset: 0, color: "white", opacity: 0 }, { offset: 100, color: "#7FDEFF", opacity: 1 }] } },
+                { name: "node7", height: 60, width: 90, offsetX: 165, offsetY: 400, borderWidth: 1, borderColor: "#99SF13", shape: "ellipse", gradient: { type: "radial", cx: 50, cy: 50, fx: 50, fy: 50, stops: [{ offset: 0, color: "white", opacity: 0 }, { offset: 100, color: "#FBB040", opacity: 1 }] } },
+                { name: "node8", height: 60, width: 90, offsetX: 240, offsetY: 400, borderWidth: 1, borderColor: "#8BB23F", shape: "ellipse", gradient: { type: "radial", cx: 50, cy: 50, fx: 50, fy: 50, stops: [{ offset: 0, color: "white", opacity: 0 }, { offset: 100, color: "#A0D05F", opacity: 1 }] } },
+                { name: "node9", height: 60, width: 90, offsetX: 315, offsetY: 400, borderWidth: 1, borderColor: "#27A9CC", shape: "ellipse", gradient: { type: "radial", cx: 50, cy: 50, fx: 50, fy: 50, stops: [{ offset: 0, color: "white", opacity: 0 }, { offset: 100, color: "#7FDEFF", opacity: 1 }] } },
+
+
+                { name: "node10", height: 40, width: 90, offsetX: 240, offsetY: 170, fillColor: "transparent", borderWidth: 1, borderColor: "transparent", labels: [{ name: "label1", text: "Same Width" }], constraints: ej.datavisualization.Diagram.NodeConstraints.Default & ~ej.datavisualization.Diagram.NodeConstraints.Select },
+                { name: "node11", height: 40, width: 90, offsetX: 240, offsetY: 320, fillColor: "transparent", borderWidth: 1, borderColor: "transparent", labels: [{ name: "label1", text: "Same Height" }], constraints: ej.datavisualization.Diagram.NodeConstraints.Default & ~ej.datavisualization.Diagram.NodeConstraints.Select },
+                { name: "node12", height: 40, width: 90, offsetX: 240, offsetY: 450, fillColor: "transparent", borderWidth: 1, borderColor: "transparent", labels: [{ name: "label1", text: "Same Size" }], constraints: ej.datavisualization.Diagram.NodeConstraints.Default & ~ej.datavisualization.Diagram.NodeConstraints.Select },
+        ];
+        angular.module('syncApp', ['ejangular'])
+            .controller('diagram', function ($scope) {
+                $scope.dataSource = datalist,
+                $scope.zoomFactor = 0.2;
+                $scope.enableContextMenu = true;
+                $scope.showTooltip = true;
+                $scope.backgroundColor = "whitesmoke";
+                $scope.pageSettings = {
+                    pageWidth: 500,
+                    pageHeight: 500,
+                    pageBackgroundColor: "White",
+                    multiplePage: true,
+                    pageBorderWidth: 1,
+                    pageBorderColor: "Black",
+                    pageMargin: 20,
+                    showPageBreak: true,
+                    pageOrientation: "landscape",
+                    scrollLimit:"diagram",
+                    enableSnapToObject: true,
+                };
+                $scope.snapSettings = {
+                    enableSnapToObject: true,
+                    snapObjectDistance: 10,
+                    snapAngle: 1,
+                };
+                $scope.pvalue = 400;
+                $scope.nodes = datalist;
+                $scope.pageStyle = [{ empid: "cr1", text: "portrait" }, { empid: "cr2", text: "landscape" }, ];
+                $scope.pageColor = [{ text: "Black" }, { text: "White" }, { text: "Goldenrod" }, { text: "Indigo" }, { text: "Chocolate" }, { text: "DarkGoldenRod" }, { text: "FireBrick" }, { text: "DarkRed" }, { text: "GoldenRod" }, { text: "Khaki" }, { text: "LightCoral" }, { text: "Moccasin" }, { text: "Teal" }, ];
+            });
+        $("#sampleProperties").ejPropertiesPanel();
+
+        $(window).load(function () {
+			if (!(ej.browserInfo().name === "msie" && Number(ej.browserInfo().version) < 9)) {
+				var diagram = $("#diagramCore").ejDiagram("instance");
+				diagram.fitToPage(null, null, { left: 0, right: 0, top: 0, bottom: 0 });
+			}
+			else {
+				alert("Diagram will not be supported in IE Version < 9");
+			}
+        });
+    </script>
+    <style>
+        .col-md-3 .e-ddl .e-input
+        {
+            line-height: 20px;
+        }
+    </style>
+</body>
+</html>

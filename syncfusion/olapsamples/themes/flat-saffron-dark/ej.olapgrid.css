@@ -1,0 +1,222 @@
+/*----------------------OLAP Definition------------------*/
+/*-----------------------SymbolPalette Definition-----------------*/
+.e-olapgrid table {
+  font: 12px Segoe UI !important;
+  color: #d8d8d8;
+  border-collapse: collapse;
+  background-color: #1f1f1f;
+  cursor: default;
+}
+.e-olapgrid .tooltipText {
+  margin: 5px 0 10px 0;
+  font-size: 12px;
+  text-align: left;
+  height: auto;
+  color: #d8d8d8;
+  font-weight: normal;
+}
+.e-olapgrid .tooltip {
+  position: absolute;
+  z-index: 500;
+  display: none;
+  border-color: #686868;
+  border-width: 10px;
+  height: auto;
+  padding: 10px;
+  background-color: #1f1f1f;
+  border: 2px solid #303030;
+}
+.e-olapgrid th,
+.e-olapgrid td {
+  padding: 0 2px 0 3px;
+  border: solid 1px;
+  border-color: #686868;
+  white-space: nowrap;
+  height: 25px;
+  font-weight: normal;
+}
+.e-olapgrid .value {
+  background-color: #1f1f1f;
+  text-align: right !important;
+  padding: 6px 6px 6px 16px;
+}
+.e-olapgrid .summary {
+  background-color: #1f1f1f;
+  color: #faa113;
+  white-space: nowrap;
+  text-align: left;
+  font-weight: bold;
+}
+.e-olapgrid .colheader,
+.e-olapgrid .rowheader {
+  font-weight: bold;
+  color: #c3c3c3;
+  background: #1f1f1f;
+  background-repeat: repeat;
+  padding: 6px 16px 6px 2px;
+  text-align: left;
+  font-style: normal;
+}
+.e-olapgrid .colheader:hover,
+.e-olapgrid .rowheader:hover {
+  font-weight: bold;
+  color: white;
+  background: #faa113;
+  background-repeat: repeat;
+  padding: 6px 16px 6px 2px;
+  text-align: left;
+  font-style: normal;
+}
+.e-olapgrid .e-rtl .colheader,
+.e-olapgrid .e-rtl .colheader:hover,
+.e-olapgrid .e-rtl .rowheader,
+.e-olapgrid .e-rtl .rowheader:hover {
+  padding: 6px 0px 6px 24px;
+}
+.e-olapgrid .expand,
+.e-olapgrid .collapse {
+  width: 23px;
+  height: 17px;
+  display: inline-block;
+  cursor: pointer;
+}
+.e-olapgrid .expand:before {
+  content: "\e6a3";
+  display: inline-block;
+  float: left;
+  font-size: 7px;
+  margin-left: 9px;
+  margin-top: 5px;
+}
+.e-olapgrid .e-rtl .expand:before {
+  content: "\e699";
+  font-size: 23px;
+  margin-top: -3px;
+}
+.e-olapgrid .e-rtl .collapse:before {
+  margin-left: 0px;
+}
+.e-olapgrid .collapse:before {
+  content: "\e6a0";
+  display: inline-block;
+  float: left;
+  font-size: 6px;
+  margin-left: 7px;
+  margin-top: 5px;
+}
+.e-olapgrid .kpiiconvalue {
+  height: 20px;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.e-olapgrid .kpiuparrow {
+  background-image: url("../common-images/olapkpi/up-arrow.png");
+}
+.e-olapgrid .kpirightarrow {
+  background-image: url("../common-images/olapkpi/right-arrow.png");
+}
+.e-olapgrid .kpidownarrow {
+  background-image: url("../common-images/olapkpi/down-arrow.png");
+  background-position: center center;
+}
+.e-olapgrid .kpidiamond {
+  background-image: url("../common-images/olapkpi/diamond.png");
+  background-position: center center;
+}
+.e-olapgrid .kpitriangle {
+  background-image: url("../common-images/olapkpi/triangle.png");
+  background-position: center center;
+}
+.e-olapgrid .kpicircle {
+  background-image: url("../common-images/olapkpi/circle.png");
+  background-position: center center;
+}
+.e-olapgrid .kpiredroad {
+  background-image: url("../common-images/olapkpi/red.png");
+  background-position: center center;
+}
+.e-olapgrid .kpigreenroad {
+  background-image: url("../common-images/olapkpi/green.png");
+  background-position: center center;
+}
+.e-olapgrid .kpiallcolor {
+  background-image: url("../common-images/olapkpi/three-color.png");
+  background-position: center center;
+}
+.e-olapgrid .hyperlinkValueCell {
+  color: #0026ff;
+  text-decoration: underline;
+  cursor: pointer;
+}
+.e-olapgrid .hyperlinkHeaderCell {
+  text-decoration: underline;
+  cursor: pointer;
+}
+.e-olapgrid .vScrollPanel {
+  background-color: #565656;
+  width: 8px;
+  margin-left: 8px;
+  display: inline-block;
+}
+.e-olapgrid .hScrollPanel {
+  background-color: #565656;
+  height: 8px;
+  margin-top: 4px;
+}
+.e-olapgrid .vScrollThumb {
+  width: 6px;
+  position: relative;
+  top: 1px;
+  left: 1px;
+  background-color: #979797;
+}
+.e-olapgrid .hScrollThumb {
+  height: 6px;
+  position: relative;
+  left: 1px;
+  top: 1px;
+  background-color: #979797;
+}
+.e-olapgrid .categPageIndicator,
+.e-olapgrid .seriesPageIndicator {
+  width: auto;
+  background-color: #efefef;
+  border: thin solid gray;
+  color: #5b5b5b;
+  padding: 5px;
+  position: absolute;
+}
+.e-olapgrid .vScrollThumb:hover,
+.e-olapgrid .hScrollThumb:hover {
+  background-color: #b9b9b9;
+}
+.e-olapgrid .inActive {
+  display: none;
+}
+.e-olapgrid .dragging {
+  background-color: #d9d9d9 !important;
+}
+.progressContainer {
+  width: 360px;
+  height: 70px;
+  border-radius: 10px;
+  position: absolute;
+  background-color: #1f1f1f;
+  box-shadow: 0 0 5px 1px #686868;
+  color: #c3c3c3;
+}
+.progressBar {
+  width: 300px;
+  height: 16px;
+  top: 25px;
+  left: 30px;
+  position: absolute;
+}
+.progressText {
+  width: 350px;
+  height: 20px;
+  top: 0px;
+  left: 30px;
+  fontSize: 16px;
+  position: absolute;
+}

@@ -1,0 +1,789 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Essential Studio for JavaScript : Airline Reservation</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="../../themes/default-theme/ej.widgets.all.min.css" rel="stylesheet" />
+    <link href="themes/css/sample.css" rel="stylesheet" />
+    <link rel="shortcut icon" href="../../themes/images/favicon.ico" />
+
+    <!--[if lt IE 9]>
+         <script src="../../scripts/jquery-1.11.3.min.js" type="text/javascript"></script>
+     <!--<![endif]-->
+    <!--[if gte IE 9]><!-->
+    <script src="../../scripts/jquery-2.1.4.min.js" type="text/javascript"></script>
+    <!--<![endif]-->
+    <script src="../../scripts/jquery.globalize.min.js"></script>
+    <script src="../../scripts/jquery.easing.1.3.min.js"></script>
+    <script src="../../scripts/jsrender.min.js"></script>
+    <script src="../../scripts/ej.web.all.min.js"></script>
+
+
+    <!--<script src="scripts/dataSource.js"></script>-->
+    <script src="scripts/sample.js"></script>
+
+
+
+    <script type="text/javascript">
+        var nHoverNode = null;
+        var oHoverNode = null;
+        var data = [];
+        $(function () {
+            data = GetData();
+            var cities = [];
+            var citiesList = GetCitiesList();
+            for (var cnt = 0; cnt < GetCitiesList().length; cnt++) {
+                cities.push(citiesList[cnt].cityName);
+            }
+            $(".datepick").ejDatePicker({
+                value: new Date()
+            });
+            $("#priceRangeSlider").ejSlider({
+                sliderType: ej.SliderType.Range,
+                values: [0, 100],
+                slide: "onPriceRangeSlide",
+                start: "onPriceRangeStart",
+                create: "onPriceRangecreate",
+                change: "onPriceRangechange",
+                height: 8
+
+            });
+
+            $("#diagramView").ejDialog(
+              {
+                  enableModal: true,
+                  resizable: false,
+                  width: 1000,
+                  height: 530,
+                  close: "onDialogClose",
+                  showOnInit: false,
+              });
+
+
+            $("#adultIncrement").bind("click", function (event) {
+                var adultTextElement = document.getElementById("adultCount");
+                var lastValue = Number(adultTextElement.value);
+                adultTextElement.value = lastValue + 1;
+
+            });
+            $("#adultDecrement").bind("click", function (event) {
+
+                var adultTextElement = document.getElementById("adultCount");
+                var lastValue = Number(adultTextElement.value);
+                if (lastValue != 0)
+                    adultTextElement.value = lastValue - 1;
+
+            });
+            $("#childIncrement").bind("click", function (event) {
+                var childTextElement = document.getElementById("childCount");
+                var lastValue = Number(childTextElement.value);
+                childTextElement.value = lastValue + 1;
+
+            });
+            $("#childDecrement").bind("click", function (event) {
+                var childTextElement = document.getElementById("childCount");
+                var lastValue = Number(childTextElement.value);
+                if (lastValue != 0)
+                    childTextElement.value = lastValue - 1;
+
+            });
+            $("#timeRangeSlider").ejSlider({
+                sliderType: ej.SliderType.Range,
+                values: [0, 100],
+                slide: "onTimeRangeSlide",
+                start: "onTimeRangeStart",
+                create: "onTimeRangecreate",
+                change: "onTimeRangechange",
+                height: 8
+            });
+
+            $('.cityList').ejAutocomplete({
+                dataSource: cities,
+                width: 205,
+                autoFill: true
+            });
+            $("#btnSearchFlight").ejButton({
+                roundedCorner: true,
+                click: "btnSearchClick"
+
+            });
+            var oldSelectedRow;
+            $("#FlightTicketBooking").ejGrid({
+                dataSource: data,
+                allowPaging: true,
+                allowSorting: true,
+                recordClick: function () {
+                    $("#btnOpenPopup").css("display", "block");
+                },
+                columns: [
+                    { field: "Airline", headerText: "Airline", width: 30 },
+                    { field: "From", headerText: "From", width: 30 },
+                    { field: "To", headerText: "To", width: 30 },
+                    { field: "Depart", headerText: "Depart", width: 30 },
+                    { field: "Arrive", headerText: "Arrive", width: 30 },
+                    { field: "Price", headerText: "Price", width: 30, format: "{0:C}" },
+                    { field: "Rating", headerText: "Rating", width: 40 }
+                ],
+                actionComplete: function (args) {
+                    if (oldSelectedRow > 0)
+                        args.model.selectedRow = oldSelectedRow;
+                },
+                actionBegin: function (args) {
+                    oldSelectedRow = args.model.selectedRow;
+                },
+                load: function (args) {
+                    var x = args.model.dataSource[Math.floor(Math.random() * args.model.dataSource.length - 1)];
+                    if (document.getElementById("fromCityName")) {
+                        document.getElementById("fromCityName").value = String(x.From);
+                        document.getElementById("toCityName").value = String(x.To);
+                    }
+                    args.model.selectedRowIndex = 0;
+                }
+            });
+
+            $("#btnOneWay").ejToggleButton({
+                size: "normal",
+                contentType: "imageonly",
+                change: "btnOneWayChange"
+            });
+            $("#btnRoundTrip").ejToggleButton({
+                size: "normal",
+                contentType: "imageonly",
+                change: "btnRoundTripChange"
+            });
+
+            var nodes = addDiagramContents();
+            $("#diagramContent").ejDiagram({
+                nodes: nodes,
+                width: "625px",
+                height: "357px",
+                canvas: {
+
+                    borderWidth: 0,
+                    width: "1000px",
+                    height: "500px"
+                },
+                grid: { visible: false },
+                constraints: ej.datavisualization.Diagram.DiagramConstraints.Default & ~ej.datavisualization.Diagram.DiagramConstraints.Zoomable,
+                click: onNodeClick,
+                drop: onItemDrop,
+                drag: nodedragging,
+                mouseLeave: nodemouseleave,
+                mouseEnter: nodemouseenter,
+                pageSettings: { showPageBreaks: false, multiplePage: false, pageBackgroundColor: "transparent", pageBorderWidth: 0, scrollLimit: "diagram" },
+                snapSettings: { snapConstraints: null },
+                backgroundImage: "themes/images/plane-image.png",
+            });
+
+
+            $("#btnOpenPopup").bind("click", function () {
+                openPopup();
+            });
+            $("#btnBookNow").bind("click", function () {
+                bookNow();
+            });
+        });
+
+        function nodemouseenter(args) {
+            if (args.element.fillColor != "red") {
+                if (nHoverNode && args.element.name != nHoverNode.name) {
+                    diagram = $("#diagramContent").ejDiagram("instance");
+                    var obj = new Object();
+                    obj.fillColor = "white";
+                    diagram.updateNode(nHoverNode.name, obj);
+                }
+                nHoverNode = args.element;
+                var diagram = $("#diagramContent").ejDiagram("instance");
+                var obj = new Object();
+                obj.fillColor = "#8CC63F";
+                diagram.updateNode(args.element.name, obj);
+            }
+        }
+
+        function nodemouseleave(args) {
+            if (args.element.fillColor != "red") {
+                var diagram = $("#diagramContent").ejDiagram("instance");
+                var obj = new Object();
+                obj.fillColor = "white";
+                diagram.updateNode(args.element.name, obj);
+            }
+        }
+
+        function testChildParent(args) {
+            if (args.childNodes[0].className == "selectchildObject")
+                return ("child");
+            else
+                return ("adult");
+        }
+
+        function onItemDrop(args) {
+            var diagram = $("#diagramContent").ejDiagram("instance");
+            diagram._clearSelection();
+            var element = diagram._findNode($("#" + args.e.target.id)[0].parentNode.id);
+
+            if (element && element.shape && element.shape == "rectangle") {
+                var selectedNode = element;
+                if (selectedNode && (selectedNode.addInfo == undefined || selectedNode.addInfo == "")) {
+                    var imageSrc = "";
+                    var adultAdded = false;
+                    var childAdded = false;
+                    var result = testChildParent(args.draggable[0]);
+                    if (result == "adult") {
+                        adultAdded = true;
+                        imageSrc = "themes/images/icon_Adult.png";
+                    }
+                    else {
+                        childAdded = true;
+                        imageSrc = "themes/images/icon_Child.png";
+                    }
+                    if (adultCount > 0 || childCount > 0) {
+                        var diagram = $("#diagramContent").ejDiagram("instance");
+                        if (!selectedNode.line && selectedNode.type != "group") {
+                            selectedNode.border = "gray";
+                            diagram.updateNode(selectedNode.name, { type: "image", source: imageSrc });
+                            if (adultAdded) {
+                                selectedNode.addInfo = "AdultSeat";
+                                removeLastAdultIcon();
+                                adultCount = adultCount - 1;
+                            }
+                            if (childAdded) {
+                                selectedNode.addInfo = "ChildSeat";
+                                removeLastChildIcon();
+                                childCount = childCount - 1;
+                            }
+                        }
+                    }
+                } else if (selectedNode.addInfo != "" && selectedNode.addInfo != "booked") {
+                    var diagram = $("#diagramContent").ejDiagram("instance");
+                    //if (selectedNode instanceof ej.datavisualization.Diagram.Node) {
+                    if (!selectedNode.line && selectedNode.type != "group") {
+                        diagram.updateNode(selectedNode.name, { type: "basic", shape: "rectangle" });
+                        if (selectedNode.addInfo == "AdultSeat") {
+                            addAdultIcon();
+                            adultCount = adultCount + 1;
+                        }
+                        if (selectedNode.addInfo == "ChildSeat") {
+                            addChildIcon();
+                            childCount = childCount + 1;
+                        }
+                        selectedNode.addInfo = "";
+                    }
+                } else if (selectedNode.addInfo == "booked") {
+                    //alert("Selected " + selectedNode.name + " is already booked");
+                }
+                updateAdultText();
+                updateChildText();
+            }
+
+        }
+        function nodedragging(args) {
+            var diagram = $("#diagramContent").ejDiagram("instance");
+            diagram._clearSelection();
+            args.cancel = true;
+        }
+        function backButtonClick() {
+            $("#diagramView").ejDialog("close");
+        }
+
+        function GetData() {
+            var dataArray = [];
+            var airwaysProvidersList = GerAirProvidersList();
+            for (var cnt = 0; cnt < airwaysProvidersList.length; cnt++) {
+
+                var citiesLst = GetCitiesList();
+                var fromIndex = GetRandCityIndex(GetCitiesList().length - 1);
+                var toIndex = GetRandCityIndex(GetCitiesList().length - 1);
+                if (fromIndex == toIndex) {
+                    toIndex = (toIndex + 1) > citiesLst.Count - 1 ? 0 : toIndex + 1;
+                }
+
+                var Airline = airwaysProvidersList[cnt];
+                var From = citiesLst[fromIndex];
+                var To = citiesLst[toIndex];
+                var Depart = GetTime();
+                var Arrive = GetTime().toFixed(2);
+                var Price = GetPrice().toFixed(2);
+                var Rating = Math.floor(Math.random() * 5);
+
+                dataArray.push({
+                    Airline: Airline.flightName,
+                    From: From.cityName,
+                    To: To.cityName,
+                    Depart: Depart,
+                    Arrive: Arrive,
+                    Price: Price,
+                    Rating: Rating
+                });
+            }
+            return dataArray;
+        }
+        function GerAirProvidersList() {
+            var flightlist = [
+            { flightName: "Aero Flot" },
+            { flightName: "Aero Mexico" },
+            { flightName: "Air NewZealand" },
+            { flightName: "AirBerlin" },
+            { flightName: "AirCanada" },
+            { flightName: "AirFrance" },
+            { flightName: "AirIndia" },
+            { flightName: "AirMadagascar" },
+            { flightName: "AirPhilipines" },
+            { flightName: "AirTran" },
+            { flightName: "AlaskaAirlines" },
+            { flightName: "Alitalia" },
+            { flightName: "Austrian" },
+            { flightName: "Avianca" },
+            { flightName: "British Airways" },
+            { flightName: "Brussels Airlines" },
+            { flightName: "CathayPacific" },
+            { flightName: "China Airlines" },
+            { flightName: "Continental Airlines" },
+            { flightName: "Croatia Airlines" },
+            { flightName: "Dragonair" },
+            { flightName: "Delta" },
+            { flightName: "Elal" },
+            { flightName: "Emirates" },
+            { flightName: "Ethiopian" },
+            { flightName: "Garuda Indonesia" },
+            { flightName: "Hawaiian" },
+            { flightName: "Iberia" },
+            { flightName: "IceLandAir" },
+            { flightName: "Jal" },
+            { flightName: "KLM" },
+            { flightName: "KoreanAir" },
+            { flightName: "Lan" },
+            { flightName: "Lot" },
+            { flightName: "Lufthansa" },
+            { flightName: "Malaysia" },
+            { flightName: "MidWest Airlines" },
+            { flightName: "NWA" },
+            { flightName: "Oceanic Airlines" },
+            { flightName: "Qantas" },
+            { flightName: "Sabena" },
+            { flightName: "Singapore Airlines" },
+            { flightName: "SouthAfrican Airways" },
+            { flightName: "Spirit Airlines" },
+            { flightName: "SriLankan Airlines" },
+            { flightName: "SwissAir" },
+            { flightName: "Tap" },
+            { flightName: "Thai" },
+            { flightName: "Turkish AirLines" },
+            { flightName: "United Airlines" },
+            { flightName: "Varig" },
+            { flightName: "Vietnam Airlines" },
+            { flightName: "Wideroe" }
+            ];
+            return flightlist;
+        }
+
+        function GetCitiesList() {
+            var cities = [
+                { cityName: "Atlanta" },
+                { cityName: "London" },
+                { cityName: "Los Angeles" },
+                { cityName: "Dallas" },
+                { cityName: "Alexandria" },
+                { cityName: "Paris" },
+                { cityName: "Amsterdam" },
+                { cityName: "Danver" },
+                { cityName: "Madrid" },
+                { cityName: "Houston" },
+                { cityName: "HongKong" },
+                { cityName: "Minneapolis" },
+                { cityName: "Detroit" },
+                { cityName: "Bangkok" },
+                { cityName: "SanFransisco" },
+                { cityName: "Bandon" },
+                { cityName: "Miami" },
+                { cityName: "New york" },
+                { cityName: "Singapore" },
+                { cityName: "Tokyo" },
+                { cityName: "Beijing" },
+                { cityName: "Seattle" },
+                { cityName: "Belize City" },
+                { cityName: "Orlando" },
+                { cityName: "Berlin" },
+                { cityName: "Bishop" },
+                { cityName: "Toronto" },
+                { cityName: "Brownwood" },
+                { cityName: "Saint Louis" },
+                { cityName: "Chicago" },
+                { cityName: "FrankFurt" },
+                { cityName: "Madrid" },
+                { cityName: "Las Vegas" },
+                { cityName: "Phoenix" },
+                { cityName: "Delhi" },
+                { cityName: "Dubai" },
+                { cityName: "Newark" },
+                { cityName: "ROME" },
+                { cityName: "Charlotte" },
+                { cityName: "Munich" },
+                { cityName: "Guangzhou" },
+                { cityName: "Eureka" },
+                { cityName: "Sydney" },
+                { cityName: "Jakarta" },
+                { cityName: "Philadelphia" },
+                { cityName: "Barcelona" },
+                { cityName: "Incheon" },
+                { cityName: "Istanbul" },
+                { cityName: "Shangai" },
+                { cityName: "Kuala Lumpur" },
+                { cityName: "Mexico" },
+                { cityName: "Boston" },
+                { cityName: "Melbourne" },
+                { cityName: "Mumbai" },
+                { cityName: "Dublin" },
+                { cityName: "Palma De Mallorca" },
+                { cityName: "Fort Lauderdale" },
+                { cityName: "Zurich" },
+                { cityName: "Manaila" },
+                { cityName: "Taipei" },
+                { cityName: "Copenhagen" },
+                { cityName: "Manchester" },
+                { cityName: "Shenzhen" },
+                { cityName: "Sao paulo" },
+                { cityName: "Baltimore MD" },
+                { cityName: "Salt Lake City" },
+                { cityName: "Moscow" },
+                { cityName: "Vienna" },
+                { cityName: "Oslo" },
+                { cityName: "Millan" },
+                { cityName: "Brisbane" },
+                { cityName: "Antalya" },
+                { cityName: "Honolulu" },
+                { cityName: "Johannesburg" },
+                { cityName: "Brussels" },
+                { cityName: "Tampa FL" },
+                { cityName: "Stockholm" },
+                { cityName: "Dusseldorf" },
+                { cityName: "San Diego CA" },
+                { cityName: "Vancouver" },
+                { cityName: "Sapporo" },
+                { cityName: "Washington" },
+                { cityName: "Fukuoka" },
+                { cityName: "Chengdu" },
+                { cityName: "Athens" },
+                { cityName: "Osaka" },
+                { cityName: "Jeddah" },
+                { cityName: "Naha" },
+                { cityName: "St Louis MO" },
+                { cityName: "Cairo" },
+                { cityName: "Portland" },
+                { cityName: "Seoul" },
+                { cityName: "CinCinnati OH" },
+                { cityName: "Lisbon" },
+                { cityName: "Bogota" },
+                { cityName: "Helsinki" },
+                { cityName: "Hall Beach" },
+                { cityName: "Eagle" },
+                { cityName: "Easton" },
+                { cityName: "Elkedra" },
+                { cityName: "Finke" },
+                { cityName: "Florenceh" },
+                { cityName: "Franklin" },
+                { cityName: "Fuyang" },
+                { cityName: "Gangaw" },
+                { cityName: "Gangneung" },
+                { cityName: "Goa" },
+                { cityName: "Greenville" },
+                { cityName: "Indiana" },
+                { cityName: "Inverway" },
+                { cityName: "Itumbiara" },
+                { cityName: "Kalgoorlieh" },
+                { cityName: "Kambuaya" },
+                { cityName: "Kasba Lake" },
+                { cityName: "Kenora" },
+                { cityName: "Kingston" },
+                { cityName: "Queretaro" },
+                { cityName: "Qiemo" },
+                { cityName: "Quillayute" },
+                { cityName: "Queenstown" },
+                { cityName: "Quanduc" },
+                { cityName: "Rafha" },
+                { cityName: "Rajshahi" },
+                { cityName: "Ramadan" },
+                { cityName: "Ranong" },
+                { cityName: "Redencao" },
+                { cityName: "Richmond" },
+                { cityName: "Ube" },
+                { cityName: "Udine" },
+                { cityName: "Union City" },
+                { cityName: "Ulusaba" },
+                { cityName: "Upland" },
+                { cityName: "Valentine" },
+                { cityName: "Vaasa" },
+                { cityName: "Vadodara" },
+                { cityName: "Varanasi" },
+                { cityName: "Vejle" },
+                { cityName: "Xiangfan" },
+                { cityName: "Xingcheng" },
+                { cityName: "Xining" },
+                { cityName: "Xinguara" },
+                { cityName: "Xayabury" },
+                { cityName: "Yaroslavl" },
+                { cityName: "Yeovilton" },
+                { cityName: "Yonago" },
+                { cityName: "Yorketown" },
+                { cityName: "Zambezi" },
+                { cityName: "Zahedan" },
+                { cityName: "Zacatecas" },
+                { cityName: "Zephyrhills" },
+                { cityName: "Chennai" }
+            ];
+            return cities;
+        }
+
+        function GetRandCityIndex(count) {
+            return Math.floor(Math.random() * count);
+        }
+
+        function GetPrice() {
+            return Math.floor(Math.random() * (5000 - 400 + 1)) + 400;
+        }
+
+        function GetTime() {
+            var time = Math.floor((Math.random() * 23) + 1);
+            var minutes = Math.floor(Math.random() * (59 - 0 + 1)) + 0;
+            var cc = time + (minutes / 100);
+            return cc;
+        }
+    </script>
+
+</head>
+<body style="background-color: white;">
+    <div id="test_feed" style="position: absolute; background-color: red; z-index: 999999999999999999999999999999999999999999999999999999;"></div>
+    <div class="header">
+        <span>AIRLINE RESERVATION</span>
+    </div>
+
+    <div class="sampleContainer">
+        <table class="sampleOuterTable" cellspacing="15">
+            <tr>
+                <td></td>
+                <td style="text-align: right; height: 40px;">
+                    <input type="button" id="btnOpenPopup" class="bookNow" style="float: right; display: none;" value="Book Now" />
+                    <div style="height: 10px; width: 100%;"></div>
+                </td>
+            </tr>
+            <tr>
+                <td id="Property_space" style="width: 325px;">
+                    <div style="padding-bottom: 85px;">
+                        <div class="userInteractionDiv">
+                            <table class="userInteractionTable">
+                                <tr>
+                                    <td>
+                                        <label>Travel Type</label><br />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">
+                                        <div class="travelTypeDiv">
+                                            <table>
+                                                <tr>
+                                                    <td style="width: 80%;">
+                                                        <label id="travelType"></label>
+                                                    </td>
+                                                    <td>
+                                                        <input type="checkbox" id="btnOneWay" />
+                                                        <input type="checkbox" id="btnRoundTrip" /></td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label>Adult</label></td>
+                                    <td>
+                                        <label>Child</label></td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 100px">
+                                        <div>
+                                            <input type="button" id="adultDecrement" value="-" class="iconButton" />
+                                            <input type="text" value="3" id="adultCount" onkeypress="return isNumber(event)" class="countBox" />
+                                            <input type="button" id="adultIncrement" value="+" class="iconButton" />
+                                        </div>
+                                    </td>
+                                    <td style="width: 100px">
+                                        <div>
+                                            <input type="button" id="childDecrement" value="-" class="iconButton" />
+                                            <input type="text" value="2" id="childCount" onkeypress="return isNumber(event)" class="countBox" />
+                                            <input type="button" id="childIncrement" value="+" class="iconButton" />
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Leaving From</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">
+                                        <input type="text" id="fromCityName" class="cityList" style="width: 100%;" value="Chennai" /></td>
+                                </tr>
+                                <tr>
+                                    <td>Going To</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">
+                                        <input type="text" id="toCityName" class="cityList" style="width: 100%;" /></td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label>Departure</label></td>
+                                    <td>
+                                        <label>Return</label></td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <input type="text" id="departureDate" class="datepick" />
+                                    </td>
+                                    <td>
+                                        <input type="text" id="returnDate" class="datepick" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="height: 10px;"></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">
+                                        <input type="button" id="btnSearchFlight" value="SEARCH FOR FLIGHT" />
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="sliderDiv">
+                            <table class="slideTable">
+                                <tr>
+                                    <td>
+                                        <label>Price Range</label></td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div id="priceRangeSlider"></div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div>
+                                            <table>
+                                                <tr>
+                                                    <td>
+                                                        <span id="minPrice"></span>
+                                                    </td>
+                                                    <td>
+                                                        <span class="maxPriceSpan" style="margin-left: 201px;" id="maxPrice"></span>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label>Departure Time</label><br />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div id="timeRangeSlider"></div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div>
+                                            <table>
+                                                <tr>
+                                                    <td>
+                                                        <span id="minTime"></span>
+                                                    </td>
+                                                    <td>
+                                                        <span style="margin-left: 212px;" id="maxTime"></span>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </td>
+                <td id="gid_space" colspan="2" style="vertical-align: top;">
+                    <div id="FlightTicketBooking"></div>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div id="diagramView" class="zoom-anim-dialog mfp-hide" style="display: none; height: 100%; width: 100%;">
+        <div id="backIcon" onclick="backButtonClick()" style=""></div>
+        <div id="popupContent">
+            <table class="countIconTable">
+                <tr>
+                    <td colspan="2" style="height: 15%;"></td>
+                </tr>
+                <tr>
+                    <td id="ResItemBox" class="countIconColumn">
+                        <div style="font-size: 12px;">
+                            Select your seat by dragging the passenger icon to any available seat.
+                        </div>
+                        <br />
+                        <div>
+                            <span id="adultCountDisplay"></span>
+                            <div class="iconDiv">
+                                <div id="adultIconDisplay">
+                                </div>
+                            </div>
+                        </div>
+                        <br />
+                        <div>
+                            <span id="childCountDisplay"></span>
+                            <div class="iconDiv">
+                                <div id="childIconDisplay">
+                                </div>
+                            </div>
+                        </div>
+
+                    </td>
+                    <td id="DiagramArea">
+                        <div id="diagramContent"></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="height: 18px;"></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <input type="button" id="btnBookNow" value="Book Now" class="bookNow" style="margin-left: 525px;" />
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div id="bg_mask" style="margin-top: -163px; margin-left: 0px;">
+            <div id="frontlayer">
+                <span style="font-size: 17px">Your booking has been confirmed. </span>
+                <br />
+                <br />
+                <span style="font-size: 17px">Thanks for choosing our service</span><br />
+                <br />
+                <span style="color: #22BAF1; font-size: 22px;">Have a Great journey !</span><br />
+                <br />
+
+                <div>
+                    <table>
+                        <tr>
+                            <td>Rate this App</td>
+                            <td>
+                                <input type="text" id="airlineRating" class="rating" /></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+</body>
+</html>

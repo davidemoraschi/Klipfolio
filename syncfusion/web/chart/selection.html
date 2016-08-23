@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+ <head>
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href="../themes/bootstrap.min.css" rel="stylesheet">
+    <link href="../themes/default-theme/ej.widgets.all.min.css" rel="stylesheet" />
+    <link href="../themes/default.css" rel="stylesheet" />
+	<link href="../themes/default-responsive.css" rel="stylesheet" />
+    <!--[if lt IE 9]>
+         <script src="../scripts/jquery-1.11.3.min.js" type="text/javascript"></script>
+     <!--<![endif]-->
+    <!--[if gte IE 9]><!-->
+    <script src="../scripts/jquery-2.1.4.min.js" type="text/javascript"></script>
+    <!--<![endif]-->
+	<script src="../scripts/jquery.globalize.min.js"></script>
+    <script src="../scripts/ej.web.all.min.js" type="text/javascript"></script>
+	<script src="../scripts/properties.js" type="text/javascript"></script>
+ </head>
+  <body>
+	<div class="content-container-fluid">      
+			<div class="row">                
+                <div class="cols-sample-area">                                  				
+					<div id="container"></div> 					                   
+                </div>
+				<div id="sampleProperties">
+					<div class="prop-grid">
+						<div class="row">
+							<div class="col-md-3">
+								 Enable Highlight
+							</div>
+							<div class="col-md-3 aligntop">
+                                <input type="checkbox" checked="checked" id="enablehigh"/>
+							</div>
+						</div>
+                        <div class="row">
+							<div class="col-md-3">
+								 Enable Selection
+							</div>
+							<div class="col-md-3 aligntop">
+                                <input type="checkbox" checked="checked" id="enablesel"/>
+							</div>
+						</div>
+                        <div class="row">
+							<div class="col-md-3">
+								 Enable 3D
+							</div>
+							<div class="col-md-3 aligntop">
+                                <input type="checkbox" id="enable3d"/>
+							</div>
+						</div>
+                         <div class="row">
+							<div class="col-md-3">
+								 Enable Legend Selection
+							</div>
+							<div class="col-md-3 aligntop">
+                                <input type="checkbox" checked="checked" id="enablelege"/>
+							</div>
+						</div>
+						<div class="row" style="margin: 10px 0;">
+							<div class="col-md-3">
+								  Type
+							</div>
+							<div class="col-md-3 aligntop">
+								<select name="selectIndex" autocomplete="off" id="type">
+									<option value="column">Column</option>
+									<option value="bar">Bar</option>
+									<option value="doughnut">Doughnut</option>
+									<option value="pie">Pie</option>
+								</select>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-3">
+								  Highlight Color
+							</div>
+							<div class="col-md-3 aligntop">
+								<input type="text" id="highcolor" value="" style="width:100px;"/>
+							</div>
+						</div>
+                        <div class="row" style="margin: 10px 0;">
+							<div class="col-md-3">
+								  Highlight Pattern
+							</div>
+							<div class="col-md-3 aligntop">
+								<select name="selectIndex" autocomplete="off" id="highpattern" style="width:100px;">
+									<option value="chessboard">Chessboard</option>
+									<option value="none">None</option>
+									<option value="diagonalForward">Diagonal Forward</option>
+									<option value="dots">Dots</option>
+								</select>
+							</div>
+						</div>
+                        <div class="row">
+							<div class="col-md-3">
+								  Selection Color
+							</div>
+							<div class="col-md-3 aligntop">
+								<input type="text" id="selcolor" value="" style="width:100px;"/>
+							</div>
+						</div>
+                        <div class="row" style="margin: 10px 0;">
+							<div class="col-md-3">
+								  Selection Pattern
+							</div>
+							<div class="col-md-3 aligntop">
+								<select name="selectIndex" autocomplete="off" id="selpattern" style="width:100px;">
+									<option value="diagonalForward">Diagonal Forward</option>
+									<option value="dots">Dots</option>
+									<option value="chessboard">Chessboard</option>
+									<option value="none">None</option>
+								</select>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+	</div>
+ <script type="text/javascript">
+	$(function () 
+	{
+        $("#container").ejChart(
+        {
+			//Initializing Primary X Axis
+            primaryXAxis:
+            {
+                title: { text: 'Countries' },
+                labelIntersectAction: 'multiplerows'                     
+            },			
+			//Initializing Primary Y Axis	
+            primaryYAxis:
+            {
+                labelFormat: "{value}%",
+                title: { text: 'Percentage' }
+            }, 
+			//Initializing Common Properties for all the series
+			commonSeriesOptions:
+			{
+                type: 'column', 
+				enableAnimation: true, 
+				tooltip: { visible: false },
+				highlightSettings: {enable:true, mode:'point', border: { width: '1'}, opacity: 1, pattern:'chessboard' },
+				selectionSettings: {enable:true, mode: 'point', border: { width: '1'}, opacity: 1, pattern: 'diagonalforward' },
+            },            
+			//Initializing Series
+			series: 
+			[ 
+				{
+				    points: [
+                             { x: "China", y: 4, fill: '#E6DC96',border:{color:'#E6DC96'} },
+                             { x: "United States", y: 7, fill: '#B4B565' ,border:{color:'#B4B565'}},
+							 { x: "India", y: 14, fill: '#576B52' ,border:{color:'#576B52'}},
+                             { x: "Japan", y: 8, fill: '#416675' ,border:{color:'#416675'}},
+							 { x: "Brazil", y: 7, fill: '#D96D32' ,border:{color:'#D96D32'}},
+                             { x: "Russia", y: 10, fill: '#FDA94E' ,border:{color:'#FDA94E'}},
+                             { x: "Germany", y: 2, fill: '#a39f10' ,border:{color:'#a39f10'}},
+							 { x: "Nigeria", y: 16, fill: '#f8940b' ,border:{color:'#f8940b'}},
+                             { x: "United Kingdom", y: 3, fill: '#dbd54b' ,border:{color:'#dbd54b'}},
+							 { x: "France", y: 3, fill: '#bd4916' ,border:{color:'#bd4916'}}
+				    ],
+				    name: 'Countries',
+				    doughnutCoefficient: 0.5,
+				    doughnutSize: 0.9
+				}
+			],
+            title: { text: 'One Year Growth of Internet Usage 2014' },
+            load: "loadTheme",
+            canResize: true,
+            size:{height:'550'},
+            legend: { visible: true, toggleSeriesVisibility: false,rowCount:2,itemPadding:26 }
+        });
+		
+		
+        $('#enablehigh').change(function () 
+		{
+            var chart = $("#container").ejChart("instance");
+            chart.model.series[0].highlightSettings.enable = $('#enablehigh').is(":checked");
+            chart.redraw();
+               
+        });
+        $('#enablesel').change(function () {
+            var chart = $("#container").ejChart("instance");
+            chart.model.series[0].selectionSettings.enable = $('#enablesel').is(":checked");
+            chart.redraw();
+
+        });
+        $('#enable3d').change(function () {
+            var chart = $("#container").ejChart("instance");
+            chart.model.enable3D = $('#enable3d').is(":checked");
+            chart.model.enableRotation = true;
+            chart.model.depth = 40;
+            chart.model.wallSize = 2;
+            chart.model.tilt = 0;
+            chart.model.rotation = 34;
+            chart.model.perspectiveAngle = 90;
+            chart.model.sideBySideSeriesPlacement = true;
+            chart.redraw();
+
+        });
+        $('#enablelege').change(function () {
+            var chart = $("#container").ejChart("instance");
+            chart.model.legend.toggleSeriesVisibility = !$('#enablelege').is(":checked");
+            chart.redraw();
+
+        });
+        $('#type').change(function () {
+            var chart = $("#container").ejChart("instance");
+            chart.model.series[0].type = $('#type')[0].value;
+            chart.redraw();
+
+        });
+
+        $('#highcolor').change(function () {
+            var chart = $("#container").ejChart("instance");
+            chart.model.series[0].highlightSettings.color = $('#highcolor')[0].value;
+            chart.redraw();
+
+        });
+        $('#highpattern').change(function () {
+            var chart = $("#container").ejChart("instance");
+            chart.model.series[0].highlightSettings.pattern = $('#highpattern')[0].value;
+            chart.redraw();
+
+        });
+
+        $('#selcolor').change(function () {
+            var chart = $("#container").ejChart("instance");
+            chart.model.series[0].selectionSettings.color = $('#selcolor')[0].value;
+            chart.redraw();
+
+        });
+        $('#selpattern').change(function () {
+            var chart = $("#container").ejChart("instance");
+            chart.model.series[0].selectionSettings.pattern = $('#selpattern')[0].value;
+            chart.redraw();
+
+        });
+
+    });	
+    
+
+	$("#sampleProperties").ejPropertiesPanel();
+ </script>
+ </body>
+</html>

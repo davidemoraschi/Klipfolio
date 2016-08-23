@@ -1,0 +1,34 @@
+/*----------------------OLAP Definition------------------*/
+/*-----------------------SymbolPalette Definition-----------------*/
+/*------------------------------------- Rotator -------------------------------------------*/
+
+.e-rotator-wrap .e-in-wrap .e-single,
+.e-rotator-wrap .e-thumb .e-thumb-items li,
+.e-rotator-wrap .e-in-wrap.e-multiple {
+  border-color: #303030;
+}
+.e-rotator-wrap .e-thumb .e-thumb-items li:hover {
+  border-color: #5eabde;
+}
+.e-rotator-wrap .e-thumb .e-thumb-items li.e-active {
+  border-color: #2382c3;
+}
+.e-rotator-wrap .e-thumb .e-thumb-items li.e-thumbhover {
+  border-color: #5eabde;
+}
+.e-rotator-wrap .e-inner .e-caption {
+  background-color: #050505;
+  color: #aaaaaa;
+}
+.e-rotator-wrap .e-pager-wrap .e-bullet > li:hover {
+  border-color: #5eabde;
+  background-color: #5eabde;
+}
+.e-rotator-wrap .e-pager-wrap .e-bullet > li.e-active {
+  border-color: #2382c3;
+  background-color: #2382c3;
+}
+.e-rotator-wrap .e-pager-wrap .e-bullet > li {
+  background-color: #1f1f1f;
+  border-color: #303030;
+}

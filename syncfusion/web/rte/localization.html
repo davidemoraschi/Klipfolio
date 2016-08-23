@@ -1,0 +1,277 @@
+﻿<!doctype html>
+<html>
+<head>
+    <title>Essential Studio for JavaScript : RTE Localization</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" charset="utf-8"  />
+    <link href="../themes/bootstrap.min.css" rel="stylesheet" />
+    <link href="../themes/default-theme/ej.widgets.all.min.css" rel="stylesheet" />
+    <link href="../themes/default.css" rel="stylesheet" />
+    <link href="../themes/default-responsive.css" rel="stylesheet" />
+	<!--[if lt IE 9]>
+	<script src="../scripts/jquery-1.11.3.min.js" type="text/javascript" ></script> 
+	<![endif]-->
+	<!--[if IE 9]><!-->
+	<script src="../scripts/jquery-2.1.4.min.js" type="text/javascript"> </script>
+	<!--<![endif]-->
+    <script src="../scripts/jquery.easing.1.3.min.js" type="text/javascript"></script>
+    <script src="../scripts/jquery.globalize.min.js" type="text/javascript"></script>
+    <script src="../scripts/ej.web.all.min.js" type="text/javascript"></script>
+    <script src="../scripts/properties.js" type="text/javascript"></script>
+</head>
+<body>
+    <div class="content-container-fluid">
+        <div class="row">
+            <div class="cols-sample-area">
+                <div>
+                    <div>
+                        <textarea id="rteSample" rows="10" cols="30" style="width: 740px; height: 440px">
+                  &lt;p&gt;&lt;b&gt;Description:&lt;/b&gt;&lt;/p&gt;
+    &lt;p&gt;The Rich Text Editor (RTE) control is an easy to render in
+    client side. Customer easy to edit the contents and get the HTML content for
+    the displayed content. A rich text editor control provides users with a toolbar
+    that helps them to apply rich text formats to the text entered in the text
+    area. &lt;/p&gt;
+    &lt;p&gt;&lt;b&gt;Functional
+    Specifications/Requirements:&lt;/b&gt;&lt;/p&gt;
+    &lt;ol&gt;&lt;li&gt;&lt;p&gt;Provide
+    the tool bar support, it’s also customizable.&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p&gt;Options
+    to get the HTML elements with styles.&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p&gt;Support
+    to insert image from a defined path.&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p&gt;Footer
+    elements and styles(tag / Element information , Action button (Upload, Cancel))&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p&gt;Re-size
+    the editor support. &lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p&gt;Provide
+    efficient public methods and client side events.&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p&gt;Keyboard
+    navigation support.&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;
+                        </textarea>
+                    </div>
+                </div>
+            </div>
+            <div id="sampleProperties">
+                <div class="prop-grid">
+                    <div class="row">
+                        <div class="col-md-3">
+                            Selection culture
+                        </div>
+                        <div class="col-md-3">
+                            <select id="language">
+                                <option value="en-US">English</option>
+                                <option value="de-DE">Deutsch</option>
+                                <option value="es-ES">Español</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" class="jsScript">
+
+        ej.RTE.Locale["de-DE"] = {
+            bold: "fett",
+            italic: "kursiv",
+            underline: "unterstreichen",
+            strikethrough: "Durchgestrichen",
+			superscript: "Überschrift",
+			subscript: "Index",
+            justifyCenter: "Text-Zentrum",
+            justifyLeft: "Ausrichten von Text links",
+            justifyRight: "Ausrichten von Text rechts",
+            justifyFull: "rechtfertigen",
+            fileBrowser: "Datei-Browser",
+            unorderedList: "Legen Sie ungeordnete Liste",
+            orderedList: "Geordnete Liste einfügen",
+            indent: "Einzug",
+            outdent: "Einzug verkleinern",
+            undo: "lösen",
+            redo: "Wiederherstellen",
+            clearAll: "Alles",
+            clearFormat: "Klar Format",
+            createLink: "Einfügen / Hyperlink Bearbeiten",
+            image: "Bild einfügen",
+            video: "Legen Video",
+            embedVideo: "Fügen Sie den Embed-Code unten",
+            viewHtml: "Blick HTML",
+            deleteAlert: "Sind Sie sicher, dass Sie alle Inhalte löschen?",
+            videoError: "Der Textbereich darf nicht leer sein",
+            imageWebUrl: "Web-URL",
+            imageAltText: "Bildbeschreibung",
+            dimensions: "Größe",
+            constrainProportions: "Proportionen",
+            linkWebUrl: "Web-URL",
+            linkText: "Text",
+            linkToolTip: "Quickinfo",
+            html5Support: "Dieses Werkzeug-Symbol nur in HTML5 aktiviert unterstützten Browser",
+            linkOpenInNewWindow: "Link in einem neuen Fenster",
+            tableColumns: "Spalten",
+            tableRows: "Zeilen",
+			solid:"solide",
+			dashed:"gestippelde",
+			dotted:"stippel",
+			doubled:"dubbele",
+			buttonApply:"toepassen",
+			buttonCancel:"annuleren",
+			closeIcon:"dicht",
+            tableWidth: "Tischbreite",
+            tableHeight: "Tischhöhe",
+            tableCellSpacing: "cellspacing",
+            tableCellPadding: "cellpadding",
+            tableBorder: "Grenze",
+            tableCaption: "Beschriftung",
+            tableAlignment: "Ausrichtung",
+            dialogUpdate: "Aktualisierung",
+            dialogInsert: "einfügen",
+            dialogCancel: "stornieren",
+            dialogOk: "Ok",
+            createTable: "Tabelle erstellen",
+            addColumnLeft: "Spalte links hinzufügen",
+            addColumnRight: "In Spalte auf der rechten",
+            addRowAbove: "Zeile hinzufügen oben",
+            addRowBelow: "Zeile hinzufügen unten",
+            deleteRow: "Löschen Sie die Zeile",
+            deleteColumn: "Löschen Sie die Spalte",
+            deleteTable: "Löschen Sie die Tabelle",
+            customTable: "von benutzerdefinierten Tabelle",
+            characters: "Charaktere",
+            dialogApply: "anwenden",
+            textAlign: "Text ausrichten",
+            imageLink: "Bild als Link zu",
+            imageBorder: "Bild Rand",
+            imageStyle: "Stil",
+            editTable: "Tabelle Eigenschaften bearbeiten",
+            general: "allgemein",
+            advanced: "fortgeschritten",
+            table: "Tisch",
+            row: "Reihe",
+            column: "Spalte",
+            cell: "Zelle"
+        };
+
+        ej.RTE.Locale["es-ES"] = {
+            bold: "audaz",
+            italic: "itálico",
+            underline: "subrayar",
+            strikethrough: "Tachado",
+			superscript: "sobrescrito",
+			subscript: "subíndice",
+            justifyCenter: "Centrar texto",
+            justifyLeft: "Alinear texto a la izquierda",
+            justifyRight: "Alinear texto a la derecha",
+            justifyFull: "justificar",
+            fileBrowser: "archivo Browser",
+            unorderedList: "Inserte lista desordenada",
+            orderedList: "Insertar lista ordenada",
+            indent: "muesca",
+			solid:"solida",
+			dashed:"fraŭditaj",
+			dotted:"punktita",
+			doubled:"duobla",
+			closeIcon:"Fermi",
+			buttonApply:"apliki",
+			buttonCancel:"nuligi",
+            outdent: "reducir sangría",
+            undo: "deshacer",
+            redo: "rehacer",
+            clearAll: "Borrar todo",
+            clearFormat: "Claro Formato",
+            createLink: "Insertar / Editar hipervínculo",
+            image: "insertar una imagen",
+            video: "insertar vídeo",
+            embedVideo: "Pegue su código de inserción por debajo de",
+            viewHtml: "Ver HTML",
+            format: "formato",
+            deleteAlert: "¿Está seguro que desea borrar todo el contenido?",
+            copyPastAlert: "Your browser doesn't support direct access to the clipboard. Please use the Ctrl+X/C/V keyboard shortcuts instead.",
+            videoError: "El área de texto no puede estar vacío",
+            imageWebUrl: "URL web",
+            imageAltText: "Descripción",
+            dimensions: "dimensiones",
+            constrainProportions: "Restringir proporciones",
+            linkWebUrl: "URL web",
+            linkText: "texto",
+            linkToolTip: "ToolTip",
+            html5Support: "Este icono de la herramienta sólo disponible en HTML5 apoyó navegadores",
+            linkOpenInNewWindow: "Abrir enlace en una nueva ventana",
+            tableColumns: "Columnas No.of",
+            tableRows: "Numero de Filas",
+            tableWidth: "ancho de la mesa",
+            tableHeight: "altura de la mesa",
+            tableCellSpacing: "El espaciado",
+            tableCellPadding: "Relleno",
+            tableBorder: "frontera",
+            tableCaption: "subtítulo",
+            tableAlignment: "alineación",
+            dialogUpdate: "actualización",
+            dialogInsert: "insertar",
+            dialogCancel: "cancelar",
+            dialogOk: "bueno",
+            createTable: "Crear una tabla",
+            addColumnLeft: "Añadir la columna de la izquierda",
+            addColumnRight: "Añadir columna a la derecha",
+            addRowAbove: "Añadir fila encima",
+            addRowBelow: "Añadir fila abajo",
+            deleteRow: "Elimine la fila",
+            deleteColumn: "Eliminar la columna",
+            deleteTable: "Eliminar la tabla",
+            customTable: "Crear una tabla personalizada",
+            characters: "Personajes",
+            dialogApply: "aplicar",
+            textAlign: "Texto Alinear",
+            imageLink: "Imagen como Enlace",
+            imageBorder: "Imagen de fronteras",
+            imageStyle: "Estilo",
+            editTable: "Editar las propiedades de la tabla",
+            general: "corriente",
+            advanced: "avanzada",
+            table: "tabla",
+            row: "fila",
+            column: "columna",
+            cell: "célula"
+        };
+
+        var format_DE = [
+                { text: "Absatz", value: "p", spriteCssClass: "e-paragraph" },
+                { text: "Zitat", value: "blockquote", spriteCssClass: "e-quotation" },
+                { text: "Kopf 1", value: "h1", spriteCssClass: "e-h1" },
+                { text: "Kopf 2", value: "h2", spriteCssClass: "e-h2" },
+                { text: "Kopf 3", value: "h3", spriteCssClass: "e-h3" },
+                { text: "Kopf 4", value: "h4", spriteCssClass: "e-h4" },
+                { text: "Kopf 5", value: "h5", spriteCssClass: "e-h5" },
+                { text: "Kopf 6", value: "h6", spriteCssClass: "e-h6" }
+        ];
+
+        var format_ES = [
+        { text: "acápite", value: "p", spriteCssClass: "e-paragraph" },
+        { text: "cita", value: "blockquote", spriteCssClass: "e-quotation" },
+        { text: "título 1", value: "h1", spriteCssClass: "e-h1" },
+        { text: "título 2", value: "h2", spriteCssClass: "e-h2" },
+        { text: "título 3", value: "h3", spriteCssClass: "e-h3" },
+        { text: "título 4", value: "h4", spriteCssClass: "e-h4" },
+        { text: "título 5", value: "h5", spriteCssClass: "e-h5" },
+        { text: "título 6", value: "h6", spriteCssClass: "e-h6" }
+        ];
+
+       var format= [
+                { text: "Paragraph", value: "p", spriteCssClass: "e-paragraph" },
+                { text: "Quotation", value: "blockquote", spriteCssClass: "e-quotation" },
+                { text: "Heading 1", value: "h1", spriteCssClass: "e-h1" },
+                { text: "Heading 2", value: "h2", spriteCssClass: "e-h2" },
+                { text: "Heading 3", value: "h3", spriteCssClass: "e-h3" },
+                { text: "Heading 4", value: "h4", spriteCssClass: "e-h4" },
+                { text: "Heading 5", value: "h5", spriteCssClass: "e-h5" },
+                { text: "Heading 6", value: "h6", spriteCssClass: "e-h6" }
+        ];
+        $(function () {
+            $("#rteSample").ejRTE({ locale: $("#language").val(), width: "700" });
+
+            $("#language").ejDropDownList({ width: "120px", "change": "onChange" })
+      .ejDropDownList("option", "selectedItemIndex", 1);
+        });
+
+        $("#sampleProperties").ejPropertiesPanel();
+        function onChange(args) {
+            var newFormat = args.value == "de-DE" ? format_DE : (args.value == "es-ES" ? format_ES : format);
+            $("#rteSample").ejRTE("model.format", newFormat);
+            $("#rteSample").ejRTE("model.locale", args.value);
+        }
+    </script>
+</body>
+</html>

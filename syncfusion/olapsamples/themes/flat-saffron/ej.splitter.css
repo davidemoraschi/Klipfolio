@@ -1,0 +1,35 @@
+/*----------------------OLAP Definition------------------*/
+/*-----------------------SymbolPalette Definition-----------------*/
+/*------------------------------------- splitter -------------------------------------------*/
+
+.e-splitter {
+  border-color: #bbbcbb;
+}
+.e-splitter .e-pane {
+  background-color: white;
+  color: #5c5c5c;
+}
+.e-splitter .e-splitbar.e-shadowbar.e-end-indicaton,
+.e-splitter .e-splitbar .e-end-indicaton {
+  background-color: #fef1ec;
+}
+.e-splitter .e-splitbar.e-shadowbar {
+  background: #f3b13f;
+  /* Old browsers */
+
+}
+.e-splitter .e-splitbar {
+  background-color: white;
+  border-color: #bbbcbb;
+}
+.e-splitter .e-splitbar .e-icon {
+  color: #797979;
+}
+.e-splitter .e-splitbar:hover .e-icon,
+.e-splitter .e-splitbar.e-hover .e-icon {
+  color: white;
+}
+.e-splitter .e-splitbar:hover:not(.e-shadowbar),
+.e-splitter .e-splitbar.e-hover {
+  background-color: rgba(0, 0, 0, 0.2);
+}

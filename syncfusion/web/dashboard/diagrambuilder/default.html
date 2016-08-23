@@ -1,0 +1,1620 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Essential Studio for JavaScript : Diagram Builder</title>
+
+    <link href="../../themes/default-theme/ej.widgets.all.min.css" rel="stylesheet" />
+    <link href="../../themes/default.css" rel="stylesheet" />
+    <link href="../../themes/default-responsive.css" rel="stylesheet" />
+    <link rel="shortcut icon" href="../../themes/images/favicon.ico" />
+
+
+    <!--[if lt IE 9]>
+         <script src="../../scripts/jquery-1.11.3.min.js" type="text/javascript"></script>
+     <!--<![endif]-->
+    <!--[if gte IE 9]><!-->
+    <script src="../../scripts/jquery-2.1.4.min.js" type="text/javascript"></script>
+    <!--<![endif]-->
+    <script src="../../scripts/jquery.easing.1.3.min.js"></script>
+    <script src="../../scripts/jquery.globalize.min.js"></script>
+    <script src="../../scripts/jsrender.min.js"></script>
+
+    <script src="../../scripts/ej.web.all.min.js"></script>
+    <script src="../../scripts/knockout.min.js"></script>
+    <script src="scripts/palettes.js"></script>
+    <script src="scripts/methods.js"></script>
+    <script src="scripts/events.js"></script>
+    <script src="scripts/control.js"></script>
+    <script src="scripts/intelligentshapes.js"></script>
+    <link href="fonticons/style.css" rel="stylesheet" />
+    <link href="css/diagrambuilder.css" rel="stylesheet" />
+    <link href="../../themes/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body>
+
+
+
+
+
+    <div id="uploadFile" style="height: 20px; width: 80px; position: absolute; left: 10px; top: 100px; display: none; z-index: 9999999999999999999; background-color: pink; border-radius: 10px; text-align: center">
+        Open
+    </div>
+
+    <div class="sample-header" id="sample-header">
+        <div class="sample-header-content">
+            <div class="sample-header-menubar">
+                <div class="sample-header-image">
+                    <div class="imgframe" style="height: 35px;">
+                        <ul id="DiagramMenuControl">
+
+                            <li id="menufile"><a>File</a>
+                                <ul style="border: .5px solid #999999; box-shadow: 2px 2px 2px  #AFAFAF;">
+                                    <li><a>New</a></li>
+                                    <li><a>Open</a></li>
+                                    <li><a>Save</a></li>
+                                    <li><a>Save As</a></li>
+                                    <li><a>Print</a></li>
+                                    <li><a>Export</a></li>
+                                </ul>
+
+                            </li>
+                            <li id="menuedit"><a>Edit</a>
+                                <ul style="border: .5px solid #999999; box-shadow: 2px 2px 2px  #AFAFAF;">
+                                    <li><a>Undo</a></li>
+                                    <li><a>Redo</a></li>
+                                    <li class="e-separator" style="margin: 0.1px; background-color: #AFAFAF;"></li>
+                                    <li><a>Select All</a></li>
+                                    <li><a>Cut</a></li>
+                                    <li><a>Copy</a></li>
+                                    <li><a>Paste</a></li>
+                                    <li><a>Delete</a></li>
+                                </ul>
+
+                            </li>
+                            <li id="menuview"><a>View</a>
+                                <ul style="border: .5px solid #999999; box-shadow: 2px 2px 2px  #AFAFAF;">
+
+                                    <li id="SmartGuid"><a style="padding: 3px 15px 5px 20px;"><span id="Show_SmartGuid" class="icon-checkmark2"></span>Smart Guide</a></li>
+                                    <li id="GridLines"><a style="padding: 3px 15px 5px 20px;"><span id="Show_GridLines" class="icon-checkmark2"></span>Grid Lines</a></li>
+                                    <li id="SnapToGrid"><a style="padding: 3px 15px 5px 20px;"><span id="Show_SnapToGrid" style="display: none;" class="icon-checkmark2"></span>Snap To Grid</a></li>
+                                    <li id="EnableOverView"><a style="padding: 3px 15px 5px 20px;"><span id="Show_EnableOverView" style="display: none;" class="icon-checkmark2"></span>Overview</a></li>
+                                </ul>
+                            </li>
+                            <li id="menuaction"><a>Actions</a>
+                                <ul style="border: .5px solid #999999; width: 100px; box-shadow: 2px 2px 2px  #AFAFAF;">
+                                    <li><a id="sd">Align</a>
+                                        <ul style="border: 1px solid transparent; box-shadow: 2px 2px 2px  #AFAFAF; border: .5px solid #999999;">
+                                            <li><a>Left</a></li>
+                                            <li><a>Right</a></li>
+                                            <li><a>Center</a></li>
+                                            <li><a>Top</a></li>
+                                            <li><a>Bottom</a></li>
+                                            <li><a>Middle</a></li>
+                                            <li><a>Space Down</a></li>
+                                            <li><a>Space Across</a></li>
+                                        </ul>
+                                    </li>
+                                    <li><a id="sd">Grouping</a>
+                                        <ul style="border: .5px solid #999999; box-shadow: 2px 2px 2px  #AFAFAF;">
+                                            <li><a>Group</a></li>
+                                            <li><a>Ungroup</a></li>
+                                        </ul>
+
+                                    </li>
+                                    <li><a id="sd">Order</a>
+                                        <ul style="border: .5px solid #999999; box-shadow: 2px 2px 2px  #AFAFAF;">
+                                            <li><a>Bring To Front</a></li>
+                                            <li><a>Bring Forward</a></li>
+                                            <li><a>Send To Back</a></li>
+                                            <li><a>Send Backward</a></li>
+                                        </ul>
+                                    </li>
+                                    <li><a id="sd">Resize</a>
+                                        <ul style="border: .5px solid #999999; box-shadow: 2px 2px 2px #AFAFAF;">
+                                            <li><a>Same Size</a></li>
+                                            <li><a>Same Height</a></li>
+                                            <li><a>Same Width</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="sample-header-toolbar">
+                <div class="Diagram-Toolbar">
+                    <table>
+                        <tr>
+                            <td>
+                                <div id="toolbarEvents" style="display: none; max-height: 33px; margin-top: 6px">
+                                    <ul id="toolblock1" class="toolblock1rightBorderVisible">
+                                        <li id="Redo_Tool" title="Redo" onmouseover="ToolBarMouseOver(this)" onmouseout="ToolBarMouseOut(this)" style="border: none; border: 1px solid transparent">
+                                            <div class="icon-TBi__Redo toolBarIconStyle" />
+                                        </li>
+                                        <li id="Undo_Tool" title="Undo" onmouseover="ToolBarMouseOver(this)" onmouseout="ToolBarMouseOut(this)" style="margin-right: 10px; border: 1px solid transparent">
+                                            <div class="icon-TBi__Undo toolBarIconStyle" />
+                                        </li>
+                                    </ul>
+                                    <ul id="toolblock2" class="toolblock2rightBorderVisible">
+                                        <li id="ZoomPercentage_Tool" title="Zoom Percentage" style="margin-left: 10px; margin-top: 3px; width: 69px;">
+                                            <input type="text" id="zoompercentage" style="width: 100px; margin-top: -1px; margin-left: -4px;" />
+                                            <div id="zoompercentageList">
+                                                <ul>
+                                                    <li>400%</li>
+                                                    <li>200%</li>
+                                                    <li>150%</li>
+                                                    <li>100%</li>
+                                                    <li>75%</li>
+                                                    <li>50%</li>
+                                                    <li>25%</li>
+                                                </ul>
+                                            </div>
+                                        </li>
+                                        <li id="ZoomIn_Tool" title="Zoom In" onmouseover="ToolBarMouseOver(this)" onmouseout="ToolBarMouseOut(this)" style="margin-left: 10px; border: 1px solid transparent">
+                                            <div class="icon-TBi__Zoomin toolBarIconStyle" />
+                                        </li>
+                                        <li id="ZoomOut_Tool" title="Zoom Out" onmouseover="ToolBarMouseOver(this)" onmouseout="ToolBarMouseOut(this)" style="margin-right: 10px; border: 1px solid transparent">
+                                            <div class="icon-TBi__Zoomout toolBarIconStyle" />
+                                        </li>
+                                        <li id="FitToPage_Tool" title="Fit To Page" onmouseover="ToolBarMouseOver(this)" onmouseout="ToolBarMouseOut(this)" style="margin-right: 10px; border: 1px solid transparent">
+                                            <div class="icon-TBi__FitToPage toolBarIconStyle" />
+                                        </li>
+                                    </ul>
+                                    <ul id="toolblock3" class="toolblock3rightBorderVisible">
+                                        <li id="Pan_Tool" title="Pan" onmouseover="ToolBarMouseOver(this)" onmouseout="ToolBarMouseOut(this)" style="margin-left: 10px; border: 1px solid transparent">
+                                            <div class="icon-TBi__pan toolBarIconStyle" />
+                                        </li>
+                                        <li id="MoveTool_Tool" title="Pointer" onmouseover="ToolBarMouseOver(this)" onmouseout="ToolBarMouseOut(this)" style="background-color: #D3D1D1; border: 1px solid transparent">
+                                            <div class="icon-TBi__MoveTool toolBarIconStyle" />
+                                        </li>
+                                        <li id="Text_Tool" title="Text" onmouseover="ToolBarMouseOver(this)" onmouseout="ToolBarMouseOut(this)" style="border: 1px solid transparent">
+                                            <div class="icon-TBi__Text toolBarIconStyle" />
+                                        </li>
+                                        <li id="ConnectorDraw_Tool" title="Orthogonal Connection" onmouseover="ToolBarMouseOver(this)" onmouseout="ToolBarMouseOut(this)" style="margin-right: 10px; border: 1px solid transparent">
+                                            <div class="icon-Con__Orthogonal toolBarIconStyle" />
+                                        </li>
+                                        <li id="ConnectorDraw_Tool_Straight" title="Straight Connection" onmouseover="ToolBarMouseOver(this)" onmouseout="ToolBarMouseOut(this)" style="margin-right: 10px; border: 1px solid transparent">
+                                            <div class="icon-Con__Stright toolBarIconStyle" />
+                                        </li>
+                                    </ul>
+                                    <ul id="toolblock4" style="display: none" class="toolblock4rightBorderVisible">
+                                        <li id="Delete_Tool" title="Delete" onmouseover="ToolBarMouseOver(this)" onmouseout="ToolBarMouseOut(this)" style="margin-left: 10px; border: 1px solid transparent">
+                                            <div class="icon-TBi__Delete toolBarIconStyle" />
+                                        </li>
+                                        <li id="Lock_Tool" title="Lock" onmouseover="ToolBarMouseOver(this)" onmouseout="ToolBarMouseOut(this)" style="margin-right: 10px; border: 1px solid transparent">
+                                            <div class="icon-TBi__Lock toolBarIconStyle" />
+                                        </li>
+                                    </ul>
+                                    <ul id="toolblock5" style="display: none" class="toolblock5rightBorderVisible">
+
+                                        <li id="Group_Tool" title="Group" onmouseover="ToolBarMouseOver(this)" onmouseout="ToolBarMouseOut(this)" style="margin-left: 10px; border: 1px solid transparent">
+                                            <div class="icon-TBi__Group toolBarIconStyle" />
+                                        </li>
+                                    </ul>
+                                    <ul id="Ul2" style="display: none" class="Ul2rightBorderVisible">
+                                        <li id="UnGroup_Tool" title="Ungroup" onmouseover="ToolBarMouseOver(this)" onmouseout="ToolBarMouseOut(this)" style="margin-right: 10px; border: 1px solid transparent">
+                                            <div class="icon-TBi__Ungroup toolBarIconStyle" />
+                                        </li>
+
+                                    </ul>
+                                    <ul id="Ul1" style="display: none" class="Ul1rightBorderVisible">
+                                        <li id="SendBackward_Tool" title="Send Backward" onmouseover="ToolBarMouseOver(this)" onmouseout="ToolBarMouseOut(this)" style="margin-left: 10px; border: 1px solid transparent">
+                                            <div class="icon-TBi__SendBack toolBarIconStyle" />
+                                        </li>
+                                        <li id="MoveForward_Tool" title="Bring Forward" onmouseover="ToolBarMouseOver(this)" onmouseout="ToolBarMouseOut(this)" style="border: 1px solid transparent">
+                                            <div class="icon-TBi__MoveForward toolBarIconStyle" />
+                                        </li>
+                                        <li id="SendToBack_Tool" title="Send To Back" onmouseover="ToolBarMouseOver(this)" onmouseout="ToolBarMouseOut(this)" style="border: 1px solid transparent">
+                                            <div class="icon-TBi__BringtoBack toolBarIconStyle" />
+                                        </li>
+                                        <li id="BringToFront_Tool" title="Bring To Front" onmouseover="ToolBarMouseOver(this)" onmouseout="ToolBarMouseOut(this)" style="margin-right: 10px; border: 1px solid transparent">
+                                            <div class="icon-TBi__BringtoFront toolBarIconStyle" />
+                                        </li>
+                                    </ul>
+
+                                    <ul id="toolblock6" style="display: none; border-right: none;" class="toolblock6rightBorderVisible">
+                                        <li id="AlignLeft_Tool" title="Align Left" onmouseover="ToolBarMouseOver(this)" onmouseout="ToolBarMouseOut(this)" style="margin-left: 10px; border: 1px solid transparent">
+                                            <div class="icon-TBi__HarizontalAlignLeft toolBarIconStyle" />
+                                        </li>
+                                        <li id="AlignCenter_Tool" title="Align Center" onmouseover="ToolBarMouseOver(this)" onmouseout="ToolBarMouseOut(this)" style="border: 1px solid transparent">
+                                            <div class="icon-TBi__HarizontalAlignCenter toolBarIconStyle" />
+                                        </li>
+                                        <li id="AlignRight_Tool" title="Align Right" onmouseover="ToolBarMouseOver(this)" onmouseout="ToolBarMouseOut(this)" style="border: 1px solid transparent">
+                                            <div class="icon-TBi__HarizontalAlignRight toolBarIconStyle" />
+                                        </li>
+                                        <li id="AlignBottom_Tool" title="Align Bottom" onmouseover="ToolBarMouseOver(this)" onmouseout="ToolBarMouseOut(this)" style="border: 1px solid transparent">
+                                            <div class="icon-TBi__VerticalAlignBottom toolBarIconStyle" />
+                                        </li>
+                                        <li id="AlignTop_Tool" title="Align Top" onmouseover="ToolBarMouseOver(this)" onmouseout="ToolBarMouseOut(this)" style="border: 1px solid transparent">
+                                            <div class="icon-TBi__VerticalAlignTop toolBarIconStyle" />
+                                        </li>
+                                        <li id="AlignMiddle_Tool" title="Align Middle" onmouseover="ToolBarMouseOver(this)" onmouseout="ToolBarMouseOut(this)" style="margin-right: 10px; border: 1px solid transparent">
+                                            <div class="icon-TBi__VerticalAlignCenter toolBarIconStyle">
+                                            </div>
+                                        </li>
+                                    </ul>
+                                    <ul id="artboard" style="display: block; border-left: 1px solid #7F7F7F;">
+                                        <li style="margin-left: 10px; border: 1px solid transparent; width: 420px">
+                                            <label style="font-weight: normal; font-size: 14px; margin-top: 2px; float: left">Artboard</label>
+                                            <label style="width: 25px; font-weight: normal; font-size: 14px; margin-top: 2px; margin-left: 18px; float: left">W :</label>
+                                            <input id="artBoardWidth" type="text" style="width: 50px;" />
+                                            <label style="width: 22px; font-weight: normal; font-size: 14px; margin-top: 2px; margin-left: 18px; float: left">H :</label>
+                                            <input id="artBoardHeight" type="text" style="width: 50px;" />
+                                            <label style="width: 86px; font-weight: normal; font-size: 14px; margin-top: 2px; margin-left: 18px; float: left">Background :</label>
+                                            <div>
+                                                <div style="width: 25px; height: 25px; border: 1px solid; border-color: #bbbcbb;">
+                                                    <table>
+                                                        <tr>
+                                                            <td>
+                                                                <table>
+                                                                    <tr>
+                                                                        <td>
+                                                                            <div style="margin-top: 1px;">
+                                                                                <span id="backgroundIcon" class="icon-Pi__Fill backgroundIconStyle"></span>
+                                                                            </div>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>
+                                                                            <div class="backgroundColordropdown">
+                                                                                <input type="text" id="pageBackgroundColor" />
+                                                                                <div id="pageBackgroundColorDiv">
+                                                                                    <ul>
+                                                                                        <li style="background-color: transparent; overflow-y: auto">
+                                                                                            <div style="margin-left: 6px">
+                                                                                                <div class="subDiv1" id="Div1" style="background-color: #FFFFFF; border: 1px solid; border-color: #3A3A3A" onmousedown="setBackgroundColor(this)"></div>
+                                                                                                <div class="subDiv1" id="Div2" style="background-color: #F9D9D9; border: 1px solid; border-color: #3A3A3A" onmousedown="setBackgroundColor(this)"></div>
+                                                                                                <div class="subDiv1" id="Div3" style="background-color: #FFE6CC; border: 1px solid; border-color: #3A3A3A" onmousedown="setBackgroundColor(this)"></div>
+                                                                                                <div class="subDiv1" id="Div4" style="background-color: #FFFF99; border: 1px solid; border-color: #3A3A3A" onmousedown="setBackgroundColor(this)"></div>
+                                                                                                <div class="subDiv1" id="Div5" style="background-color: #CCFFCC; border: 1px solid; border-color: #3A3A3A" onmousedown="setBackgroundColor(this)"></div>
+                                                                                                <div class="subDiv1" id="Div6" style="background-color: #CCFFFF; border: 1px solid; border-color: #3A3A3A" onmousedown="setBackgroundColor(this)"></div>
+                                                                                                <div class="subDiv1" id="Div7" style="background-color: #D4D4F9; border: 1px solid; border-color: #3A3A3A" onmousedown="setBackgroundColor(this)"></div>
+                                                                                                <div class="subDiv1" id="Div8" style="background-color: #E5CCFF; border: 1px solid; border-color: #3A3A3A" onmousedown="setBackgroundColor(this)"></div>
+                                                                                                <div class="subDiv1" id="Div9" style="background-color: #FFCCFF; border: 1px solid; border-color: #3A3A3A" onmousedown="setBackgroundColor(this)"></div>
+                                                                                                <div class="subDiv1" id="Div10" style="background-color: #FFCCE6; border: 1px solid; border-color: #3A3A3A" onmousedown="setBackgroundColor(this)"></div>
+                                                                                                <div class="subDiv1" id="Div11" style="background-color: #E5E5E5; border: 1px solid; border-color: #3A3A3A" onmousedown="setBackgroundColor(this)"></div>
+                                                                                                <div class="subDiv1" id="Div12" style="background-color: #FF9999; border: 1px solid; border-color: #3A3A3A" onmousedown="setBackgroundColor(this)"></div>
+                                                                                                <div class="subDiv1" id="Div13" style="background-color: #FCC088; border: 1px solid; border-color: #3A3A3A" onmousedown="setBackgroundColor(this)"></div>
+                                                                                                <div class="subDiv1" id="Div14" style="background-color: #FFFF33; border: 1px solid; border-color: #3A3A3A" onmousedown="setBackgroundColor(this)"></div>
+                                                                                                <div class="subDiv1" id="Div15" style="background-color: #99FF33; border: 1px solid; border-color: #3A3A3A" onmousedown="setBackgroundColor(this)"></div>
+                                                                                                <div class="subDiv1" id="Div16" style="background-color: #66FFFF; border: 1px solid; border-color: #3A3A3A" onmousedown="setBackgroundColor(this)"></div>
+                                                                                                <div class="subDiv1" id="Div17" style="background-color: #7E7EFC; border: 1px solid; border-color: #3A3A3A" onmousedown="setBackgroundColor(this)"></div>
+                                                                                                <div class="subDiv1" id="Div18" style="background-color: #CC99FF; border: 1px solid; border-color: #3A3A3A" onmousedown="setBackgroundColor(this)"></div>
+                                                                                                <div class="subDiv1" id="Div19" style="background-color: #FF99FF; border: 1px solid; border-color: #3A3A3A" onmousedown="setBackgroundColor(this)"></div>
+                                                                                                <div class="subDiv1" id="Div20" style="background-color: #FF66B3; border: 1px solid; border-color: #3A3A3A" onmousedown="setBackgroundColor(this)"></div>
+                                                                                                <div class="subDiv1" id="Div21" style="background-color: #262626; border: 1px solid; border-color: #3A3A3A" onmousedown="setBackgroundColor(this)"></div>
+                                                                                                <div class="subDiv1" id="Div22" style="background-color: #FF0000; border: 1px solid; border-color: #3A3A3A" onmousedown="setBackgroundColor(this)"></div>
+                                                                                                <div class="subDiv1" id="Div23" style="background-color: #FF8000; border: 1px solid; border-color: #3A3A3A" onmousedown="setBackgroundColor(this)"></div>
+                                                                                                <div class="subDiv1" id="Div24" style="background-color: #CCCC00; border: 1px solid; border-color: #3A3A3A" onmousedown="setBackgroundColor(this)"></div>
+                                                                                                <div class="subDiv1" id="Div25" style="background-color: #66CC00; border: 1px solid; border-color: #3A3A3A" onmousedown="setBackgroundColor(this)"></div>
+                                                                                                <div class="subDiv1" id="Div26" style="background-color: #00CCCC; border: 1px solid; border-color: #3A3A3A" onmousedown="setBackgroundColor(this)"></div>
+                                                                                                <div class="subDiv1" id="Div27" style="background-color: #3333FF; border: 1px solid; border-color: #3A3A3A" onmousedown="setBackgroundColor(this)"></div>
+                                                                                                <div class="subDiv1" id="Div28" style="background-color: #7F00FF; border: 1px solid; border-color: #3A3A3A" onmousedown="setBackgroundColor(this)"></div>
+                                                                                                <div class="subDiv1" id="Div29" style="background-color: #FF00FF; border: 1px solid; border-color: #3A3A3A" onmousedown="setBackgroundColor(this)"></div>
+                                                                                                <div class="subDiv1" id="Div30" style="background-color: #FF0080; border: 1px solid; border-color: #3A3A3A" onmousedown="setBackgroundColor(this)"></div>
+                                                                                                <div class="subDiv1" id="Div31" style="background-color: #0C0C0C; border: 1px solid; border-color: #3A3A3A" onmousedown="setBackgroundColor(this)"></div>
+                                                                                                <div class="subDiv1" id="Div32" style="background-color: #CC0000; border: 1px solid; border-color: #3A3A3A" onmousedown="setBackgroundColor(this)"></div>
+                                                                                                <div class="subDiv1" id="Div33" style="background-color: #994C00; border: 1px solid; border-color: #3A3A3A" onmousedown="setBackgroundColor(this)"></div>
+                                                                                                <div class="subDiv1" id="Div34" style="background-color: #999900; border: 1px solid; border-color: #3A3A3A" onmousedown="setBackgroundColor(this)"></div>
+                                                                                                <div class="subDiv1" id="Div35" style="background-color: #006600; border: 1px solid; border-color: #3A3A3A" onmousedown="setBackgroundColor(this)"></div>
+                                                                                                <div class="subDiv1" id="Div36" style="background-color: #009999; border: 1px solid; border-color: #3A3A3A" onmousedown="setBackgroundColor(this)"></div>
+                                                                                                <div class="subDiv1" id="Div37" style="background-color: #000066; border: 1px solid; border-color: #3A3A3A" onmousedown="setBackgroundColor(this)"></div>
+                                                                                                <div class="subDiv1" id="Div38" style="background-color: #4C0099; border: 1px solid; border-color: #3A3A3A" onmousedown="setBackgroundColor(this)"></div>
+                                                                                                <div class="subDiv1" id="Div39" style="background-color: #990099; border: 1px solid; border-color: #3A3A3A" onmousedown="setBackgroundColor(this)"></div>
+                                                                                                <div class="subDiv1" id="Div40" style="background-color: #99004D; border: 1px solid; border-color: #3A3A3A; margin-bottom: 10px" onmousedown="setBackgroundColor(this)"></div>
+                                                                                            </div>
+
+                                                                                        </li>
+                                                                                    </ul>
+
+                                                                                </div>
+                                                                            </div>
+                                                                        </td>
+                                                                    </tr>
+                                                                </table>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                            </td>
+                        </tr>
+                    </table>
+                    <div style="margin-top: -34px; float: right; margin-right: 20px;">
+                        <button id="save_icon" onclick="saveIcon()" style="font-size: 12px;"></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="sample-main" id="sample-main">
+
+        <div id="main-left" style="float: left">
+            <div id="palette-div1" style="width: 270px; float: left">
+                <div class="searchicon-parent-div1">
+                    <input type="text" id="textbox_maxi" style="border: medium none; float: left; height: 30px; margin-left: 6px; outline: medium none; width: calc(270px - 60px);"
+                        onclick="maxiTextBoxClick()" onkeyup="onSearchBoxTextChange_maxi()" />
+                    <div id="searchbox_icon-maxi" class="searchbox_icon-maxi" onclick="clearText()"></div>
+                    <div id="edit_splitter_hideslide"></div>
+                </div>
+                <div id="symbolpalette"></div>
+            </div>
+            <div id="minimizedPalette"></div>
+        </div>
+        <div id="main-right">
+            <div id="DiagramContent"></div>
+        </div>
+        <div id="propertyEditor" style="float: right; display: none">
+            <div id="tabitems" class="PropertyPanel">
+
+                <div class="MenuSize">
+                    <div style="height: 47px">
+                        <ul>
+                            <li class="menulistyle" style="float: left; border-left: none; border-top-color: lightgray; outline: none;">
+                                <a href="#steelman" style="width: 28px; height: 26px; outline: none;">
+                                    <span id="pinspan" class="icon-PH__TabBin tabIconStyle" data-bind="style: { color: tabPinIcon }"></span>
+                                </a>
+                            </li>
+                            <li class="menulistyle" style="float: left; border-top-color: lightgray; outline: none;">
+
+                                <a href="#nodeprop" style="width: 28px; height: 30px; outline: none;">
+                                    <span class="icon-PH__NodeProperty tabIconStyle" data-bind="style: { color: tabnodeicon }"></span>
+                                </a>
+
+                            </li>
+                            <li class="menulistyle" style="float: left; border-top-color: lightgray; outline: none;">
+
+                                <a href="#textprop" style="width: 28px; height: 30px; outline: none;">
+                                    <span class="icon-PH__TextProperty tabIconStyle" data-bind="style: { color: tabTextIcon }"></span>
+                                </a>
+
+                            </li>
+                            <li class="menulistyle" style="float: left; border-top-color: lightgray; outline: none;">
+
+                                <a href="#lineprop" style="width: 28px; height: 30px; outline: none;">
+                                    <span class="icon-Pi__Connector tabIconStyle" data-bind="style: { color: tabConnectorIcon }"></span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div id="nodeprop" class="MenuSize SubMenuSize" style="width: 100%;">
+                        <div style="margin-left: -11px">
+                            <div>
+                                <div>
+                                    <label class="label" style="margin-top: 20px; font-size: 15px; font-weight: bold; color: #1E989E">Properties</label>
+                                </div>
+                            </div>
+                            <table style="margin-top: 17px;">
+                                <tr>
+                                    <td>
+                                        <div data-bind="style: { backgroundColor: fillDivColor }" style="width: 45px; height: 45px; margin-left: 5px; border: 1px solid; border-color: #bbbcbb" onmouseover="MouseEnterOnDiv(this,'fillColor','icon-Pi__Fill')" onmouseout="MouseLeaveFromDiv(this,'fillColor','icon-Pi__Fill')">
+                                            <table>
+                                                <tr>
+                                                    <td>
+                                                        <table>
+                                                            <tr>
+                                                                <td>
+                                                                    <div style="margin-top: 8px; margin-left: -1px;">
+                                                                        <span id="fillicon" class="icon-Pi__Fill fillIconStyle" data-bind="style: { color: fillColor }"></span>
+                                                                    </div>
+                                                                    <div style="margin-top: -33px">
+                                                                        <span class="icon-Pi__Button-Corner" data-bind="style: { color: fillCornerColor }"></span>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>
+                                                                    <div class="dropdownPositionStyle">
+                                                                        <input type="text" id="fillColor" style="width: 0px" />
+                                                                        <div id="fillColorDiv">
+
+                                                                            <ul>
+                                                                                <li style="background-color: transparent; overflow-y: auto;">
+                                                                                    <div style="margin-left: 6px">
+                                                                                        <div class="subDiv" id="redcolordiv" style="background-color: #0C0C0C; border: 1px solid; border-color: #3A3A3A" onmousedown="PropertyChangesFromPanel(this, 'Fill')" onmouseover="MouseEnterOnColorPalette(this)" onmouseout="MouseLeaveOnColorPalette(this)"></div>
+                                                                                        <div class="subDiv" id="FillDiv1" style="background-color: #262626; border: 1px solid; border-color: #3A3A3A" onmousedown="PropertyChangesFromPanel(this, 'Fill')" onmouseover="MouseEnterOnColorPalette(this)" onmouseout="MouseLeaveOnColorPalette(this)"></div>
+                                                                                        <div class="subDiv" id="FillDiv2" style="background-color: #E5E5E5; border: 1px solid; border-color: #3A3A3A" onmousedown="PropertyChangesFromPanel(this, 'Fill')" onmouseover="MouseEnterOnColorPalette(this)" onmouseout="MouseLeaveOnColorPalette(this)"></div>
+                                                                                        <div class="subDiv" id="FillDiv3" style="background-color: #FFFFFF; border: 1px solid; border-color: #3A3A3A" onmousedown="PropertyChangesFromPanel(this, 'Fill')" onmouseover="MouseEnterOnColorPalette(this)" onmouseout="MouseLeaveOnColorPalette(this)"></div>
+                                                                                        <div class="subDiv" id="FillDiv4" style="background-color: #CC0000; border: 1px solid; border-color: #3A3A3A" onmousedown="PropertyChangesFromPanel(this, 'Fill')" onmouseover="MouseEnterOnColorPalette(this)" onmouseout="MouseLeaveOnColorPalette(this)"></div>
+                                                                                        <div class="subDiv" id="FillDiv5" style="background-color: #FF0000; border: 1px solid; border-color: #3A3A3A" onmousedown="PropertyChangesFromPanel(this, 'Fill')" onmouseover="MouseEnterOnColorPalette(this)" onmouseout="MouseLeaveOnColorPalette(this)"></div>
+                                                                                        <div class="subDiv" id="FillDiv6" style="background-color: #FF9999; border: 1px solid; border-color: #3A3A3A" onmousedown="PropertyChangesFromPanel(this, 'Fill')" onmouseover="MouseEnterOnColorPalette(this)" onmouseout="MouseLeaveOnColorPalette(this)"></div>
+                                                                                        <div class="subDiv" id="FillDiv7" style="background-color: #F9D9D9; border: 1px solid; border-color: #3A3A3A" onmousedown="PropertyChangesFromPanel(this, 'Fill')" onmouseover="MouseEnterOnColorPalette(this)" onmouseout="MouseLeaveOnColorPalette(this)"></div>
+                                                                                        <div class="subDiv" id="FillDiv8" style="background-color: #994C00; border: 1px solid; border-color: #3A3A3A" onmousedown="PropertyChangesFromPanel(this, 'Fill')" onmouseover="MouseEnterOnColorPalette(this)" onmouseout="MouseLeaveOnColorPalette(this)"></div>
+                                                                                        <div class="subDiv" id="FillDiv9" style="background-color: #FF8000; border: 1px solid; border-color: #3A3A3A" onmousedown="PropertyChangesFromPanel(this, 'Fill')" onmouseover="MouseEnterOnColorPalette(this)" onmouseout="MouseLeaveOnColorPalette(this)"></div>
+                                                                                        <div class="subDiv" id="FillDiv10" style="background-color: #FCC088; border: 1px solid; border-color: #3A3A3A" onmousedown="PropertyChangesFromPanel(this, 'Fill')" onmouseover="MouseEnterOnColorPalette(this)" onmouseout="MouseLeaveOnColorPalette(this)"></div>
+                                                                                        <div class="subDiv" id="FillDiv11" style="background-color: #FFE6CC; border: 1px solid; border-color: #3A3A3A" onmousedown="PropertyChangesFromPanel(this, 'Fill')" onmouseover="MouseEnterOnColorPalette(this)" onmouseout="MouseLeaveOnColorPalette(this)"></div>
+                                                                                        <div class="subDiv" id="FillDiv12" style="background-color: #999900; border: 1px solid; border-color: #3A3A3A" onmousedown="PropertyChangesFromPanel(this, 'Fill')" onmouseover="MouseEnterOnColorPalette(this)" onmouseout="MouseLeaveOnColorPalette(this)"></div>
+                                                                                        <div class="subDiv" id="FillDiv13" style="background-color: #CCCC00; border: 1px solid; border-color: #3A3A3A" onmousedown="PropertyChangesFromPanel(this, 'Fill')" onmouseover="MouseEnterOnColorPalette(this)" onmouseout="MouseLeaveOnColorPalette(this)"></div>
+                                                                                        <div class="subDiv" id="FillDiv14" style="background-color: #FFFF33; border: 1px solid; border-color: #3A3A3A" onmousedown="PropertyChangesFromPanel(this, 'Fill')" onmouseover="MouseEnterOnColorPalette(this)" onmouseout="MouseLeaveOnColorPalette(this)"></div>
+                                                                                        <div class="subDiv" id="FillDiv15" style="background-color: #FFFF99; border: 1px solid; border-color: #3A3A3A" onmousedown="PropertyChangesFromPanel(this, 'Fill')" onmouseover="MouseEnterOnColorPalette(this)" onmouseout="MouseLeaveOnColorPalette(this)"></div>
+                                                                                        <div class="subDiv" id="FillDiv16" style="background-color: #006600; border: 1px solid; border-color: #3A3A3A" onmousedown="PropertyChangesFromPanel(this, 'Fill')" onmouseover="MouseEnterOnColorPalette(this)" onmouseout="MouseLeaveOnColorPalette(this)"></div>
+                                                                                        <div class="subDiv" id="FillDiv17" style="background-color: #66CC00; border: 1px solid; border-color: #3A3A3A" onmousedown="PropertyChangesFromPanel(this, 'Fill')" onmouseover="MouseEnterOnColorPalette(this)" onmouseout="MouseLeaveOnColorPalette(this)"></div>
+                                                                                        <div class="subDiv" id="FillDiv18" style="background-color: #99FF33; border: 1px solid; border-color: #3A3A3A" onmousedown="PropertyChangesFromPanel(this, 'Fill')" onmouseover="MouseEnterOnColorPalette(this)" onmouseout="MouseLeaveOnColorPalette(this)"></div>
+                                                                                        <div class="subDiv" id="FillDiv19" style="background-color: #CCFFCC; border: 1px solid; border-color: #3A3A3A" onmousedown="PropertyChangesFromPanel(this, 'Fill')" onmouseover="MouseEnterOnColorPalette(this)" onmouseout="MouseLeaveOnColorPalette(this)"></div>
+                                                                                        <div class="subDiv" id="FillDiv20" style="background-color: #009999; border: 1px solid; border-color: #3A3A3A" onmousedown="PropertyChangesFromPanel(this, 'Fill')" onmouseover="MouseEnterOnColorPalette(this)" onmouseout="MouseLeaveOnColorPalette(this)"></div>
+                                                                                        <div class="subDiv" id="FillDiv21" style="background-color: #00CCCC; border: 1px solid; border-color: #3A3A3A" onmousedown="PropertyChangesFromPanel(this, 'Fill')" onmouseover="MouseEnterOnColorPalette(this)" onmouseout="MouseLeaveOnColorPalette(this)"></div>
+                                                                                        <div class="subDiv" id="FillDiv22" style="background-color: #66FFFF; border: 1px solid; border-color: #3A3A3A" onmousedown="PropertyChangesFromPanel(this, 'Fill')" onmouseover="MouseEnterOnColorPalette(this)" onmouseout="MouseLeaveOnColorPalette(this)"></div>
+                                                                                        <div class="subDiv" id="FillDiv23" style="background-color: #CCFFFF; border: 1px solid; border-color: #3A3A3A" onmousedown="PropertyChangesFromPanel(this, 'Fill')" onmouseover="MouseEnterOnColorPalette(this)" onmouseout="MouseLeaveOnColorPalette(this)"></div>
+                                                                                        <div class="subDiv" id="FillDiv24" style="background-color: #000066; border: 1px solid; border-color: #3A3A3A" onmousedown="PropertyChangesFromPanel(this, 'Fill')" onmouseover="MouseEnterOnColorPalette(this)" onmouseout="MouseLeaveOnColorPalette(this)"></div>
+                                                                                        <div class="subDiv" id="FillDiv25" style="background-color: #3333FF; border: 1px solid; border-color: #3A3A3A" onmousedown="PropertyChangesFromPanel(this, 'Fill')" onmouseover="MouseEnterOnColorPalette(this)" onmouseout="MouseLeaveOnColorPalette(this)"></div>
+                                                                                        <div class="subDiv" id="FillDiv26" style="background-color: #7E7EFC; border: 1px solid; border-color: #3A3A3A" onmousedown="PropertyChangesFromPanel(this, 'Fill')" onmouseover="MouseEnterOnColorPalette(this)" onmouseout="MouseLeaveOnColorPalette(this)"></div>
+                                                                                        <div class="subDiv" id="FillDiv27" style="background-color: #D4D4F9; border: 1px solid; border-color: #3A3A3A" onmousedown="PropertyChangesFromPanel(this, 'Fill')" onmouseover="MouseEnterOnColorPalette(this)" onmouseout="MouseLeaveOnColorPalette(this)"></div>
+                                                                                        <div class="subDiv" id="FillDiv28" style="background-color: #4C0099; border: 1px solid; border-color: #3A3A3A" onmousedown="PropertyChangesFromPanel(this, 'Fill')" onmouseover="MouseEnterOnColorPalette(this)" onmouseout="MouseLeaveOnColorPalette(this)"></div>
+                                                                                        <div class="subDiv" id="FillDiv29" style="background-color: #7F00FF; border: 1px solid; border-color: #3A3A3A" onmousedown="PropertyChangesFromPanel(this, 'Fill')" onmouseover="MouseEnterOnColorPalette(this)" onmouseout="MouseLeaveOnColorPalette(this)"></div>
+                                                                                        <div class="subDiv" id="FillDiv30" style="background-color: #CC99FF; border: 1px solid; border-color: #3A3A3A" onmousedown="PropertyChangesFromPanel(this, 'Fill')" onmouseover="MouseEnterOnColorPalette(this)" onmouseout="MouseLeaveOnColorPalette(this)"></div>
+                                                                                        <div class="subDiv" id="FillDiv31" style="background-color: #E5CCFF; border: 1px solid; border-color: #3A3A3A" onmousedown="PropertyChangesFromPanel(this, 'Fill')" onmouseover="MouseEnterOnColorPalette(this)" onmouseout="MouseLeaveOnColorPalette(this)"></div>
+                                                                                        <div class="subDiv" id="FillDiv32" style="background-color: #990099; border: 1px solid; border-color: #3A3A3A" onmousedown="PropertyChangesFromPanel(this, 'Fill')" onmouseover="MouseEnterOnColorPalette(this)" onmouseout="MouseLeaveOnColorPalette(this)"></div>
+                                                                                        <div class="subDiv" id="FillDiv33" style="background-color: #FF00FF; border: 1px solid; border-color: #3A3A3A" onmousedown="PropertyChangesFromPanel(this, 'Fill')" onmouseover="MouseEnterOnColorPalette(this)" onmouseout="MouseLeaveOnColorPalette(this)"></div>
+                                                                                        <div class="subDiv" id="FillDiv34" style="background-color: #FF99FF; border: 1px solid; border-color: #3A3A3A" onmousedown="PropertyChangesFromPanel(this, 'Fill')" onmouseover="MouseEnterOnColorPalette(this)" onmouseout="MouseLeaveOnColorPalette(this)"></div>
+                                                                                        <div class="subDiv" id="FillDiv35" style="background-color: #FFCCFF; border: 1px solid; border-color: #3A3A3A" onmousedown="PropertyChangesFromPanel(this, 'Fill')" onmouseover="MouseEnterOnColorPalette(this)" onmouseout="MouseLeaveOnColorPalette(this)"></div>
+                                                                                        <div class="subDiv" id="FillDiv36" style="background-color: #99004D; border: 1px solid; border-color: #3A3A3A" onmousedown="PropertyChangesFromPanel(this, 'Fill')" onmouseover="MouseEnterOnColorPalette(this)" onmouseout="MouseLeaveOnColorPalette(this)"></div>
+                                                                                        <div class="subDiv" id="FillDiv37" style="background-color: #FF0080; border: 1px solid; border-color: #3A3A3A" onmousedown="PropertyChangesFromPanel(this, 'Fill')" onmouseover="MouseEnterOnColorPalette(this)" onmouseout="MouseLeaveOnColorPalette(this)"></div>
+                                                                                        <div class="subDiv" id="FillDiv38" style="background-color: #FF66B3; border: 1px solid; border-color: #3A3A3A" onmousedown="PropertyChangesFromPanel(this, 'Fill')" onmouseover="MouseEnterOnColorPalette(this)" onmouseout="MouseLeaveOnColorPalette(this)"></div>
+                                                                                        <div class="subDiv" id="FillDiv39" style="background-color: #FFCCE6; border: 1px solid; border-color: #3A3A3A; margin-bottom: 10px" onmousedown="PropertyChangesFromPanel(this, 'Fill')" onmouseover="MouseEnterOnColorPalette(this)" onmouseout="MouseLeaveOnColorPalette(this)"></div>
+                                                                                    </div>
+
+                                                                                </li>
+                                                                            </ul>
+
+                                                                        </div>
+                                                                    </div>
+                                                                    <div style="margin-left: -2px">
+                                                                        <label style="font-size: 11px; font-weight: normal">Fill Color</label>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                        </table>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div data-bind="style: { backgroundColor: strokeDivColor }" style="width: 45px; height: 45px; border: 1px solid; border-color: #bbbcbb; margin-left: 22px" onmouseover="MouseEnterOnDiv(this,'stroke','icon-Pi__Stroke-Fill')" onmouseout="MouseLeaveFromDiv(this,'stroke','icon-Pi__Stroke-Fill')">
+                                            <table>
+                                                <tr>
+                                                    <td>
+                                                        <div style="margin-top: 7px; margin-left: 3px">
+                                                            <!--<span id="borderColorIcon" class="icon-Pi__Stroke-Fill" data-bind="style:{color: stroke}"></span>-->
+                                                            <div>
+                                                                <span class="icon-Strokefillpen propertyPanelIconStyle" style="font-size: 21px" data-bind="style: { color: strokePenColor }"></span>
+                                                            </div>
+                                                            <div style="margin-top: -17px">
+                                                                <span id="borderColorIcon" class="icon-Strokefillcolor propertyPanelIconStyle" data-bind="style: { color: stroke }"></span>
+                                                            </div>
+                                                        </div>
+                                                        <div style="margin-top: -37px; margin-left: 1px;">
+                                                            <span class="icon-Pi__Button-Corner" data-bind="style: { color: strokeCornerColor }" />
+                                                        </div>
+
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div class="dropdownPositionStyle">
+                                                            <input type="text" id="stroke" style="width: 0px" />
+                                                            <div id="strokeDiv" style="background-color: red">
+                                                                <ul>
+                                                                    <li style="background-color: transparent; overflow-y: auto;">
+                                                                        <div style="margin-left: 6px">
+                                                                            <div class="subDiv" id="StrokeDiv41" style="background-color: #0C0C0C; border: 1px solid; border-color: #3A3A3A" onmousedown="PropertyChangesFromPanel(this, 'Stroke')" onmouseover="MouseEnterOnColorPalette(this)" onmouseout="MouseLeaveOnColorPalette(this)"></div>
+                                                                            <div class="subDiv" id="StrokeDiv42" style="background-color: #262626; border: 1px solid; border-color: #3A3A3A" onmousedown="PropertyChangesFromPanel(this, 'Stroke')" onmouseover="MouseEnterOnColorPalette(this)" onmouseout="MouseLeaveOnColorPalette(this)"></div>
+                                                                            <div class="subDiv" id="StrokeDiv43" style="background-color: #E5E5E5; border: 1px solid; border-color: #3A3A3A" onmousedown="PropertyChangesFromPanel(this, 'Stroke')" onmouseover="MouseEnterOnColorPalette(this)" onmouseout="MouseLeaveOnColorPalette(this)"></div>
+                                                                            <div class="subDiv" id="StrokeDiv44" style="background-color: #FFFFFF; border: 1px solid; border-color: #3A3A3A" onmousedown="PropertyChangesFromPanel(this, 'Stroke')" onmouseover="MouseEnterOnColorPalette(this)" onmouseout="MouseLeaveOnColorPalette(this)"></div>
+                                                                            <div class="subDiv" id="StrokeDiv45" style="background-color: #CC0000; border: 1px solid; border-color: #3A3A3A" onmousedown="PropertyChangesFromPanel(this, 'Stroke')" onmouseover="MouseEnterOnColorPalette(this)" onmouseout="MouseLeaveOnColorPalette(this)"></div>
+                                                                            <div class="subDiv" id="StrokeDiv46" style="background-color: #FF0000; border: 1px solid; border-color: #3A3A3A" onmousedown="PropertyChangesFromPanel(this, 'Stroke')" onmouseover="MouseEnterOnColorPalette(this)" onmouseout="MouseLeaveOnColorPalette(this)"></div>
+                                                                            <div class="subDiv" id="StrokeDiv47" style="background-color: #FF9999; border: 1px solid; border-color: #3A3A3A" onmousedown="PropertyChangesFromPanel(this, 'Stroke')" onmouseover="MouseEnterOnColorPalette(this)" onmouseout="MouseLeaveOnColorPalette(this)"></div>
+                                                                            <div class="subDiv" id="StrokeDiv48" style="background-color: #F9D9D9; border: 1px solid; border-color: #3A3A3A" onmousedown="PropertyChangesFromPanel(this, 'Stroke')" onmouseover="MouseEnterOnColorPalette(this)" onmouseout="MouseLeaveOnColorPalette(this)"></div>
+                                                                            <div class="subDiv" id="StrokeDiv49" style="background-color: #994C00; border: 1px solid; border-color: #3A3A3A" onmousedown="PropertyChangesFromPanel(this, 'Stroke')" onmouseover="MouseEnterOnColorPalette(this)" onmouseout="MouseLeaveOnColorPalette(this)"></div>
+                                                                            <div class="subDiv" id="StrokeDiv50" style="background-color: #FF8000; border: 1px solid; border-color: #3A3A3A" onmousedown="PropertyChangesFromPanel(this, 'Stroke')" onmouseover="MouseEnterOnColorPalette(this)" onmouseout="MouseLeaveOnColorPalette(this)"></div>
+                                                                            <div class="subDiv" id="StrokeDiv51" style="background-color: #FCC088; border: 1px solid; border-color: #3A3A3A" onmousedown="PropertyChangesFromPanel(this, 'Stroke')" onmouseover="MouseEnterOnColorPalette(this)" onmouseout="MouseLeaveOnColorPalette(this)"></div>
+                                                                            <div class="subDiv" id="StrokeDiv52" style="background-color: #FFE6CC; border: 1px solid; border-color: #3A3A3A" onmousedown="PropertyChangesFromPanel(this, 'Stroke')" onmouseover="MouseEnterOnColorPalette(this)" onmouseout="MouseLeaveOnColorPalette(this)"></div>
+                                                                            <div class="subDiv" id="StrokeDiv53" style="background-color: #999900; border: 1px solid; border-color: #3A3A3A" onmousedown="PropertyChangesFromPanel(this, 'Stroke')" onmouseover="MouseEnterOnColorPalette(this)" onmouseout="MouseLeaveOnColorPalette(this)"></div>
+                                                                            <div class="subDiv" id="StrokeDiv54" style="background-color: #CCCC00; border: 1px solid; border-color: #3A3A3A" onmousedown="PropertyChangesFromPanel(this, 'Stroke')" onmouseover="MouseEnterOnColorPalette(this)" onmouseout="MouseLeaveOnColorPalette(this)"></div>
+                                                                            <div class="subDiv" id="StrokeDiv55" style="background-color: #FFFF33; border: 1px solid; border-color: #3A3A3A" onmousedown="PropertyChangesFromPanel(this, 'Stroke')" onmouseover="MouseEnterOnColorPalette(this)" onmouseout="MouseLeaveOnColorPalette(this)"></div>
+                                                                            <div class="subDiv" id="StrokeDiv61" style="background-color: #FFFF99; border: 1px solid; border-color: #3A3A3A" onmousedown="PropertyChangesFromPanel(this, 'Stroke')" onmouseover="MouseEnterOnColorPalette(this)" onmouseout="MouseLeaveOnColorPalette(this)"></div>
+                                                                            <div class="subDiv" id="StrokeDiv62" style="background-color: #006600; border: 1px solid; border-color: #3A3A3A" onmousedown="PropertyChangesFromPanel(this, 'Stroke')" onmouseover="MouseEnterOnColorPalette(this)" onmouseout="MouseLeaveOnColorPalette(this)"></div>
+                                                                            <div class="subDiv" id="StrokeDiv63" style="background-color: #66CC00; border: 1px solid; border-color: #3A3A3A" onmousedown="PropertyChangesFromPanel(this, 'Stroke')" onmouseover="MouseEnterOnColorPalette(this)" onmouseout="MouseLeaveOnColorPalette(this)"></div>
+                                                                            <div class="subDiv" id="StrokeDiv64" style="background-color: #99FF33; border: 1px solid; border-color: #3A3A3A" onmousedown="PropertyChangesFromPanel(this, 'Stroke')" onmouseover="MouseEnterOnColorPalette(this)" onmouseout="MouseLeaveOnColorPalette(this)"></div>
+                                                                            <div class="subDiv" id="StrokeDiv65" style="background-color: #CCFFCC; border: 1px solid; border-color: #3A3A3A" onmousedown="PropertyChangesFromPanel(this, 'Stroke')" onmouseover="MouseEnterOnColorPalette(this)" onmouseout="MouseLeaveOnColorPalette(this)"></div>
+                                                                            <div class="subDiv" id="StrokeDiv66" style="background-color: #009999; border: 1px solid; border-color: #3A3A3A" onmousedown="PropertyChangesFromPanel(this, 'Stroke')" onmouseover="MouseEnterOnColorPalette(this)" onmouseout="MouseLeaveOnColorPalette(this)"></div>
+                                                                            <div class="subDiv" id="StrokeDiv67" style="background-color: #00CCCC; border: 1px solid; border-color: #3A3A3A" onmousedown="PropertyChangesFromPanel(this, 'Stroke')" onmouseover="MouseEnterOnColorPalette(this)" onmouseout="MouseLeaveOnColorPalette(this)"></div>
+                                                                            <div class="subDiv" id="StrokeDiv106" style="background-color: #66FFFF; border: 1px solid; border-color: #3A3A3A" onmousedown="PropertyChangesFromPanel(this, 'Stroke')" onmouseover="MouseEnterOnColorPalette(this)" onmouseout="MouseLeaveOnColorPalette(this)"></div>
+                                                                            <div class="subDiv" id="StrokeDiv107" style="background-color: #CCFFFF; border: 1px solid; border-color: #3A3A3A" onmousedown="PropertyChangesFromPanel(this, 'Stroke')" onmouseover="MouseEnterOnColorPalette(this)" onmouseout="MouseLeaveOnColorPalette(this)"></div>
+                                                                            <div class="subDiv" id="StrokeDiv108" style="background-color: #000066; border: 1px solid; border-color: #3A3A3A" onmousedown="PropertyChangesFromPanel(this, 'Stroke')" onmouseover="MouseEnterOnColorPalette(this)" onmouseout="MouseLeaveOnColorPalette(this)"></div>
+                                                                            <div class="subDiv" id="StrokeDiv109" style="background-color: #3333FF; border: 1px solid; border-color: #3A3A3A" onmousedown="PropertyChangesFromPanel(this, 'Stroke')" onmouseover="MouseEnterOnColorPalette(this)" onmouseout="MouseLeaveOnColorPalette(this)"></div>
+                                                                            <div class="subDiv" id="StrokeDiv110" style="background-color: #7E7EFC; border: 1px solid; border-color: #3A3A3A" onmousedown="PropertyChangesFromPanel(this, 'Stroke')" onmouseover="MouseEnterOnColorPalette(this)" onmouseout="MouseLeaveOnColorPalette(this)"></div>
+                                                                            <div class="subDiv" id="StrokeDiv111" style="background-color: #D4D4F9; border: 1px solid; border-color: #3A3A3A" onmousedown="PropertyChangesFromPanel(this, 'Stroke')" onmouseover="MouseEnterOnColorPalette(this)" onmouseout="MouseLeaveOnColorPalette(this)"></div>
+                                                                            <div class="subDiv" id="StrokeDiv112" style="background-color: #4C0099; border: 1px solid; border-color: #3A3A3A" onmousedown="PropertyChangesFromPanel(this, 'Stroke')" onmouseover="MouseEnterOnColorPalette(this)" onmouseout="MouseLeaveOnColorPalette(this)"></div>
+                                                                            <div class="subDiv" id="StrokeDiv113" style="background-color: #7F00FF; border: 1px solid; border-color: #3A3A3A" onmousedown="PropertyChangesFromPanel(this, 'Stroke')" onmouseover="MouseEnterOnColorPalette(this)" onmouseout="MouseLeaveOnColorPalette(this)"></div>
+                                                                            <div class="subDiv" id="StrokeDiv114" style="background-color: #CC99FF; border: 1px solid; border-color: #3A3A3A" onmousedown="PropertyChangesFromPanel(this, 'Stroke')" onmouseover="MouseEnterOnColorPalette(this)" onmouseout="MouseLeaveOnColorPalette(this)"></div>
+                                                                            <div class="subDiv" id="StrokeDiv115" style="background-color: #E5CCFF; border: 1px solid; border-color: #3A3A3A" onmousedown="PropertyChangesFromPanel(this, 'Stroke')" onmouseover="MouseEnterOnColorPalette(this)" onmouseout="MouseLeaveOnColorPalette(this)"></div>
+                                                                            <div class="subDiv" id="StrokeDiv116" style="background-color: #990099; border: 1px solid; border-color: #3A3A3A" onmousedown="PropertyChangesFromPanel(this, 'Stroke')" onmouseover="MouseEnterOnColorPalette(this)" onmouseout="MouseLeaveOnColorPalette(this)"></div>
+                                                                            <div class="subDiv" id="StrokeDiv117" style="background-color: #FF00FF; border: 1px solid; border-color: #3A3A3A" onmousedown="PropertyChangesFromPanel(this, 'Stroke')" onmouseover="MouseEnterOnColorPalette(this)" onmouseout="MouseLeaveOnColorPalette(this)"></div>
+                                                                            <div class="subDiv" id="StrokeDiv118" style="background-color: #FF99FF; border: 1px solid; border-color: #3A3A3A" onmousedown="PropertyChangesFromPanel(this, 'Stroke')" onmouseover="MouseEnterOnColorPalette(this)" onmouseout="MouseLeaveOnColorPalette(this)"></div>
+                                                                            <div class="subDiv" id="StrokeDiv119" style="background-color: #FFCCFF; border: 1px solid; border-color: #3A3A3A" onmousedown="PropertyChangesFromPanel(this, 'Stroke')" onmouseover="MouseEnterOnColorPalette(this)" onmouseout="MouseLeaveOnColorPalette(this)"></div>
+                                                                            <div class="subDiv" id="StrokeDiv120" style="background-color: #99004D; border: 1px solid; border-color: #3A3A3A" onmousedown="PropertyChangesFromPanel(this, 'Stroke')" onmouseover="MouseEnterOnColorPalette(this)" onmouseout="MouseLeaveOnColorPalette(this)"></div>
+                                                                            <div class="subDiv" id="StrokeDiv121" style="background-color: #FF0080; border: 1px solid; border-color: #3A3A3A" onmousedown="PropertyChangesFromPanel(this, 'Stroke')" onmouseover="MouseEnterOnColorPalette(this)" onmouseout="MouseLeaveOnColorPalette(this)"></div>
+                                                                            <div class="subDiv" id="StrokeDiv122" style="background-color: #FF66B3; border: 1px solid; border-color: #3A3A3A" onmousedown="PropertyChangesFromPanel(this, 'Stroke')" onmouseover="MouseEnterOnColorPalette(this)" onmouseout="MouseLeaveOnColorPalette(this)"></div>
+                                                                            <div class="subDiv" id="StrokeDiv123" style="background-color: #FFCCE6; border: 1px solid; border-color: #3A3A3A; margin-bottom: 10px" onmousedown="PropertyChangesFromPanel(this, 'Stroke')" onmouseover="MouseEnterOnColorPalette(this)" onmouseout="MouseLeaveOnColorPalette(this)"></div>
+                                                                        </div>
+
+                                                                    </li>
+                                                                </ul>
+
+
+                                                            </div>
+                                                        </div>
+                                                        <div style="margin-top: 1px; margin-left: 3px;">
+                                                            <label style="font-size: 11px; font-weight: normal">Stroke</label>
+                                                        </div>
+                                                    </td>
+
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div data-bind="style: { backgroundColor: borderthicknessDivColor }" style="width: 45px; height: 45px; border: 1px solid; border-color: #bbbcbb; margin-left: 22px" onmouseover="MouseEnterOnDiv(this,'borderthickness','icon-Pi__Line-Width')" onmouseout="MouseLeaveFromDiv(this,'borderthickness','icon-Pi__Line-Width')">
+                                            <table>
+                                                <tr>
+                                                    <td>
+                                                        <div style="margin-top: 9px; margin-left: 1px">
+                                                            <span id="borderWidthIcon" class="icon-Pi__LineWidth propertyPanelIconStyle" data-bind="style: { color: borderthicknessfontColor }"></span>
+                                                        </div>
+                                                        <div style="margin-top: -31px; margin-left: 1px;">
+                                                            <span class="icon-Pi__Button-Corner" data-bind="style: { color: borderthicknessCornerColor }" />
+                                                        </div>
+
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div class="dropdownPositionStyle">
+                                                            <input type="text" id="borderWidth" style="width: 0px" />
+                                                            <div id="borderWidthDiv">
+                                                                <ul>
+                                                                    <li style="height: 25px">
+                                                                        <div style="margin-top: 3px">
+                                                                            <label style="font-weight: bold">1 px</label>
+                                                                            <div style="background-color: black; width: 45px; height: 1px; float: right; margin-top: 12px; margin-left: 20px; margin-right: 5px"></div>
+                                                                        </div>
+                                                                    </li>
+                                                                    <li style="height: 25px">
+
+                                                                        <div style="margin-top: 3px">
+                                                                            <label style="font-weight: bold">2 px</label>
+                                                                            <div style="background-color: black; width: 45px; height: 2px; float: right; margin-top: 10px; margin-left: 20px; margin-right: 5px"></div>
+                                                                        </div>
+                                                                    </li>
+                                                                    <li style="height: 25px">
+
+                                                                        <div style="margin-top: 3px">
+                                                                            <label style="font-weight: bold">3 px</label>
+                                                                            <div style="background-color: black; width: 45px; height: 3px; float: right; margin-top: 9px; margin-left: 20px; margin-right: 5px"></div>
+                                                                        </div>
+                                                                    </li>
+                                                                    <li style="height: 25px">
+                                                                        <div style="margin-top: 3px">
+                                                                            <label style="font-weight: bold">4 px</label>
+                                                                            <div style="background-color: black; width: 45px; height: 4px; float: right; margin-top: 9px; margin-left: 20px; margin-right: 5px"></div>
+                                                                        </div>
+                                                                    </li>
+                                                                    <li style="height: 25px">
+
+                                                                        <div style="margin-top: 3px">
+                                                                            <label style="font-weight: bold">5 px</label>
+                                                                            <div style="background-color: black; width: 45px; height: 5px; float: right; margin-top: 8px; margin-left: 20px; margin-right: 5px"></div>
+                                                                        </div>
+                                                                    </li>
+                                                                    <li style="height: 25px">
+
+                                                                        <div style="margin-top: 3px">
+                                                                            <label style="font-weight: bold">6 px</label>
+                                                                            <div style="background-color: black; width: 45px; height: 6px; float: right; margin-top: 8px; margin-left: 20px; margin-right: 5px"></div>
+                                                                        </div>
+                                                                    </li>
+                                                                    <li style="height: 25px">
+                                                                        <div style="margin-top: 3px">
+                                                                            <label style="font-weight: bold">7 px</label>
+                                                                            <div style="background-color: black; width: 45px; height: 7px; float: right; margin-top: 8px; margin-left: 20px; margin-right: 5px"></div>
+                                                                        </div>
+                                                                    </li>
+                                                                    <li style="height: 25px">
+                                                                        <div style="margin-top: 3px">
+                                                                            <label style="font-weight: bold">8 px</label>
+                                                                            <div style="background-color: black; width: 45px; height: 8px; float: right; margin-top: 7px; margin-left: 20px; margin-right: 5px"></div>
+                                                                        </div>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                        <div>
+                                                            <label style="font-size: 11px; margin-left: -5px; margin-top: 1px; font-weight: normal">Thickness</label>
+                                                        </div>
+                                                    </td>
+
+                                                </tr>
+                                            </table>
+                                        </div>
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div id="gradientDivParent" data-bind="style: { backgroundColor: gradientDivColor }" style="width: 45px; height: 45px; border: 1px solid; border-color: #bbbcbb; margin-left: 5px; margin-top: 40px" onmousedown="PropertyChangesFromPanel(this,'Gradient')" onmouseover="MouseEnterOnDiv(this,'gradient','icon-Pi__Credient')" onmouseout="MouseLeaveFromDiv(this,'gradient','icon-Pi__Credient')">
+                                            <table>
+                                                <tr>
+                                                    <td>
+                                                        <div style="margin-top: 8px; margin-left: 8px;">
+                                                            <div id="gradientDiv" style="width: 27px; height: 27px"></div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div style="margin-top: 8px; margin-left: -1px">
+                                                            <label style="font-size: 11px; font-weight: normal">Gradient</label>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div id="lockDivParent" data-bind="style: { backgroundColor: lockDivColor }" style="width: 45px; height: 45px; margin-left: 22px; margin-top: 40px; border: 1px solid; border-color: #bbbcbb" onmousedown="PropertyChangesFromPanel(this,'Lock')" onmouseover="MouseEnterOnDiv(this,'lock','icon-Pi__lock')" onmouseout="MouseLeaveFromDiv(this,'lock','icon-Pi__lock')">
+                                            <table>
+                                                <tr>
+                                                    <td>
+                                                        <div style="margin-top: 9px; margin-left: 3px">
+                                                            <span id="Span4" class="icon-Pi__lock propertyPanelIconStyle" data-bind="style: { color: lockfontColor }"></span>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div style="margin-top: 8px; margin-left: 9px;">
+                                                            <label style="font-size: 11px; font-weight: normal">Lock</label>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                            </table>
+                            <div style="height: 30px; width: 100%; margin-top: 40px; vertical-align: middle;">
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <label style="font-size: 11px; margin-left: 5px; font-weight: normal">Opacity</label></td>
+                                        <td>
+                                            <div id="opacity" style="width: 100px; margin-left: 10px; height: 8px; margin-top: 8px;"></div>
+                                        </td>
+                                    </tr>
+                                </table>
+
+
+                            </div>
+
+                            <div style="margin-top: 20px; margin-left: 12px">
+                                <label style="font-weight: bold; color: #1E989E; font-size: 15px;">Dimensions</label>
+                            </div>
+
+                            <table>
+                                <tr>
+                                    <td>
+
+                                        <div style="margin-top: 10px; margin-left: 8px">
+                                            <label style="width: 20px; font-weight: bold; float: left">W</label>
+                                            <input id="widthnumeric" type="text" style="width: 65px; float: left" />
+                                            <!--<input id="widthbox" data-bind="value: width" style="width: 55px; float: left; text-indent: 3px; font-size: 12px;" onfocusout="PropertyChangesFromPanel(this,'height')" />-->
+                                            <label style="width: 20px; margin-left: 12px; font-weight: bold; float: left">H</label>
+                                            <!--<input class="proppanelInpubox" id="Text1" data-bind="value: height" style="width: 55px; float: left; text-indent: 3px; font-size: 12px;" onfocusout="PropertyChangesFromPanel(this,'height')" />-->
+                                            <input id="heightnumeric" type="text" style="width: 65px; float: left" />
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div style="margin-top: 25px; margin-left: 8px">
+                                            <label style="width: 20px; font-weight: bold; float: left; text-indent: 3px;">X</label>
+                                            <!--<input class="proppanelInpubox" id="Text2" data-bind="value: offsetX" style="width: 55px; float: left; text-indent: 3px; font-size: 12px;" onfocusout="PropertyChangesFromPanel(this,'pinX')" />-->
+                                            <input id="offsetxnumeric" type="text" style="width: 65px; float: left" />
+                                            <label style="width: 20px; margin-left: 12px; font-weight: bold; float: left">Y</label>
+                                            <!--<input class="proppanelInpubox" id="Text3" data-bind="value: offsetY" style="width: 55px; float: left; text-indent: 3px; font-size: 12px;" onfocusout="PropertyChangesFromPanel(this,'pinY')" />-->
+                                            <input id="offsetynumeric" type="text" style="width: 65px; float: left" />
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div style="margin-top: 20px; margin-left: 8px">
+                                            <input type="checkbox" id="aspectratioCheckBox" />
+                                            <label for="aspectratioCheckBox" class="icon-Pi__lock" style="margin-left: 4px"></label>
+                                            <span style="font-size: 11px">Aspect Ratio</span>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <!--<tr>
+                                    <td>
+                                        <div style="margin-top: 2px">
+                                            <div style="margin-top: 30px; margin-left: 10px">
+                                                <label style="font-weight: bold; color: #1E989E; font-size: 15px;">Opacity</label>
+                                            </div>
+                                            <div id="opacity" style="width:100px; height:10px; margin-top: 10px; margin-left: 8px"></div>
+
+                                        </div>
+                                    </td>
+                                </tr>-->
+                            </table>
+                        </div>
+                    </div>
+
+                    <div id="textprop" class="MenuSize SubMenuSize">
+                        <div style="margin-left: -11px">
+                            <div>
+                                <div>
+
+                                    <label class="label" style="margin-top: 20px; font-size: 15px; font-weight: bold; color: #1E989E">Text</label>
+                                </div>
+                            </div>
+                            <table style="margin-top: 20px;">
+                                <tr>
+                                    <td>
+                                        <div data-bind="style: { backgroundColor: fontColorDiv }" style="width: 45px; height: 45px; border: 1px solid; border-color: #bbbcbb; margin-left: 5px" onmouseover="MouseEnterOnDiv(this,'fontColor','icon-Pi__Fill')" onmouseout="MouseLeaveFromDiv(this,'fontColor','icon-Pi__Fill')">
+                                            <table>
+                                                <tr>
+                                                    <td>
+                                                        <table>
+                                                            <tr>
+                                                                <td>
+                                                                    <div style="margin-top: 8px; margin-left: -1px;">
+                                                                        <span id="Span1" class="icon-Pi__Fill fillIconStyle" data-bind="style: { color: labelfontColor }"></span>
+                                                                    </div>
+                                                                    <div style="margin-top: -33px">
+                                                                        <span class="icon-Pi__Button-Corner" data-bind="style: { color: fontCornerColor }" />
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>
+                                                                    <div class="dropdownPositionStyle">
+                                                                        <input type="text" id="fontColor" style="width: 0px" />
+                                                                        <div id="fontColorDiv">
+
+                                                                            <ul>
+                                                                                <li style="background-color: transparent; overflow-y: auto;">
+
+                                                                                    <div style="margin-left: 6px">
+                                                                                        <div class="subDiv" id="FontColor26" style="background-color: #0C0C0C; border: 1px solid; border-color: #3A3A3A" onmousedown="PropertyChangesFromPanel(this, 'TextColor')" onmouseover="MouseEnterOnColorPalette(this)" onmouseout="MouseLeaveOnColorPalette(this)"></div>
+                                                                                        <div class="subDiv" id="FontColor27" style="background-color: #262626; border: 1px solid; border-color: #3A3A3A" onmousedown="PropertyChangesFromPanel(this, 'TextColor')" onmouseover="MouseEnterOnColorPalette(this)" onmouseout="MouseLeaveOnColorPalette(this)"></div>
+                                                                                        <div class="subDiv" id="FontColor28" style="background-color: #E5E5E5; border: 1px solid; border-color: #3A3A3A" onmousedown="PropertyChangesFromPanel(this, 'TextColor')" onmouseover="MouseEnterOnColorPalette(this)" onmouseout="MouseLeaveOnColorPalette(this)"></div>
+                                                                                        <div class="subDiv" id="FontColor29" style="background-color: #FFFFFF; border: 1px solid; border-color: #3A3A3A" onmousedown="PropertyChangesFromPanel(this, 'TextColor')" onmouseover="MouseEnterOnColorPalette(this)" onmouseout="MouseLeaveOnColorPalette(this)"></div>
+                                                                                        <div class="subDiv" id="FontColor30" style="background-color: #CC0000; border: 1px solid; border-color: #3A3A3A" onmousedown="PropertyChangesFromPanel(this, 'TextColor')" onmouseover="MouseEnterOnColorPalette(this)" onmouseout="MouseLeaveOnColorPalette(this)"></div>
+                                                                                        <div class="subDiv" id="FontColor31" style="background-color: #FF0000; border: 1px solid; border-color: #3A3A3A" onmousedown="PropertyChangesFromPanel(this, 'TextColor')" onmouseover="MouseEnterOnColorPalette(this)" onmouseout="MouseLeaveOnColorPalette(this)"></div>
+                                                                                        <div class="subDiv" id="FontColor32" style="background-color: #FF9999; border: 1px solid; border-color: #3A3A3A" onmousedown="PropertyChangesFromPanel(this, 'TextColor')" onmouseover="MouseEnterOnColorPalette(this)" onmouseout="MouseLeaveOnColorPalette(this)"></div>
+                                                                                        <div class="subDiv" id="FontColor33" style="background-color: #F9D9D9; border: 1px solid; border-color: #3A3A3A" onmousedown="PropertyChangesFromPanel(this, 'TextColor')" onmouseover="MouseEnterOnColorPalette(this)" onmouseout="MouseLeaveOnColorPalette(this)"></div>
+                                                                                        <div class="subDiv" id="FontColor34" style="background-color: #994C00; border: 1px solid; border-color: #3A3A3A" onmousedown="PropertyChangesFromPanel(this, 'TextColor')" onmouseover="MouseEnterOnColorPalette(this)" onmouseout="MouseLeaveOnColorPalette(this)"></div>
+                                                                                        <div class="subDiv" id="FontColor35" style="background-color: #FF8000; border: 1px solid; border-color: #3A3A3A" onmousedown="PropertyChangesFromPanel(this, 'TextColor')" onmouseover="MouseEnterOnColorPalette(this)" onmouseout="MouseLeaveOnColorPalette(this)"></div>
+                                                                                        <div class="subDiv" id="FontColor36" style="background-color: #FCC088; border: 1px solid; border-color: #3A3A3A" onmousedown="PropertyChangesFromPanel(this, 'TextColor')" onmouseover="MouseEnterOnColorPalette(this)" onmouseout="MouseLeaveOnColorPalette(this)"></div>
+                                                                                        <div class="subDiv" id="FontColor37" style="background-color: #FFE6CC; border: 1px solid; border-color: #3A3A3A" onmousedown="PropertyChangesFromPanel(this, 'TextColor')" onmouseover="MouseEnterOnColorPalette(this)" onmouseout="MouseLeaveOnColorPalette(this)"></div>
+                                                                                        <div class="subDiv" id="FontColor68" style="background-color: #999900; border: 1px solid; border-color: #3A3A3A" onmousedown="PropertyChangesFromPanel(this, 'TextColor')" onmouseover="MouseEnterOnColorPalette(this)" onmouseout="MouseLeaveOnColorPalette(this)"></div>
+                                                                                        <div class="subDiv" id="FontColor69" style="background-color: #CCCC00; border: 1px solid; border-color: #3A3A3A" onmousedown="PropertyChangesFromPanel(this, 'TextColor')" onmouseover="MouseEnterOnColorPalette(this)" onmouseout="MouseLeaveOnColorPalette(this)"></div>
+                                                                                        <div class="subDiv" id="FontColor70" style="background-color: #FFFF33; border: 1px solid; border-color: #3A3A3A" onmousedown="PropertyChangesFromPanel(this, 'TextColor')" onmouseover="MouseEnterOnColorPalette(this)" onmouseout="MouseLeaveOnColorPalette(this)"></div>
+                                                                                        <div class="subDiv" id="FontColor71" style="background-color: #FFFF99; border: 1px solid; border-color: #3A3A3A" onmousedown="PropertyChangesFromPanel(this, 'TextColor')" onmouseover="MouseEnterOnColorPalette(this)" onmouseout="MouseLeaveOnColorPalette(this)"></div>
+                                                                                        <div class="subDiv" id="FontColor72" style="background-color: #006600; border: 1px solid; border-color: #3A3A3A" onmousedown="PropertyChangesFromPanel(this, 'TextColor')" onmouseover="MouseEnterOnColorPalette(this)" onmouseout="MouseLeaveOnColorPalette(this)"></div>
+                                                                                        <div class="subDiv" id="FontColor73" style="background-color: #66CC00; border: 1px solid; border-color: #3A3A3A" onmousedown="PropertyChangesFromPanel(this, 'TextColor')" onmouseover="MouseEnterOnColorPalette(this)" onmouseout="MouseLeaveOnColorPalette(this)"></div>
+                                                                                        <div class="subDiv" id="FontColor74" style="background-color: #99FF33; border: 1px solid; border-color: #3A3A3A" onmousedown="PropertyChangesFromPanel(this, 'TextColor')" onmouseover="MouseEnterOnColorPalette(this)" onmouseout="MouseLeaveOnColorPalette(this)"></div>
+                                                                                        <div class="subDiv" id="FontColor75" style="background-color: #CCFFCC; border: 1px solid; border-color: #3A3A3A" onmousedown="PropertyChangesFromPanel(this, 'TextColor')" onmouseover="MouseEnterOnColorPalette(this)" onmouseout="MouseLeaveOnColorPalette(this)"></div>
+                                                                                        <div class="subDiv" id="FontColor76" style="background-color: #009999; border: 1px solid; border-color: #3A3A3A" onmousedown="PropertyChangesFromPanel(this, 'TextColor')" onmouseover="MouseEnterOnColorPalette(this)" onmouseout="MouseLeaveOnColorPalette(this)"></div>
+                                                                                        <div class="subDiv" id="FontColor77" style="background-color: #00CCCC; border: 1px solid; border-color: #3A3A3A" onmousedown="PropertyChangesFromPanel(this, 'TextColor')" onmouseover="MouseEnterOnColorPalette(this)" onmouseout="MouseLeaveOnColorPalette(this)"></div>
+                                                                                        <div class="subDiv" id="FontColor124" style="background-color: #66FFFF; border: 1px solid; border-color: #3A3A3A" onmousedown="PropertyChangesFromPanel(this, 'TextColor')" onmouseover="MouseEnterOnColorPalette(this)" onmouseout="MouseLeaveOnColorPalette(this)"></div>
+                                                                                        <div class="subDiv" id="FontColor125" style="background-color: #CCFFFF; border: 1px solid; border-color: #3A3A3A" onmousedown="PropertyChangesFromPanel(this, 'TextColor')" onmouseover="MouseEnterOnColorPalette(this)" onmouseout="MouseLeaveOnColorPalette(this)"></div>
+                                                                                        <div class="subDiv" id="FontColor126" style="background-color: #000066; border: 1px solid; border-color: #3A3A3A" onmousedown="PropertyChangesFromPanel(this, 'TextColor')" onmouseover="MouseEnterOnColorPalette(this)" onmouseout="MouseLeaveOnColorPalette(this)"></div>
+                                                                                        <div class="subDiv" id="FontColor127" style="background-color: #3333FF; border: 1px solid; border-color: #3A3A3A" onmousedown="PropertyChangesFromPanel(this, 'TextColor')" onmouseover="MouseEnterOnColorPalette(this)" onmouseout="MouseLeaveOnColorPalette(this)"></div>
+                                                                                        <div class="subDiv" id="FontColor128" style="background-color: #7E7EFC; border: 1px solid; border-color: #3A3A3A" onmousedown="PropertyChangesFromPanel(this, 'TextColor')" onmouseover="MouseEnterOnColorPalette(this)" onmouseout="MouseLeaveOnColorPalette(this)"></div>
+                                                                                        <div class="subDiv" id="FontColor129" style="background-color: #D4D4F9; border: 1px solid; border-color: #3A3A3A" onmousedown="PropertyChangesFromPanel(this, 'TextColor')" onmouseover="MouseEnterOnColorPalette(this)" onmouseout="MouseLeaveOnColorPalette(this)"></div>
+                                                                                        <div class="subDiv" id="FontColor130" style="background-color: #4C0099; border: 1px solid; border-color: #3A3A3A" onmousedown="PropertyChangesFromPanel(this, 'TextColor')" onmouseover="MouseEnterOnColorPalette(this)" onmouseout="MouseLeaveOnColorPalette(this)"></div>
+                                                                                        <div class="subDiv" id="FontColor131" style="background-color: #7F00FF; border: 1px solid; border-color: #3A3A3A" onmousedown="PropertyChangesFromPanel(this, 'TextColor')" onmouseover="MouseEnterOnColorPalette(this)" onmouseout="MouseLeaveOnColorPalette(this)"></div>
+                                                                                        <div class="subDiv" id="FontColor132" style="background-color: #CC99FF; border: 1px solid; border-color: #3A3A3A" onmousedown="PropertyChangesFromPanel(this, 'TextColor')" onmouseover="MouseEnterOnColorPalette(this)" onmouseout="MouseLeaveOnColorPalette(this)"></div>
+                                                                                        <div class="subDiv" id="FontColor133" style="background-color: #E5CCFF; border: 1px solid; border-color: #3A3A3A" onmousedown="PropertyChangesFromPanel(this, 'TextColor')" onmouseover="MouseEnterOnColorPalette(this)" onmouseout="MouseLeaveOnColorPalette(this)"></div>
+                                                                                        <div class="subDiv" id="FontColor134" style="background-color: #990099; border: 1px solid; border-color: #3A3A3A" onmousedown="PropertyChangesFromPanel(this, 'TextColor')" onmouseover="MouseEnterOnColorPalette(this)" onmouseout="MouseLeaveOnColorPalette(this)"></div>
+                                                                                        <div class="subDiv" id="FontColor135" style="background-color: #FF00FF; border: 1px solid; border-color: #3A3A3A" onmousedown="PropertyChangesFromPanel(this, 'TextColor')" onmouseover="MouseEnterOnColorPalette(this)" onmouseout="MouseLeaveOnColorPalette(this)"></div>
+                                                                                        <div class="subDiv" id="FontColor136" style="background-color: #FF99FF; border: 1px solid; border-color: #3A3A3A" onmousedown="PropertyChangesFromPanel(this, 'TextColor')" onmouseover="MouseEnterOnColorPalette(this)" onmouseout="MouseLeaveOnColorPalette(this)"></div>
+                                                                                        <div class="subDiv" id="FontColor137" style="background-color: #FFCCFF; border: 1px solid; border-color: #3A3A3A" onmousedown="PropertyChangesFromPanel(this, 'TextColor')" onmouseover="MouseEnterOnColorPalette(this)" onmouseout="MouseLeaveOnColorPalette(this)"></div>
+                                                                                        <div class="subDiv" id="FontColor138" style="background-color: #99004D; border: 1px solid; border-color: #3A3A3A" onmousedown="PropertyChangesFromPanel(this, 'TextColor')" onmouseover="MouseEnterOnColorPalette(this)" onmouseout="MouseLeaveOnColorPalette(this)"></div>
+                                                                                        <div class="subDiv" id="FontColor139" style="background-color: #FF0080; border: 1px solid; border-color: #3A3A3A" onmousedown="PropertyChangesFromPanel(this, 'TextColor')" onmouseover="MouseEnterOnColorPalette(this)" onmouseout="MouseLeaveOnColorPalette(this)"></div>
+                                                                                        <div class="subDiv" id="FontColor140" style="background-color: #FF66B3; border: 1px solid; border-color: #3A3A3A" onmousedown="PropertyChangesFromPanel(this, 'TextColor')" onmouseover="MouseEnterOnColorPalette(this)" onmouseout="MouseLeaveOnColorPalette(this)"></div>
+                                                                                        <div class="subDiv" id="FontColor141" style="background-color: #FFCCE6; border: 1px solid; border-color: #3A3A3A; margin-bottom: 10px" onmousedown="PropertyChangesFromPanel(this, 'TextColor')" onmouseover="MouseEnterOnColorPalette(this)" onmouseout="MouseLeaveOnColorPalette(this)"></div>
+                                                                                    </div>
+
+                                                                                </li>
+                                                                            </ul>
+
+                                                                        </div>
+                                                                    </div>
+                                                                    <div style="margin-left: 8px">
+                                                                        <label style="font-size: 11px; font-weight: normal">Text</label>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                        </table>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </td>
+
+                                    <td>
+                                        <div data-bind="style: { backgroundColor: boldDivColor }" style="width: 45px; height: 45px; margin-left: 22px; border: 1px solid; border-color: #bbbcbb" onmousedown="PropertyChangesFromPanel(this, 'Bold')" onmouseover="MouseEnterOnDiv(this,'bold','icon-Pi__Bold')" onmouseout="MouseLeaveFromDiv(this,'bold','icon-Pi__Bold')">
+                                            <table>
+                                                <tr>
+                                                    <td>
+                                                        <div style="margin-top: 10px; margin-left: 3px;">
+                                                            <span id="Span5" class="icon-Pi__Bold propertyPanelIconStyle" data-bind="style: { color: boldfontColor }"></span>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div style="margin-top: 8px; margin-left: 8px">
+                                                            <label style="font-size: 11px; font-weight: normal">Bold</label>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </td>
+
+                                    <td>
+                                        <div data-bind="style: { backgroundColor: italicDivColor }" style="width: 45px; height: 45px; margin-left: 22px; border: 1px solid; border-color: #bbbcbb" onmousedown="PropertyChangesFromPanel(this, 'Italic')" onmouseover="MouseEnterOnDiv(this,'italic','icon-Pi__Italic')" onmouseout="MouseLeaveFromDiv(this,'italic','icon-Pi__Italic')">
+                                            <table>
+                                                <tr>
+                                                    <td>
+                                                        <div style="margin-top: 10px; margin-left: 3px;">
+                                                            <span id="Span6" class="icon-Pi__Italic propertyPanelIconStyle" data-bind="style: { color: italicfontColor }"></span>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div style="margin-top: 6px; margin-left: 8px">
+                                                            <label style="font-size: 11px; font-weight: normal">Italic</label>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                            <table style="margin-top: 20px">
+                                <tr>
+                                    <td>
+                                        <div style="margin-top: 30px; margin-left: 10px">
+                                            <label style="font-weight: normal">Font</label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div style="margin-top: 25px; margin-left: 10px">
+                                            <input type="text" id="fontStylelist" style="width: 150px; text-indent: 8px;" />
+                                            <div id="fontStylelistDiv">
+                                                <ul>
+                                                    <li>Arial</li>
+                                                    <li>Aharoni</li>
+                                                    <li>Bell MT</li>
+                                                    <li>Fantasy</li>
+                                                    <li>Times New Roman</li>
+                                                    <li>Segoe UI</li>
+                                                    <li>Verdana</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                            </table>
+                            <table>
+                                <tr>
+                                    <td>
+                                        <div style="margin-top: 30px; margin-left: 10px">
+                                            <label style="font-weight: normal">Size</label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div style="margin-top: 25px; margin-left: 15px">
+                                            <input type="text" id="fontsizelist" style="width: 100px; text-indent: 8px;" />
+                                            <div id="fontsizelistDiv">
+                                                <ul>
+                                                    <li>8</li>
+                                                    <li>9</li>
+                                                    <li>10</li>
+                                                    <li>11</li>
+                                                    <li>12</li>
+                                                    <li>13</li>
+                                                    <li>14</li>
+                                                    <li>15</li>
+                                                    <li>16</li>
+                                                    <li>17</li>
+                                                    <li>18</li>
+                                                    <li>19</li>
+                                                    <li>20</li>
+                                                </ul>
+                                            </div>
+
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                            <div>
+                                <div style="margin-top: 20px">
+
+                                    <label class="label" style="margin-top: 20px; font-size: 15px; font-weight: bold; color: #1E989E">Align</label>
+                                </div>
+                            </div>
+                            <table style="margin-top: 15px">
+                                <tr>
+                                    <td>
+                                        <div data-bind="style: { backgroundColor: textLeftAlignDiv }" style="width: 45px; height: 45px; border: 1px solid; border-color: #bbbcbb; margin-left: 5px" onmousedown="PropertyChangesFromPanel(this, 'left')" onmouseover="MouseEnterOnDiv(this,'left','icon-Pi__Text-LeftAlgin')" onmouseout="MouseLeaveFromDiv(this,'left','icon-Pi__Text-LeftAlgin')">
+                                            <table>
+                                                <tr>
+                                                    <td>
+                                                        <div style="margin-top: 10px; margin-left: 3px;">
+                                                            <span id="Span7" class="icon-Pi__TextLeftAlgin propertyPanelIconStyle" data-bind="style: { color: textLeftAlignfont }"></span>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </td>
+
+                                    <td>
+                                        <div data-bind="style: { backgroundColor: textCenterAlignDiv }" style="width: 45px; height: 45px; margin-left: 22px; border: 1px solid; border-color: #bbbcbb;" onmousedown="PropertyChangesFromPanel(this, 'center')" onmouseover="MouseEnterOnDiv(this,'center','icon-Pi__Text-CenterAlgin')" onmouseout="MouseLeaveFromDiv(this,'center','icon-Pi__Text-CenterAlgin')">
+                                            <table>
+                                                <tr>
+                                                    <td>
+                                                        <div style="margin-top: 10px; margin-left: 3px;">
+                                                            <span id="Span8" class="icon-Pi__TextCenterAlgin propertyPanelIconStyle" data-bind="style: { color: textCenterAlignfont }"></span>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </td>
+
+                                    <td>
+                                        <div data-bind="style: { backgroundColor: textRightAlignDiv }" style="width: 45px; height: 45px; margin-left: 22px; border: 1px solid; border-color: #bbbcbb;" onmousedown="PropertyChangesFromPanel(this, 'right')" onmouseover="MouseEnterOnDiv(this,'right','icon-Pi__TextRightAlgin')" onmouseout="MouseLeaveFromDiv(this,'right','icon-Pi__TextRightAlgin')">
+                                            <table>
+                                                <tr>
+                                                    <td>
+                                                        <div style="margin-top: 10px; margin-left: 3px;">
+                                                            <span id="Span2" class="icon-Pi__TextRightAlgin propertyPanelIconStyle" data-bind="style: { color: textRightAlignfont }"></span>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div id="lineprop" class="MenuSize SubMenuSize">
+                        <div style="margin-left: -11px">
+                            <div>
+                                <div>
+
+                                    <label class="label" style="margin-top: 20px; font-size: 15px; font-weight: bold; color: #1E989E">Connector</label>
+                                </div>
+                            </div>
+                            <table style="margin-top: 20px;">
+                                <tr>
+                                    <td>
+                                        <div data-bind="style: { backgroundColor: lineDivColor }" style="width: 45px; height: 45px; margin-left: 5px; border: 1px solid; border-color: #bbbcbb;" onmouseover="MouseEnterOnDiv(this,'lineColor','icon-Pi__Fill')" onmouseout="MouseLeaveFromDiv(this,'lineColor','icon-Pi__Fill')">
+                                            <table>
+                                                <tr>
+                                                    <td>
+                                                        <table>
+                                                            <tr>
+                                                                <td>
+                                                                    <div style="margin-top: 8px; margin-left: -1px;">
+                                                                        <span id="lineFillIcon" class="icon-Pi__Fill fillIconStyle" data-bind="style: { color: lineColor }"></span>
+                                                                    </div>
+                                                                    <div style="margin-top: -33px">
+                                                                        <span class="icon-Pi__Button-Corner" data-bind="style: { color: lineColorCorner }" />
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>
+                                                                    <div class="dropdownPositionStyle">
+                                                                        <input type="text" id="lineColor" style="width: 0px" />
+                                                                        <div id="lineColorDiv">
+
+                                                                            <ul>
+                                                                                <li style="background-color: transparent; overflow-y: auto;">
+                                                                                    <div style="margin-left: 6px">
+                                                                                        <div class="subDiv" id="LineColor13" style="background-color: #0C0C0C; border: 1px solid; border-color: #3A3A3A" onmousedown="PropertyChangesFromPanel(this, 'LineStrokeColor')" onmouseover="MouseEnterOnColorPalette(this)" onmouseout="MouseLeaveOnColorPalette(this)"></div>
+                                                                                        <div class="subDiv" id="LineColor50" style="background-color: #262626; border: 1px solid; border-color: #3A3A3A" onmousedown="PropertyChangesFromPanel(this, 'LineStrokeColor')" onmouseover="MouseEnterOnColorPalette(this)" onmouseout="MouseLeaveOnColorPalette(this)"></div>
+                                                                                        <div class="subDiv" id="LineColor51" style="background-color: #E5E5E5; border: 1px solid; border-color: #3A3A3A" onmousedown="PropertyChangesFromPanel(this, 'LineStrokeColor')" onmouseover="MouseEnterOnColorPalette(this)" onmouseout="MouseLeaveOnColorPalette(this)"></div>
+                                                                                        <div class="subDiv" id="LineColor52" style="background-color: #FFFFFF; border: 1px solid; border-color: #3A3A3A" onmousedown="PropertyChangesFromPanel(this, 'LineStrokeColor')" onmouseover="MouseEnterOnColorPalette(this)" onmouseout="MouseLeaveOnColorPalette(this)"></div>
+                                                                                        <div class="subDiv" id="LineColor53" style="background-color: #CC0000; border: 1px solid; border-color: #3A3A3A" onmousedown="PropertyChangesFromPanel(this, 'LineStrokeColor')" onmouseover="MouseEnterOnColorPalette(this)" onmouseout="MouseLeaveOnColorPalette(this)"></div>
+                                                                                        <div class="subDiv" id="LineColor54" style="background-color: #FF0000; border: 1px solid; border-color: #3A3A3A" onmousedown="PropertyChangesFromPanel(this, 'LineStrokeColor')" onmouseover="MouseEnterOnColorPalette(this)" onmouseout="MouseLeaveOnColorPalette(this)"></div>
+                                                                                        <div class="subDiv" id="LineColor55" style="background-color: #FF9999; border: 1px solid; border-color: #3A3A3A" onmousedown="PropertyChangesFromPanel(this, 'LineStrokeColor')" onmouseover="MouseEnterOnColorPalette(this)" onmouseout="MouseLeaveOnColorPalette(this)"></div>
+                                                                                        <div class="subDiv" id="LineColor56" style="background-color: #F9D9D9; border: 1px solid; border-color: #3A3A3A" onmousedown="PropertyChangesFromPanel(this, 'LineStrokeColor')" onmouseover="MouseEnterOnColorPalette(this)" onmouseout="MouseLeaveOnColorPalette(this)"></div>
+                                                                                        <div class="subDiv" id="LineColor57" style="background-color: #994C00; border: 1px solid; border-color: #3A3A3A" onmousedown="PropertyChangesFromPanel(this, 'LineStrokeColor')" onmouseover="MouseEnterOnColorPalette(this)" onmouseout="MouseLeaveOnColorPalette(this)"></div>
+                                                                                        <div class="subDiv" id="LineColor58" style="background-color: #FF8000; border: 1px solid; border-color: #3A3A3A" onmousedown="PropertyChangesFromPanel(this, 'LineStrokeColor')" onmouseover="MouseEnterOnColorPalette(this)" onmouseout="MouseLeaveOnColorPalette(this)"></div>
+                                                                                        <div class="subDiv" id="LineColor59" style="background-color: #FCC088; border: 1px solid; border-color: #3A3A3A" onmousedown="PropertyChangesFromPanel(this, 'LineStrokeColor')" onmouseover="MouseEnterOnColorPalette(this)" onmouseout="MouseLeaveOnColorPalette(this)"></div>
+                                                                                        <div class="subDiv" id="LineColor60" style="background-color: #FFE6CC; border: 1px solid; border-color: #3A3A3A" onmousedown="PropertyChangesFromPanel(this, 'LineStrokeColor')" onmouseover="MouseEnterOnColorPalette(this)" onmouseout="MouseLeaveOnColorPalette(this)"></div>
+                                                                                        <div class="subDiv" id="LineColor78" style="background-color: #999900; border: 1px solid; border-color: #3A3A3A" onmousedown="PropertyChangesFromPanel(this, 'LineStrokeColor')" onmouseover="MouseEnterOnColorPalette(this)" onmouseout="MouseLeaveOnColorPalette(this)"></div>
+                                                                                        <div class="subDiv" id="LineColor79" style="background-color: #CCCC00; border: 1px solid; border-color: #3A3A3A" onmousedown="PropertyChangesFromPanel(this, 'LineStrokeColor')" onmouseover="MouseEnterOnColorPalette(this)" onmouseout="MouseLeaveOnColorPalette(this)"></div>
+                                                                                        <div class="subDiv" id="LineColor80" style="background-color: #FFFF33; border: 1px solid; border-color: #3A3A3A" onmousedown="PropertyChangesFromPanel(this, 'LineStrokeColor')" onmouseover="MouseEnterOnColorPalette(this)" onmouseout="MouseLeaveOnColorPalette(this)"></div>
+                                                                                        <div class="subDiv" id="LineColor81" style="background-color: #FFFF99; border: 1px solid; border-color: #3A3A3A" onmousedown="PropertyChangesFromPanel(this, 'LineStrokeColor')" onmouseover="MouseEnterOnColorPalette(this)" onmouseout="MouseLeaveOnColorPalette(this)"></div>
+                                                                                        <div class="subDiv" id="LineColor82" style="background-color: #006600; border: 1px solid; border-color: #3A3A3A" onmousedown="PropertyChangesFromPanel(this, 'LineStrokeColor')" onmouseover="MouseEnterOnColorPalette(this)" onmouseout="MouseLeaveOnColorPalette(this)"></div>
+                                                                                        <div class="subDiv" id="LineColor83" style="background-color: #66CC00; border: 1px solid; border-color: #3A3A3A" onmousedown="PropertyChangesFromPanel(this, 'LineStrokeColor')" onmouseover="MouseEnterOnColorPalette(this)" onmouseout="MouseLeaveOnColorPalette(this)"></div>
+                                                                                        <div class="subDiv" id="LineColor84" style="background-color: #99FF33; border: 1px solid; border-color: #3A3A3A" onmousedown="PropertyChangesFromPanel(this, 'LineStrokeColor')" onmouseover="MouseEnterOnColorPalette(this)" onmouseout="MouseLeaveOnColorPalette(this)"></div>
+                                                                                        <div class="subDiv" id="LineColor85" style="background-color: #CCFFCC; border: 1px solid; border-color: #3A3A3A" onmousedown="PropertyChangesFromPanel(this, 'LineStrokeColor')" onmouseover="MouseEnterOnColorPalette(this)" onmouseout="MouseLeaveOnColorPalette(this)"></div>
+                                                                                        <div class="subDiv" id="LineColor86" style="background-color: #009999; border: 1px solid; border-color: #3A3A3A" onmousedown="PropertyChangesFromPanel(this, 'LineStrokeColor')" onmouseover="MouseEnterOnColorPalette(this)" onmouseout="MouseLeaveOnColorPalette(this)"></div>
+                                                                                        <div class="subDiv" id="LineColor87" style="background-color: #00CCCC; border: 1px solid; border-color: #3A3A3A" onmousedown="PropertyChangesFromPanel(this, 'LineStrokeColor')" onmouseover="MouseEnterOnColorPalette(this)" onmouseout="MouseLeaveOnColorPalette(this)"></div>
+                                                                                        <div class="subDiv" id="LineColor142" style="background-color: #66FFFF; border: 1px solid; border-color: #3A3A3A" onmousedown="PropertyChangesFromPanel(this, 'LineStrokeColor')" onmouseover="MouseEnterOnColorPalette(this)" onmouseout="MouseLeaveOnColorPalette(this)"></div>
+                                                                                        <div class="subDiv" id="LineColor143" style="background-color: #CCFFFF; border: 1px solid; border-color: #3A3A3A" onmousedown="PropertyChangesFromPanel(this, 'LineStrokeColor')" onmouseover="MouseEnterOnColorPalette(this)" onmouseout="MouseLeaveOnColorPalette(this)"></div>
+                                                                                        <div class="subDiv" id="LineColor144" style="background-color: #000066; border: 1px solid; border-color: #3A3A3A" onmousedown="PropertyChangesFromPanel(this, 'LineStrokeColor')" onmouseover="MouseEnterOnColorPalette(this)" onmouseout="MouseLeaveOnColorPalette(this)"></div>
+                                                                                        <div class="subDiv" id="LineColor145" style="background-color: #3333FF; border: 1px solid; border-color: #3A3A3A" onmousedown="PropertyChangesFromPanel(this, 'LineStrokeColor')" onmouseover="MouseEnterOnColorPalette(this)" onmouseout="MouseLeaveOnColorPalette(this)"></div>
+                                                                                        <div class="subDiv" id="LineColor146" style="background-color: #7E7EFC; border: 1px solid; border-color: #3A3A3A" onmousedown="PropertyChangesFromPanel(this, 'LineStrokeColor')" onmouseover="MouseEnterOnColorPalette(this)" onmouseout="MouseLeaveOnColorPalette(this)"></div>
+                                                                                        <div class="subDiv" id="LineColor147" style="background-color: #D4D4F9; border: 1px solid; border-color: #3A3A3A" onmousedown="PropertyChangesFromPanel(this, 'LineStrokeColor')" onmouseover="MouseEnterOnColorPalette(this)" onmouseout="MouseLeaveOnColorPalette(this)"></div>
+                                                                                        <div class="subDiv" id="LineColor148" style="background-color: #4C0099; border: 1px solid; border-color: #3A3A3A" onmousedown="PropertyChangesFromPanel(this, 'LineStrokeColor')" onmouseover="MouseEnterOnColorPalette(this)" onmouseout="MouseLeaveOnColorPalette(this)"></div>
+                                                                                        <div class="subDiv" id="LineColor149" style="background-color: #7F00FF; border: 1px solid; border-color: #3A3A3A" onmousedown="PropertyChangesFromPanel(this, 'LineStrokeColor')" onmouseover="MouseEnterOnColorPalette(this)" onmouseout="MouseLeaveOnColorPalette(this)"></div>
+                                                                                        <div class="subDiv" id="LineColor150" style="background-color: #CC99FF; border: 1px solid; border-color: #3A3A3A" onmousedown="PropertyChangesFromPanel(this, 'LineStrokeColor')" onmouseover="MouseEnterOnColorPalette(this)" onmouseout="MouseLeaveOnColorPalette(this)"></div>
+                                                                                        <div class="subDiv" id="LineColor151" style="background-color: #E5CCFF; border: 1px solid; border-color: #3A3A3A" onmousedown="PropertyChangesFromPanel(this, 'LineStrokeColor')" onmouseover="MouseEnterOnColorPalette(this)" onmouseout="MouseLeaveOnColorPalette(this)"></div>
+                                                                                        <div class="subDiv" id="LineColor152" style="background-color: #990099; border: 1px solid; border-color: #3A3A3A" onmousedown="PropertyChangesFromPanel(this, 'LineStrokeColor')" onmouseover="MouseEnterOnColorPalette(this)" onmouseout="MouseLeaveOnColorPalette(this)"></div>
+                                                                                        <div class="subDiv" id="LineColor153" style="background-color: #FF00FF; border: 1px solid; border-color: #3A3A3A" onmousedown="PropertyChangesFromPanel(this, 'LineStrokeColor')" onmouseover="MouseEnterOnColorPalette(this)" onmouseout="MouseLeaveOnColorPalette(this)"></div>
+                                                                                        <div class="subDiv" id="LineColor154" style="background-color: #FF99FF; border: 1px solid; border-color: #3A3A3A" onmousedown="PropertyChangesFromPanel(this, 'LineStrokeColor')" onmouseover="MouseEnterOnColorPalette(this)" onmouseout="MouseLeaveOnColorPalette(this)"></div>
+                                                                                        <div class="subDiv" id="LineColor155" style="background-color: #FFCCFF; border: 1px solid; border-color: #3A3A3A" onmousedown="PropertyChangesFromPanel(this, 'LineStrokeColor')" onmouseover="MouseEnterOnColorPalette(this)" onmouseout="MouseLeaveOnColorPalette(this)"></div>
+                                                                                        <div class="subDiv" id="LineColor156" style="background-color: #99004D; border: 1px solid; border-color: #3A3A3A" onmousedown="PropertyChangesFromPanel(this, 'LineStrokeColor')" onmouseover="MouseEnterOnColorPalette(this)" onmouseout="MouseLeaveOnColorPalette(this)"></div>
+                                                                                        <div class="subDiv" id="LineColor157" style="background-color: #FF0080; border: 1px solid; border-color: #3A3A3A" onmousedown="PropertyChangesFromPanel(this, 'LineStrokeColor')" onmouseover="MouseEnterOnColorPalette(this)" onmouseout="MouseLeaveOnColorPalette(this)"></div>
+                                                                                        <div class="subDiv" id="LineColor158" style="background-color: #FF66B3; border: 1px solid; border-color: #3A3A3A" onmousedown="PropertyChangesFromPanel(this, 'LineStrokeColor')" onmouseover="MouseEnterOnColorPalette(this)" onmouseout="MouseLeaveOnColorPalette(this)"></div>
+                                                                                        <div class="subDiv" id="LineColor159" style="background-color: #FFCCE6; border: 1px solid; border-color: #3A3A3A; margin-bottom: 10px" onmousedown="PropertyChangesFromPanel(this, 'LineStrokeColor')" onmouseover="MouseEnterOnColorPalette(this)" onmouseout="MouseLeaveOnColorPalette(this)"></div>
+                                                                                    </div>
+
+                                                                                </li>
+                                                                            </ul>
+
+                                                                        </div>
+                                                                    </div>
+                                                                    <div style="margin-left: -6px">
+                                                                        <label style="font-size: 11px; font-weight: normal">Line Color</label>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                        </table>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div data-bind="style: { backgroundColor: lineconnectorDivColor }" style="width: 45px; height: 45px; margin-left: 22px; border: 1px solid; border-color: #bbbcbb;" onmouseover="MouseEnterOnDiv(this,'line','icon-Pi__Connector1')" onmouseout="MouseLeaveFromDiv(this,'line','icon-Pi__Connector1')">
+                                            <table>
+                                                <tr>
+                                                    <td>
+                                                        <div style="margin-top: 9px; margin-left: 3px;">
+                                                            <span id="ConnectorListIcon" class="icon-Pi__Connector1 propertyPanelIconStyle" data-bind="style: { color: lineconnectorfontColor }"></span>
+                                                        </div>
+                                                        <div style="margin-top: -31px; margin-left: 1px;">
+                                                            <span class="icon-Pi__Button-Corner" data-bind="style: { color: lineconnectorCornerColor }" />
+                                                        </div>
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td>
+                                                        <div class="dropdownPositionStyle">
+                                                            <input type="text" id="line" style="width: 0px" />
+                                                            <div id="lineDiv" style="background-color: red">
+                                                                <ul>
+                                                                    <li>
+                                                                        <div style="margin-top: 5px">
+                                                                            <span class="icon-Con__Stright" />
+                                                                            <label>Straight</label>
+                                                                        </div>
+                                                                    </li>
+                                                                    <li>
+                                                                        <div style="margin-top: 5px">
+                                                                            <span class="icon-Con__Bezier" />
+                                                                            <label>Bezier</label>
+                                                                        </div>
+                                                                    </li>
+                                                                    <li>
+                                                                        <div style="margin-top: 5px">
+                                                                            <span class="icon-Con__Orthogonal" />
+                                                                            <label>Orthogonal</label>
+                                                                        </div>
+                                                                    </li>
+
+                                                                </ul>
+
+
+                                                            </div>
+                                                        </div>
+                                                        <div style="margin-top: 1px; margin-left: 10px;">
+                                                            <label style="font-size: 11px; font-weight: normal">Type</label>
+                                                        </div>
+                                                    </td>
+
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div data-bind="style: { backgroundColor: lineWidthDivColor }" style="width: 45px; height: 45px; margin-left: 22px; border: 1px solid; border-color: #bbbcbb;" onmouseover="MouseEnterOnDiv(this,'lineWidth','icon-Pi__Line-Width')" onmouseout="MouseLeaveFromDiv(this,'lineWidth','icon-Pi__Line-Width')">
+                                            <table>
+                                                <tr>
+                                                    <td>
+                                                        <div style="margin-top: 9px; margin-left: 3px;">
+                                                            <span id="Span10" class="icon-Pi__LineWidth propertyPanelIconStyle" data-bind="style: { color: lineWidthfontColor }"></span>
+                                                        </div>
+                                                        <div style="margin-top: -31px; margin-left: 1px;">
+                                                            <span class="icon-Pi__Button-Corner" data-bind="style: { color: lineWidthCornerColor }" />
+                                                        </div>
+
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div class="dropdownPositionStyle">
+                                                            <input type="text" id="lineWidth" style="width: 0px" />
+                                                            <div id="lineWidthDiv">
+                                                                <ul>
+                                                                    <li style="height: 25px">
+                                                                        <div style="margin-top: 3px">
+                                                                            <label style="font-weight: bold">1 px</label>
+                                                                            <div style="background-color: black; width: 45px; height: 1px; float: right; margin-top: 11px; margin-left: 20px; margin-right: 5px"></div>
+                                                                        </div>
+                                                                    </li>
+                                                                    <li style="height: 25px">
+                                                                        <div style="margin-top: 3px">
+                                                                            <label style="font-weight: bold">2 px</label>
+                                                                            <div style="background-color: black; width: 45px; height: 2px; float: right; margin-top: 9px; margin-left: 20px; margin-right: 5px"></div>
+                                                                        </div>
+                                                                    </li>
+                                                                    <li style="height: 25px">
+                                                                        <div style="margin-top: 3px">
+                                                                            <label style="font-weight: bold">3 px</label>
+                                                                            <div style="background-color: black; width: 45px; height: 3px; float: right; margin-top: 9px; margin-left: 20px; margin-right: 5px"></div>
+                                                                        </div>
+                                                                    </li>
+                                                                    <li style="height: 25px">
+                                                                        <div style="margin-top: 3px;">
+                                                                            <label style="font-weight: bold">4 px</label>
+                                                                            <div style="background-color: black; width: 45px; height: 4px; float: right; margin-top: 10px; margin-left: 20px; margin-right: 5px"></div>
+                                                                        </div>
+                                                                    </li>
+                                                                    <li style="height: 25px">
+                                                                        <div style="margin-top: 3px;">
+                                                                            <label style="font-weight: bold">5 px</label>
+                                                                            <div style="background-color: black; width: 45px; height: 5px; float: right; margin-top: 9px; margin-left: 20px; margin-right: 5px"></div>
+                                                                        </div>
+                                                                    </li>
+                                                                    <li style="height: 25px">
+                                                                        <div style="margin-top: 3px;">
+                                                                            <label style="font-weight: bold">6 px</label>
+                                                                            <div style="background-color: black; width: 45px; height: 6px; float: right; margin-top: 8px; margin-left: 20px; margin-right: 5px"></div>
+                                                                        </div>
+                                                                    </li>
+                                                                    <li style="height: 25px">
+                                                                        <div style="margin-top: 3px">
+                                                                            <label style="font-weight: bold">7 px</label>
+                                                                            <div style="background-color: black; width: 45px; height: 7px; float: right; margin-top: 8px; margin-left: 20px; margin-right: 5px"></div>
+                                                                        </div>
+                                                                    </li>
+                                                                    <li style="height: 25px">
+                                                                        <div style="margin-top: 3px;">
+                                                                            <label style="font-weight: bold">8 px</label>
+                                                                            <div style="background-color: black; width: 45px; height: 8px; float: right; margin-top: 7px; margin-left: 20px; margin-right: 5px"></div>
+                                                                        </div>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                        <div style="margin-left: -2px">
+                                                            <label style="font-size: 11px; font-weight: normal">Thickness</label>
+                                                        </div>
+                                                    </td>
+
+                                                </tr>
+                                            </table>
+                                        </div>
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div data-bind="style: { backgroundColor: headDecoratorDivColor }" style="width: 45px; height: 45px; border: 1px solid; border-color: #bbbcbb; margin-left: 5px; margin-top: 40px" onmouseover="MouseEnterOnDiv(this,'headDecorator','icon-Pi__Head')" onmouseout="MouseLeaveFromDiv(this,'headDecorator','icon-Pi__Head')">
+                                            <table>
+                                                <tr>
+                                                    <td>
+                                                        <div style="margin-top: 9px; margin-left: 3px;">
+                                                            <span class="icon-Pi__Head propertyPanelIconStyle" data-bind="style: { color: headDecoratorfontColor }"></span>
+                                                        </div>
+                                                        <div style="margin-top: -31px; margin-left: 1px;">
+                                                            <span class="icon-Pi__Button-Corner" data-bind="style: { color: headDecoratorCornerColor }" />
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div class="dropdownPositionStyle">
+                                                            <input type="text" id="headDecorator" />
+                                                            <div id="headDecoratorDiv">
+                                                                <ul>
+                                                                    <li>
+                                                                        <span class="icon-Con__Line decoratorIcons" />
+                                                                    </li>
+                                                                    <li>
+                                                                        <span class="icon-Con__HeadArrow-fill decoratorIcons" />
+                                                                    </li>
+                                                                    <li>
+                                                                        <span class="icon-Con__Headsguer-fill-10 decoratorIcons" />
+                                                                    </li>
+                                                                    <li>
+                                                                        <span class="icon-Con__Headsguer-fill-11 decoratorIcons" />
+                                                                    </li>
+
+                                                                    <li>
+                                                                        <span class="icon-Con__HeadArrow2-fill decoratorIcons" />
+                                                                    </li>
+                                                                    <li>
+                                                                        <span class="icon-Con__HeadArrow-line decoratorIcons" />
+                                                                    </li>
+                                                                    <li>
+                                                                        <span class="icon-Con__Headsguer-line decoratorIcons" />
+                                                                    </li>
+                                                                    <li>
+                                                                        <span class="icon-Con__Headround-line decoratorIcons" />
+                                                                    </li>
+
+                                                                    <li>
+                                                                        <span class="icon-Con__HeadArrow2-line decoratorIcons" />
+                                                                    </li>
+
+                                                                </ul>
+
+
+                                                            </div>
+                                                        </div>
+                                                        <div style="margin-left: 8px">
+                                                            <label style="font-size: 11px; font-weight: normal;">Head</label>
+                                                        </div>
+                                                    </td>
+
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div data-bind="style: { backgroundColor: lineStyleDivColor }" style="width: 45px; height: 45px; border: 1px solid; border-color: #bbbcbb; margin-left: 22px; margin-top: 40px" onmouseover="MouseEnterOnDiv(this,'lineStyle','icon-Pi__Line-Style')" onmouseout="MouseLeaveFromDiv(this,'lineStyle','icon-Pi__Line-Style')">
+                                            <table>
+                                                <tr>
+                                                    <td>
+                                                        <div style="margin-top: 10px; margin-left: 3px;">
+                                                            <span class="icon-Pi__LineStyle propertyPanelIconStyle" data-bind="style: { color: lineStylefontColor }"></span>
+                                                        </div>
+                                                        <div style="margin-top: -32px; margin-left: 1px;">
+                                                            <span class="icon-Pi__Button-Corner" data-bind="style: { color: lineStyleCornerColor }" />
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div class="dropdownPositionStyle">
+                                                            <input type="text" id="lineStyle" style="width: 0px" />
+                                                            <div id="lineStyleDiv" style="background-color: red">
+                                                                <ul>
+                                                                    <li>
+                                                                        <span class="icon-Line_Basic" />
+                                                                    </li>
+                                                                    <li>
+                                                                        <span class="icon-Line_Dash" />
+                                                                    </li>
+                                                                    <li>
+                                                                        <span class="icon-Line_Dot" />
+                                                                    </li>
+                                                                    <li>
+                                                                        <span class="icon-Line_Stylish" />
+                                                                    </li>
+
+                                                                </ul>
+
+
+                                                            </div>
+                                                        </div>
+                                                        <div style="margin-left: -4px">
+                                                            <label style="font-size: 11px; font-weight: normal">Line Style</label>
+                                                        </div>
+                                                    </td>
+
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div data-bind="style: { backgroundColor: tailDecoratorDivColor }" style="width: 45px; height: 45px; border: 1px solid; border-color: #bbbcbb; margin-left: 22px; margin-top: 40px" onmouseover="MouseEnterOnDiv(this,'tailDecorator','icon-Pi__Tail')" onmouseout="MouseLeaveFromDiv(this,'tailDecorator','icon-Pi__Tail')">
+                                            <table>
+                                                <tr>
+                                                    <td>
+                                                        <div style="margin-top: 10px; margin-left: 3px;">
+                                                            <span class="icon-Pi__Tail propertyPanelIconStyle" data-bind="style: { color: tailDecoratorfontColor }"></span>
+                                                        </div>
+                                                        <div style="margin-top: -32px; margin-left: 1px;">
+                                                            <span class="icon-Pi__Button-Corner" data-bind="style: { color: tailDecoratorCornerColor }" />
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div class="dropdownPositionStyle">
+                                                            <input type="text" id="tailDecorator" />
+                                                            <div id="tailDecoratorDiv">
+                                                                <ul>
+                                                                    <li>
+                                                                        <span class="icon-Con__Line decoratorIcons" />
+                                                                    </li>
+                                                                    <li>
+                                                                        <span class="icon-Con__TailArrow-fill decoratorIcons" />
+                                                                    </li>
+                                                                    <li>
+                                                                        <span class="icon-Con__Tailsguer-fill-10 decoratorIcons" />
+                                                                    </li>
+                                                                    <li>
+                                                                        <span class="icon-Con__Tailsguer-fill-11 decoratorIcons" />
+                                                                    </li>
+
+                                                                    <li>
+                                                                        <span class="icon-Con__TailArrow2-fill decoratorIcons" />
+                                                                    </li>
+                                                                    <li>
+                                                                        <span class="icon-Con__TailArrow-line decoratorIcons" />
+                                                                    </li>
+                                                                    <li>
+                                                                        <span class="icon-Con__Tailsguer-line decoratorIcons" />
+                                                                    </li>
+                                                                    <li>
+                                                                        <span class="icon-Con__Tailround-line decoratorIcons" />
+                                                                    </li>
+
+                                                                    <li>
+                                                                        <span class="icon-Con__TailArrow2-line decoratorIcons" />
+                                                                    </li>
+
+                                                                </ul>
+
+
+                                                            </div>
+                                                        </div>
+                                                        <div style="margin-left: 13px">
+                                                            <label style="font-size: 11px; font-weight: normal">Tail</label>
+                                                        </div>
+                                                    </td>
+
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+    <div id="dialogBrowse" title="More Shapes">
+
+        <div class="control">
+            Select a file to upload
+                <div class="posupload">
+                    <div id="UploadDiv"></div>
+                </div>
+
+        </div>
+    </div>
+
+    <div id="subControl_Div">
+        <span class="">Browse the image to upload.  </span>
+        <div id="uploadImage"></div>
+        <span class="file_support">PNG,JPG and GIF files supported.</span>
+    </div>
+    <div style="display: none;">
+        <div id="insertLink" title="Hyperlink" style="display: none;">
+            <table>
+                <tr style="height: 50px;">
+                    <td><span class="insertLink">Web Address :</span></td>
+                    <td>
+                        <input id="navigateURL" type="text" class="insertLink" autofocus="autofocus" value="http://" style="width: 420px; height: 20px; border: 1px solid gray;" /></td>
+                </tr>
+                <tr style="text-align: right">
+                    <td></td>
+                    <td>
+                        <input class="insertLinkOk" type="button" value="Apply" onclick="insertlink()" />
+                        <input class="insertLinkcancel" type="button" value="Cancel" onclick="cancellink()" />
+                    </td>
+                </tr>
+            </table>
+
+        </div>
+    </div>
+
+    <div id="basicDialog" title="Save" style="margin-left: 6px; margin-top: 12px;">
+
+        <div style="height: 30px; width: 100%; font-size: 16px;">
+            File Name
+        </div>
+        <div style="border: 1px solid #D3D1D1; height: 30px; width: 100%;">
+            <input type="text" id="SaveFileName" value="" style="margin-top: 2px; margin-left: 6px; width: 390px; height: 23px; border: none; outline: none;" />
+        </div>
+        <div style="height: 30px; margin-bottom: 6px; margin-top: 11px; width: 100%;">
+            <input type="button" id="SaveFile" onclick="saveFileAsString()" value="Save" style="background-color: #28B1BF; border: medium none; color: #FFFFFF; font-family: Segoe UI; font-size: 16px; height: 29px; margin-left: 152px; width: 90px;" />
+        </div>
+    </div>
+    <div id="basicDialog1" title="Save" style="margin-left: 6px; margin-top: 12px;">
+
+        <div style="height: 30px; width: 100%; font-size: 16px;">
+            File Name
+        </div>
+        <div style="border: 1px solid #D3D1D1; height: 30px; width: 100%;">
+            <input type="text" id="SaveFileName1" value="" style="margin-top: 2px; margin-left: 6px; width: 390px; height: 23px; border: none; outline: none;" />
+        </div>
+        <div style="height: 30px; margin-bottom: 6px; margin-top: 11px; width: 100%;">
+            <input type="button" id="SaveFile1" onclick="new_saveOptions()" value="Save" style="background-color: #28B1BF; border: medium none; color: #FFFFFF; font-family: Segoe UI; font-size: 16px; height: 29px; margin-left: 152px; width: 90px;" />
+        </div>
+
+
+
+
+    </div>
+    <div id="basicDialogToLoad" title="Load" style="">
+        <br />
+        <table style="margin-left: 50px">
+            <tr>
+                <td>Select a file to upload
+                </td>
+                <td>
+                    <div>
+                        <div id="UploadDefault"></div>
+                    </div>
+                </td>
+            </tr>
+        </table>
+        <br />
+    </div>
+    <div id="confirmDialog" title="Save" style="margin-left: 12px; margin-top: 12px; text-align: center">
+
+        <div style="height: 30px; width: 100%; font-size: 16px;">
+            Do you want to save the changes?
+        </div>
+
+        <div style="height: 40px; margin-bottom: 6px; margin-top: 11px; width: 100%;">
+            <input type="button" id="confirm" onclick="new_SaveFileAsString()" value="Yes" style="background-color: #28B1BF; border: medium none; color: #FFFFFF; font-family: Segoe UI; font-size: 16px; height: 29px; margin-left: 50px; width: 90px;" />
+            <input type="button" id="confirm_no" onclick="new_No()" value="No" style="background-color: #28B1BF; border: medium none; color: #FFFFFF; font-family: Segoe UI; font-size: 16px; height: 29px; margin-right: 50px; margin-left: 10px; margin-top: auto; width: 90px;" />
+        </div>
+    </div>
+    <div id="exportDialog" title="Export" style="margin-top: 12px;">
+        <table style="margin-left: 12px">
+            <tr style="height: 40px">
+                <td style="vertical-align: central">
+                    <div style="height: 30px; width: 100%; font-size: 16px; margin-right: 60px">
+                        File Name
+                    </div>
+                </td>
+                <td style="vertical-align: central">
+                    <div style="border: 1px solid #D3D1D1; height: 30px; width: 200px;">
+                        <input type="text" id="ExportFileName" value="diagram" style="width: 200px; height: 23px; border: none; outline: none;" />
+                    </div>
+                </td>
+            </tr>
+            <tr style="height: 40px">
+                <td style="vertical-align: central">
+                    <div style="height: 30px; width: 100%; font-size: 16px; margin-right: 60px">
+                        Format
+                    </div>
+                </td>
+                <td style="vertical-align: central">
+                    <div style="height: 30px; width: 200px;">
+                        <input type="text" id="exportformat" style="width: 100px; text-align: left; text-indent: 8px;" />
+                        <div id="formatDiv">
+                            <ul style="background-color: lightgray">
+                                <li>JPG</li>
+                                <li>PNG</li>
+                                <li>BMP</li>
+                                <li>SVG</li>
+                            </ul>
+                        </div>
+                    </div>
+                </td>
+
+            </tr>
+            <tr style="height: 40px">
+                <td style="vertical-align: central">
+                    <div style="height: 30px; width: 100%; font-size: 16px; margin-right: 60px">
+                        Mode
+                    </div>
+                </td>
+                <td style="vertical-align: central">
+                    <div style="height: 30px; width: 200px;">
+                        <input type="text" id="exportmode" style="width: 100px; text-indent: 8px;" />
+                        <div id="modeDiv" style="text-align: right">
+                            <ul style="background-color: lightgray">
+                                <li>Content</li>
+                                <li>PageSettings</li>
+                            </ul>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <div style="height: 30px; margin-bottom: 6px; margin-top: 6px; width: 100%;">
+                        <input type="button" id="Button1" onclick="exportDiagram()" value="Export" style="background-color: #28B1BF; border: medium none; color: #FFFFFF; font-family: Segoe UI; font-size: 16px; height: 29px; width: 90px;" />
+                    </div>
+                </td>
+            </tr>
+        </table>
+
+
+
+    </div>
+    <div id="showMinimizedPlatedItemsparent" style="">
+        <div id="no_match_found" style="height: 30px; width: 100%; display: block; text-align: center;">
+            <div style="height: 6px; width: 100%;"></div>
+            <span style="font-size: 13px; font-style: italic; height: 30px;">No matches found..</span>
+
+        </div>
+        <div id="maxi_Search" style="background-color: white;"></div>
+        <div id="basicShapes_Search"></div>
+        <div id="umlShapes_Search"></div>
+        <div id="flowShapes_search"></div>
+        <div id="electrical_Search"></div>
+        <div id="bpmnShapes_Search"></div>
+        <div id="connectors_Search"></div>
+        <div id="intelligent_Search"></div>
+
+    </div>
+    <div id="Overview-div" class="Overview-div" style="width: 253px; float: left; display: none">
+        <div id="Overview"></div>
+        <table cellpadding="3">
+            <tr>
+                <td><span class="sliderValue"></span></td>
+                <td>
+                    <div id="overviewSlider"></div>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div id="FileOpenDialog" style="height: 100%; width: 100%;" title="Open">
+        <div id="parent_tree">
+            <ul id="FileTreeView">
+            </ul>
+        </div>
+        <div style="height: 30px; margin-left: -16px; margin-top: 13px; width: 100%;">
+            <input type="button" id="fileOpen" onclick="onFileItemSelected()    " value="Open" style="background-color: #28B1BF; border: medium none; color: #FFFFFF; font-family: Segoe UI; font-size: 16px; height: 29px; margin-left: 130px; width: 90px;" />
+        </div>
+    </div>
+
+
+
+</body>
+</html>

@@ -1,0 +1,111 @@
+﻿<!doctype html>
+<html ng-app="syncApp">
+<head>
+    <title>Essential Studio for JavaScript : Circular Gauge-Angular</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" charset="utf-8">
+    <link href="../themes/bootstrap.min.css" rel="stylesheet"/>
+    <link href="../themes/default-theme/ej.widgets.all.min.css" rel="stylesheet" />
+    <link href="../themes/default.css" rel="stylesheet" />
+    <link href="../themes/default-responsive.css" rel="stylesheet" />    
+	<!--[if lt IE 9]>
+    <script src="../scripts/jquery-1.11.3.min.js" type="text/javascript"></script>
+    <![endif]-->
+    <!--[if gte IE 9]><!-->
+    <script src="../scripts/jquery-2.1.4.min.js" type="text/javascript"></script>
+     <!--<![endif]-->
+    <script src="../scripts/jquery.easing.1.3.min.js" type="text/javascript"></script>
+    <script src="../scripts/excanvas.min.js" type="text/javascript"></script>
+    <script src="../scripts/angular.min.js"></script>
+    <script src="../scripts/ej.web.all.min.js"></script>
+    <script src="../scripts/ej.unobtrusive.min.js"></script>
+    <script src="../scripts/jquery.globalize.min.js" type="text/javascript"></script>
+    <script src="../scripts/cultures/globalize.culture.en-US.min.js"></script>
+    <script src="../scripts/properties.js" type="text/javascript"></script>
+    <script src="../scripts/ej.widget.angular.min.js"></script>
+</head>
+<body ng-controller="CircularGauge">
+    <div class="content-container-fluid">
+        <div class="row">
+            <div class="cols-sample-area" align="center">
+                <div id="circularframe">
+                    <ej-CircularGauge id="CircularGauge1" e-backgroundColor="transparent" e-value="nvalue" e-width="500" e-readOnly="false" e-load= "loadGaugeTheme" e-maximum="maxvalue" e-minimum="minvalue" e-enableAnimation="false">
+                        <e-scales>
+                            <e-scale e-showRanges="true" e-startAngle="122" e-sweepAngle="296" e-radius="130" e-showScaleBar="true" e-size="1" e-maximum="120" e-majorIntervalValue="20" e-minorIntervalValue="10" e-border-width="0.5">
+                                <e-pointers>
+                                    <e-pointer e-showBackNeedle="true" e-backNeedleLength="20" e-length="95" e-width="7" e-value="nvalue" e-pointerCap-radius="12">
+                                    </e-pointer>
+                                </e-pointers>
+                                <e-labels>
+                                    <e-label e-color="#8c8c8c"></e-label>
+                                </e-labels>
+                                <e-ticks>
+                                    <e-tick e-type="major" e-distanceFromScale="2" e-height="16" e-width="1" e-color="#8c8c8c"></e-tick>
+                                    <e-tick e-type="minor" e-distanceFromScale="2" e-height="8" e-width="1" e-color="#8c8c8c"></e-tick>
+                                </e-ticks>
+                                <e-ranges>
+                                    <e-range e-distanceFromScale="-30" e-startValue="0" e-endValue="70">
+                                    </e-range>
+                                    <e-range e-distanceFromScale="-30" e-startValue="70" e-endValue="110" e-backgroundColor="#fc0606" e-border-color="#fc0606">
+                                    </e-range>
+                                    <e-range e-distanceFromScale="-30" e-startValue="110" e-endValue="120" e-backgroundColor="#f5b43f" e-border-color="#f5b43f">
+                                    </e-range>
+                                </e-ranges>
+                            </e-scale>
+                        </e-scales>
+                    </ej-CircularGauge>
+                </div>
+                <table style="float:left;width:400px">
+                    <tr>
+                        <td>Value</td>
+                         <td> <input type="text" id="txtValue" ej-numerictextbox e-value="nvalue" ng-model="nvalue" e-showspinbutton="false" e-change="validate" Style="width:110px"/></td>
+                    </tr>
+                     <tr>
+                        <td>Minimum Value</td>
+                         <td><input type="text" id="txtMin" value="" ej-numerictextbox e-value="minvalue" ng-model="minvalue" e-change="validateMin" e-showspinbutton="false" style="width:110px" /></td>
+                    </tr>
+                     <tr>
+                        <td>Maximum Value</td>
+                         <td><input type="text" id="txtMax" value="" ej-numerictextbox e-value="maxvalue" ng-model="maxvalue" e-change="validateMax" e-showspinbutton="false" style="width:110px" /></td>
+                    </tr>
+                </table>
+                </div>
+            </div>
+
+           
+        </div>
+    <script type="text/javascript">
+        angular.module('syncApp', ['ejangular'])
+             .controller('CircularGauge', function ($scope) {
+                 $scope.nvalue = 80;
+                 $scope.minvalue = 0;
+                 $scope.maxvalue = 120;
+             });
+        function validate(e) {
+            var min = $("#txtMin").data("ejNumericTextbox");
+            var max = $("#txtMax").data("ejNumericTextbox");
+            var val = $("#txtValue").data("ejNumericTextbox");
+            if (min.option("value") > e.value)
+                val.option("value", min.option("value"));
+            else if (max.option("value") < e.value)
+                val.option("value", max.option("value"));
+        }
+        function validateMin(e) {
+            var max = $("#txtMax").data("ejNumericTextbox");
+            if (max.option("value") == e.value)
+                max.option("value", max.option("value")+1);
+        }
+        function validateMax(e) {
+            var min = $("#txtMin").data("ejNumericTextbox");
+            var max = $("#txtMax").data("ejNumericTextbox");
+            if (min.option("value") == e.value)
+                max.option("value", max.option("value") + 1);
+        }
+    </script>
+     <style>
+        .col-md-3 .e-ddl .e-input {
+            line-height:20px;
+        }
+    </style>
+</body>
+</html>
+

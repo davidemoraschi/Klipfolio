@@ -1,0 +1,114 @@
+﻿<!doctype html>
+<html lang="en" ng-app="listCtrl">
+<head>
+    <meta charset="utf-8" />
+    <title>Essential Studio for JavaScript : Angular support</title>
+    <link href="../themes/bootstrap.min.css" rel="stylesheet" />
+    <link href="../themes/default-theme/ej.widgets.all.min.css" rel="stylesheet" />
+    <link href="../themes/default.css" rel="stylesheet" />
+    <link href="../themes/default-responsive.css" rel="stylesheet" />
+    <link href="../themes/responsive-css/ej.responsive.css" rel="stylesheet" />
+    <script src="../scripts/angular.min.js"></script>
+    <!--[if lt IE 9]>
+        <script src="../scripts/jquery-1.11.3.min.js"></script>
+    <![endif]-->
+    <!--[if gte IE 9]><!-->
+    <script src="../scripts/jquery-2.1.4.min.js"></script>
+    <!--<![endif]-->
+    <script src="../scripts/jsrender.min.js"></script>
+    <script src="../scripts/jquery.globalize.min.js"></script>
+    <script src="../scripts/ej.web.all.min.js"></script>
+    <script src="../scripts/jsondata.min.js"></script>
+    <script src="../scripts/jsondata.min.js"></script>
+    <script src="../scripts/ej.widget.angular.min.js"></script>
+    <script src="../scripts/properties.js" type="text/javascript"></script>
+</head>
+<body ng-controller="PhoneListCtrl">
+    <div class="content-container-fluid">
+        <div class="row">
+            <div class="cols-sample-area">
+                <div id="Grid" ej-grid e-datasource="data" e-selectedrowindex="selectedRow" e-allowgrouping="true" e-pagesettings-pagesize="8" e-pagesettings-currentpage="page" e-allowsorting="true" e-allowpaging="true" e-actionbegin="actionBegin">
+                    <div e-columns>
+                        <div e-column e-field="EmployeeID" e-headertext="Employee ID" e-textalign="right" e-width="90"></div>
+                        <div e-column e-field="LastName" e-headertext="Last Name" e-textalign="left" e-width="90"></div>
+                        <div e-column e-field="FirstName" e-headertext="FirstName" e-textalign="left" e-width="90"></div>
+                        <div e-column e-field="Title" e-headertext="Title" e-textalign="left" e-width="90"></div>
+                        <div e-column e-field="City" e-headertext="City" e-textalign="left" e-width="90"></div>
+                        <div e-column e-field="Country" e-headertext="Country" e-textalign="left" e-width="90"></div>
+
+                    </div>
+                </div>
+            </div>
+            <div id="sampleProperties">
+                <div class="prop-grid">
+                    <div class="row">
+                        <div class="col-md-3">
+                            Selected Row
+                        </div>
+                        <div class="col-md-3">
+                            <input type="text" id="selectedRow" name="name" class="e-ejinputtext" value="" ej-numerictextbox e-value="selectedRow"  e-maxvalue="7" e-minValue ="-1" e-width="100px" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            Current Page
+                        </div>
+                        <div class="col-md-3">
+                            <input type="text" name="name" class="e-ejinputtext" value="" ej-numerictextbox e-value="page"  e-maxvalue="4" e-minValue ="1" e-width="100px" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        var obj = [
+                 { "EmployeeID": 1, "LastName": "Davolio", "FirstName": "Nancy", "Title": "Sales Representative", "City": "Seattle", "Country": "USA" },
+                 { "EmployeeID": 2, "LastName": "Fuller", "FirstName": "Andrew", "Title": "Vice President, Sales", "City": "Tacoma", "Country": "USA" },
+                 { "EmployeeID": 3, "LastName": "Leverling", "FirstName": "Janet", "Title": "Sales Representative", "City": "Kirkland", "Country": "USA" },
+                 { "EmployeeID": 4, "LastName": "Peacock", "FirstName": "Margaret", "Title": "Sales Representative", "City": "Redmond", "Country": "USA" },
+                 { "EmployeeID": 5, "LastName": "Buchanan", "FirstName": "Steven", "Title": "Sales Manager", "City": "London", "Country": "UK" },
+                 { "EmployeeID": 6, "LastName": "Suyama", "FirstName": "Michael", "Title": "Sales Representative", "City": "London", "Country": "UK" },
+                 { "EmployeeID": 7, "LastName": "King", "FirstName": "Robert", "Title": "Sales Representative", "City": "London", "Country": "UK" },
+                 { "EmployeeID": 8, "LastName": "Callahan", "FirstName": "Laura", "Title": "Inside Sales Coordinator", "City": "Seattle", "Country": "USA" },
+                 { "EmployeeID": 9, "LastName": "Dodsworth", "FirstName": "Anne", "Title": "Sales Representative", "City": "London", "Country": "UK" },
+                 { "EmployeeID": 10, "LastName": "Callahan", "FirstName": "Laura", "Title": "Inside Sales Coordinator", "City": "Seattle", "Country": "USA" },
+                 { "EmployeeID": 11, "LastName": "Leverling", "FirstName": "Janet", "Title": "Sales Representative", "City": "Kirkland", "Country": "USA" },
+                 { "EmployeeID": 12, "LastName": "Suyama", "FirstName": "Michael", "Title": "Sales Representative", "City": "London", "Country": "UK" },
+                 { "EmployeeID": 13, "LastName": "Buchanan", "FirstName": "Steven", "Title": "Sales Manager", "City": "London", "Country": "UK" },
+                 { "EmployeeID": 14, "LastName": "Fuller", "FirstName": "Andrew", "Title": "Vice President, Sales", "City": "Tacoma", "Country": "USA" },
+                 { "EmployeeID": 15, "LastName": "King", "FirstName": "Robert", "Title": "Sales Representative", "City": "London", "Country": "UK" },
+                 { "EmployeeID": 16, "LastName": "Peacock", "FirstName": "Margaret", "Title": "Sales Representative", "City": "Redmond", "Country": "USA" },
+                 { "EmployeeID": 17, "LastName": "Buchanan", "FirstName": "Steven", "Title": "Sales Manager", "City": "London", "Country": "UK" },
+                 { "EmployeeID": 18, "LastName": "Suyama", "FirstName": "Michael", "Title": "Sales Representative", "City": "London", "Country": "UK" },
+                 { "EmployeeID": 19, "LastName": "King", "FirstName": "Robert", "Title": "Sales Representative", "City": "London", "Country": "UK" },
+                 { "EmployeeID": 20, "LastName": "Callahan", "FirstName": "Laura", "Title": "Inside Sales Coordinator", "City": "Seattle", "Country": "USA" },
+                 { "EmployeeID": 21, "LastName": "Dodsworth", "FirstName": "Anne", "Title": "Sales Representative", "City": "London", "Country": "UK" },
+                 { "EmployeeID": 22, "LastName": "Suyama", "FirstName": "Margaret", "Title": "Sales Representative", "City": "London", "Country": "UK" },
+                 { "EmployeeID": 23, "LastName": "Fuller", "FirstName": "Andrew", "Title": "Vice President, Sales", "City": "Tacoma", "Country": "USA" },
+                 { "EmployeeID": 24, "LastName": "Leverling", "FirstName": "Janet", "Title": "Sales Representative", "City": "Kirkland", "Country": "USA" },
+                 { "EmployeeID": 25, "LastName": "Peacock", "FirstName": "Margaret", "Title": "Sales Representative", "City": "Redmond", "Country": "USA" },
+                 { "EmployeeID": 26, "LastName": "Buchanan", "FirstName": "Steven", "Title": "Sales Manager", "City": "London", "Country": "UK" },
+                 { "EmployeeID": 27, "LastName": "Suyama", "FirstName": "Michael", "Title": "Sales Representative", "City": "London", "Country": "UK" },
+                 { "EmployeeID": 28, "LastName": "King", "FirstName": "Robert", "Title": "Sales Representative", "City": "London", "Country": "UK" },
+                 { "EmployeeID": 29, "LastName": "Callahan", "FirstName": "Laura", "Title": "Inside Sales Coordinator", "City": "Seattle", "Country": "USA" },
+                 { "EmployeeID": 30, "LastName": "Dodsworth", "FirstName": "Anne", "Title": "Sales Representative", "City": "London", "Country": "UK" },
+                 { "EmployeeID": 31, "LastName": "Peacock", "FirstName": "Margaret", "Title": "Sales Representative", "City": "Redmond", "Country": "USA" },
+                 { "EmployeeID": 32, "LastName": "Buchanan", "FirstName": "Steven", "Title": "Sales Manager", "City": "London", "Country": "UK" },
+        ];
+        $("#sampleProperties").ejPropertiesPanel();
+        angular.module('listCtrl', ['ejangular'])
+        .controller('PhoneListCtrl', function ($scope) {
+			$scope.selectedRow = 2;
+            $scope.page = 2;
+            $scope.data = obj;
+            $scope.actionBegin = function (args) {
+                if (args.requestType == "grouping")
+                    $("#selectedRow").ejNumericTextbox("option", { value: -1 });
+            }
+        });
+    </script>
+</body>
+
+</html>

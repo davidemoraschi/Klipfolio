@@ -1,0 +1,55 @@
+﻿
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Essential Studio for JavaScript : Tile - Live Tile Functionalities</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" charset="utf-8" />
+    <link href="../themes/bootstrap.min.css" rel="stylesheet" />
+    <link href="../themes/default-theme/ej.widgets.all.min.css" rel="stylesheet" />
+    <link href="../themes/default.css" rel="stylesheet" />
+    <link href="../themes/default-responsive.css" rel="stylesheet" />
+    <!--[if lt IE 9]>
+    <script src="../scripts/jquery-1.11.3.min.js" type="text/javascript"></script>
+    <![endif]-->
+    <!--[if gte IE 9]><!-->
+    <script src="../scripts/jquery-2.1.4.min.js" type="text/javascript"></script>
+    <!--<![endif]-->
+    <script src="../scripts/jquery.globalize.min.js" type="text/javascript"></script>
+    <script src="../scripts/ej.web.all.min.js" type="text/javascript"></script>
+    <script src="../scripts/ej.unobtrusive.min.js"></script>
+    <script src="../scripts/properties.js" type="text/javascript"></script>
+</head>
+<body>
+    <div id="scrollTarget">
+        <div class="group">
+            <div class="column">
+                <div id="tile6" data-role="ejtile" data-ej-tilesize="medium" data-ej-imageposition="center" data-ej-imageurl='../themes/images/tile/windows/games.png' data-ej-text="Play">
+                </div>
+                <div class="small-col-2">
+                    <div id="tile2" data-role="ejtile" data-ej-imageposition="center" data-ej-tilesize="small" data-ej-imageurl='../themes/images/tile/windows/alerts.png'>
+                    </div>
+                    <div id="tile3" data-role="ejtile" data-ej-imageposition="center" data-ej-livetile-updateinterval="3000" data-ej-tilesize="small" data-ej-livetile-enabled="true" data-ej-livetile-type="flip" data-ej-livetile-imageurl="['../themes/images/tile/windows/alerts.png','../themes/images/tile/windows/bing.png','../themes/images/tile/windows/camera.png']">
+                    </div>
+                    <div id="tile4" data-role="ejtile" data-ej-livetile-updateinterval="3500" data-ej-livetile-enabled="true" data-ej-livetile-type="flip" data-ej-livetile-imageurl="['../themes/images/tile/windows/alerts.png','../themes/images/tile/windows/bing.png','../themes/images/tile/windows/camera.png']" data-ej-tilesize="small">
+                    </div>
+                    <div id="tile5" data-role="ejtile" data-ej-tilesize="small" data-ej-badge-enabled="true" data-ej-badge-value="10" data-ej-imageposition="center" data-ej-imageurl='../themes/images/tile/windows/messages.png'>
+                    </div>
+                </div>
+                <div id="tile6" data-role="ejtile" data-ej-tilesize="medium" data-ej-imageposition="fill" data-ej-livetile-updateinterval="5000" data-ej-livetile-enabled="true" data-ej-livetile-type="slide" data-ej-livetile-imageurl="['../themes/images/tile/windows/people_1.png','../themes/images/tile/windows/people_2.png','../themes/images/tile/windows/people_3.png']" data-ej-text="People">
+                </div>
+                <div id="tile7" data-role="ejtile" data-ej-tilesize="medium" data-ej-imageposition="center" data-ej-livetile-updateinterval="4000" data-ej-livetile-enabled="true" data-ej-livetile-type="slide" data-ej-livetile-imageurl="['../themes/images/tile/windows/pictures.png','../themes/images/tile/windows/photo_1.png','../themes/images/tile/windows/photo_2.png','../themes/images/tile/windows/pictures.png','../themes/images/tile/windows/photo_1.png']" data-ej-text="Photo">
+                </div>
+                <div id="tile8" data-role="ejtile" data-ej-tilesize="wide" data-ej-imageposition="center" data-ej-livetile-enabled="true" data-ej-livetile-type="carousel" data-ej-livetile-imageurl="['../themes/images/tile/windows/weather.png','../themes/images/tile/windows/weather_1.png','../themes/images/tile/windows/weather_2.png']" data-ej-text="Weather">
+                </div>
+            </div>
+        </div>
+    </div>
+	    <script type="text/javascript">
+        $(function () {
+            if ((ej.browserInfo().name == "msie" && ej.browserInfo().version < 9)) {
+                $("#scrollTarget").html("Live Tile Functionality is only supported from Internet Explorer Versioned 9 and above.").css({ "font-size": "20px", "color": "red" });
+            }
+        });
+    </script>
+</body>
+</html>

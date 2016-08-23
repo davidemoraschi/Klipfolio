@@ -1,0 +1,5 @@
+{
+   "Humidity": "0.66",
+   "Temperature": "43",
+   "Timestamp": "2012-04-23T18:25:43.511Z"
+}

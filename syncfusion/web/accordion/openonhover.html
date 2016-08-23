@@ -1,0 +1,59 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Essential Studio for JavaScript : Accordion - Open on Hover</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" charset="utf-8"  />
+    <link href="../themes/bootstrap.min.css" rel="stylesheet" />
+    <link href="../themes/default-theme/ej.widgets.all.min.css" rel="stylesheet" />
+    <link href="../themes/default.css" rel="stylesheet" />
+    <link href="../themes/default-responsive.css" rel="stylesheet" />
+    <!--[if lt IE 9]>
+    <script src="../scripts/jquery-1.11.3.min.js" type="text/javascript"></script>
+    <![endif]-->
+    <!--[if gte IE 9]><!-->
+    <script src="../scripts/jquery-2.1.4.min.js" type="text/javascript"></script>
+    <!--<![endif]-->
+    <script src="../scripts/jquery.easing.1.3.min.js" type="text/javascript"></script>
+    <script src="../scripts/ej.web.all.min.js" type="text/javascript"></script>
+    <script src="../scripts/properties.js" type="text/javascript"></script>
+</head>
+<body>
+
+    <div class="content-container-fluid">
+        <div class="row">
+            <div class="cols-sample-area">
+                <div id="hoverAccordion" style="width: 500px">
+                    <h3>
+                        <a href="#">About Syncfusion</a></h3>
+                    <div>
+                        Syncfusion, a world leader in software components have thousands of satisfied customers
+                    world-wide who have used our products to ship award winning software.
+                    </div>
+                    <h3>
+                        <a href="#">Technology</a></h3>
+                    <div>
+                        Syncfusion products are smartly designed to cope with the fast-changing technology
+                    environment.
+                    </div>
+                    <h3>
+                        <a href="#">Contact Us</a></h3>
+                    <div>
+                        Company Headquarters<br />
+                        <br />
+                        2501 Aerial Center Parkway<br />
+                        Suite 200<br />
+                        Morrisville, NC 27560<br />
+                        USA.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" class="jsScript">
+        $(function () {
+            // declaration
+            $("#hoverAccordion").ejAccordion({ events: "mouseover" });
+        });
+    </script>
+</body>
+</html>

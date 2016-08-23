@@ -1,0 +1,172 @@
+<!doctype html>
+<html>
+<head>
+    <title>Essential Studio for JavaScript : Autocomplete - KnockOut</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" charset="utf-8"  />
+    <link href="../themes/bootstrap.min.css" rel="stylesheet">
+    <link href="../themes/default-theme/ej.widgets.all.min.css" rel="stylesheet" />
+    <link href="../themes/default.css" rel="stylesheet" />
+    <link href="../themes/default-responsive.css" rel="stylesheet" />
+    <!--[if lt IE 9]>
+    <script src="../scripts/jquery-1.11.3.min.js" type="text/javascript"></script>
+    <![endif]-->
+    <!--[if gte IE 9]><!-->
+    <script src="../scripts/jquery-2.1.4.min.js" type="text/javascript"></script>
+    <!--<![endif]-->
+    <script src="../scripts/jquery.easing.1.3.min.js" type="text/javascript"></script>
+    <script src="../scripts/ej.web.all.min.js" type="text/javascript"></script>
+    <script src="../scripts/properties.js" type="text/javascript"></script>
+    <script src="../scripts/knockout.min.js" type="text/javascript"></script>
+    <script src="../scripts/ej.widget.ko.min.js" type="text/javascript"></script>
+</head>
+<body>
+    <div class="content-container-fluid">
+        <div class="row">
+            <div class="cols-sample-area">
+                <div class="frame" style="width: 50%; height: 55px">
+                    <div class="control" style="margin: auto; width: 100%">
+                        <div class="countryList" style="float: left; width: 45%">
+                            <label class="txt">Select Country</label>
+                            <input id="country" data-bind='value: countryName, valueUpdate: ["onchange", "input", "blur"]' />
+                        </div>
+
+                        <div class="stateList" style="float: right; width: 45%">
+                            <label class="txt">Select State</label>
+                            <input id="state" data-bind='value: stateName' />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="sampleProperties">
+                <div class="prop-grid">
+                    <div class="row">
+                        <div class="col-md-3">
+                            State
+                        </div>
+                        <div class="col-md-3">
+                            <input type="checkbox" id="check21" class="e-togglebtn" />
+                            <label for="check21">Toggle</label>
+                        </div>
+                        <div class="col-md-3">
+                            Get current value
+                        </div>
+                        <div class="col-md-3">
+                            <input type="button" id="GetValue" value="Get value" />
+                        </div>
+                        <div class="col-md-3">
+                            Set value
+                        </div>
+                        <div class="col-md-3">
+                            <input type="text" name="AutoComplete" class="input ejinputtext" value="" data-bind="value: countryName" />
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" class="jsScript">
+        var autocomplete;
+        $(function () {
+            var countryList = ["United States", "Australia", "Austria", "India"];
+            $('#country').ejAutocomplete({
+                watermarkText: "Select country",
+                showPopupButton: true,
+                dataSource: countryList
+            });
+            $('#state').ejAutocomplete({
+                showPopupButton: true
+            });
+            $("#check21").ejToggleButton({
+                defaultText: "Disable",
+                activeText: "Enable",
+                click: "changeState",
+                width: "100px"
+            });
+            $("#GetValue").ejButton ({
+			    width: "87px",
+				click: "currentValue"
+			 });
+            
+			var countryObj = $('#country').data("ejAutocomplete");
+            var stateObj = $('#state').data("ejAutocomplete");
+            stateObj.disable();
+            // declaration             
+            var ViewModel = function () {
+                var usaStates = ["California", "New York", "South Carolina", "Washington"];
+                var australiaStates = ["West Island", "Sydney", "Kingston", "Melbourne"];
+                var austriaStates = ["Burgenland", "Carinthia", "Styria", "Vienna"];
+                var indiaStates = ["Tamil Nadu", "Rajasthan", "West Bengal", "Maharashtra"];
+
+                this.countryName = ko.observable();
+                this.stateName = ko.computed(function () {
+                    var source = null;
+                    switch (this.countryName()) {
+                        case "United States": source = usaStates; break;
+                        case "Australia": source = australiaStates; break;
+                        case "Austria": source = austriaStates; break;
+                        case "India": source = indiaStates; break;
+                    }
+                    if (source) {
+                        if (countryObj.option("enabled"))
+							stateObj.enable();
+                        stateObj.setModel({ dataSource: source });
+                        return source[0];
+                    }
+                    else stateObj.setModel({ dataSource: null });
+
+                    return "";
+                }, this);
+            };
+            ko.applyBindings(new ViewModel());
+            $("#sampleProperties").ejPropertiesPanel();
+            autocompleteCountry = $('#country').data("ejAutocomplete");
+            autocompleteState = $('#state').data("ejAutocomplete");
+        });
+
+
+        function changeState(args) {
+            
+            if (args.isChecked)
+            {
+                autocompleteCountry.disable();
+                autocompleteState.disable();
+            } 
+            else
+            {
+                autocompleteCountry.enable();
+                autocompleteState.enable();
+            }
+        }
+		function currentValue(args) {
+		       alert("Current Country & State is : " + autocompleteCountry.getValue()+","+autocompleteState.getValue());
+			}
+    </script>
+    <style type="text/css">
+        .frame span {
+            display: block;
+        }
+
+        .inputBtn {
+            width: 87px;
+            text-align: center;
+        }
+
+        .input {
+            height: 22px;
+            text-indent: 10px;
+            width: 100px;
+        }
+
+        .control {
+            margin-top: 10px;
+            width: 144px;
+        }
+
+        .txt {
+            display: block;
+        }
+    </style>
+</body>
+</html>

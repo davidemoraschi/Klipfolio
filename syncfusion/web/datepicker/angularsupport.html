@@ -1,0 +1,62 @@
+﻿<!doctype html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" ng-app="DateCtrl">
+<head>
+    <title>Essential Studio for JavaScript : DatePicker - Angular</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" charset="utf-8"  />
+    <link href="../themes/bootstrap.min.css" rel="stylesheet">
+    <link href="../themes/default-theme/ej.widgets.all.min.css" rel="stylesheet" />
+    <link href="../themes/default.css" rel="stylesheet" />
+    <link href="../themes/default-responsive.css" rel="stylesheet" />
+    <!--[if lt IE 9]>
+    <script src="../scripts/jquery-1.11.3.min.js" type="text/javascript"></script>
+    <![endif]-->
+    <!--[if gte IE 9]><!-->
+    <script src="../scripts/jquery-2.1.4.min.js" type="text/javascript"></script>
+    <!--<![endif]-->
+    <script src="../scripts/jquery.easing.1.3.min.js" type="text/javascript"></script>
+    <script src="../scripts/angular.min.js"></script>
+    <script src="../scripts/jquery.globalize.min.js"></script>
+    <script src="../scripts/cultures/globalize.culture.en-US.min.js"></script>
+    <script src="../scripts/ej.web.all.min.js" type="text/javascript"></script>
+    <script src="../scripts/properties.js" type="text/javascript"></script>
+    <script src="../scripts/ej.unobtrusive.min.js"></script>
+    <script src="../scripts/ej.widget.angular.min.js"></script>
+
+</head>
+<body ng-controller="DatePickerCtrl">
+    <div class="content-container-fluid">
+        <div class="row">
+            <div class="cols-sample-area">
+                <div class="frame" style="width: 50%;height:56px">
+				<label>Select Show Date </label>
+				<div>
+                    <div id="control" style="float: left;width: 45%;">
+                        <input id="datepick" ej-datepicker  e-value="dateValue"  />
+                        <h6><span style="font-style: italic; font-weight: normal; position: absolute; margin-top: 4px;">Note:Two Way Angular Support</span></h6>
+                    </div>
+                    <div id="binding" style="float: right;width: 45%;">
+                        <input id="datepick1" ej-datepicker  e-value="dateValue"  />
+                    </div>
+                </div>
+				</div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        angular.module('DateCtrl', ['ejangular'])
+           .controller('DatePickerCtrl', function ($scope) {
+               $scope.dateValue = "2/3/2013";
+           });
+    </script>
+    <style type="text/css" class="cssStyles">
+        .frame .control {
+            margin-left: 23px;
+        }   
+#control .e-datewidget,#binding .e-datewidget 
+{
+width:70%;
+}		
+    </style>
+</body>
+</html>

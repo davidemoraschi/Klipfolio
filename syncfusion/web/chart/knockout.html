@@ -1,0 +1,112 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+ <head>
+    <title>Essential Studio for JavaScript : KO</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="../themes/bootstrap.min.css" rel="stylesheet" />
+    <link href="../themes/default-theme/ej.widgets.all.min.css" rel="stylesheet" />
+    <link href="../themes/default.css" rel="stylesheet" />
+    <link href="../themes/default-responsive.css" rel="stylesheet" />
+    <link href="../themes/responsive-css/ej.responsive.css" rel="stylesheet" />
+    <!--[if lt IE 9]>
+         <script src="../scripts/jquery-1.11.3.min.js" type="text/javascript"></script>
+     <!--<![endif]-->
+    <!--[if gte IE 9]><!-->
+    <script src="../scripts/jquery-2.1.4.min.js" type="text/javascript"></script>
+    <!--<![endif]-->
+    <script src="../scripts/jquery.globalize.min.js"></script>
+    <script src="../scripts/knockout.min.js"></script>
+    <script src="../scripts/ej.web.all.min.js"></script>
+    <script src="../scripts/ej.widget.ko.min.js"></script>
+    <script src="../scripts/properties.js" type="text/javascript"></script>
+ </head>
+ <body>
+	<div class="content-container-fluid">
+        <div class="row">
+            <div class="cols-sample-area">
+                  <div id="Chart" data-bind="ejChart: { primaryXAxis:{title:{text:'Days'}}  , primaryYAxis:{title:{text:'Sales(%)'}},title:{ text:'Knockout Support'},  commonSeriesOptions:{ dataSource:dataSource}, series:[{xName:'EmployeeID', yName:'Value', name:'Product', type:'line'}], xZoomFactor:xZoomFactor , yZoomFactor:yZoomFactor,xZoomPosition:xZoomPosition ,yZoomPosition:yZoomPosition,zooming:{enable:enable},load:'loadTheme', canResize:true, size:{height:'600'} }"></div>
+            </div>
+            <div id="sampleProperties">
+                <div class="prop-grid">
+				  <b>  Primary X-Axis: </b>
+                    <div class="row">
+                        <div class="col-md-3">
+                            Zoom Factor
+                        </div>
+                        <div class="col-md-3">
+                            <input type="text" value="" data-bind="ejNumericTextbox: {value:xZoomFactor, minValue: 0 ,maxValue:1 ,  incrementStep: 0.1,decimalPlaces: 4 , width: '100px', enableStrictMode:true }" data-bind="value:xZoomFactor" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                           Zoom Position
+                        </div>
+                        <div class="col-md-3">
+                            <input type="text" value="" data-bind="ejNumericTextbox: {value:xZoomPosition , minValue: 0 ,maxValue:1 ,  incrementStep: 0.1,decimalPlaces: 4, width: '100px', enableStrictMode:true }" data-bind="value:xZoomPosition" />
+                        </div>
+                    </div>
+					<b>Primary Y-Axis:</b>
+                    <div class="row">
+                        <div class="col-md-3">
+                            Zoom Factor
+                        </div>
+                        <div class="col-md-3">
+                            <input type="text" value="" data-bind="ejNumericTextbox: {value:yZoomFactor, minValue: 0 ,maxValue:1 ,  incrementStep: 0.1,decimalPlaces: 4, width: '100px', enableStrictMode:true  }" data-bind="value:yZoomFactor" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                           Zoom Position
+                        </div>
+                        <div class="col-md-3">
+                            <input type="text" value="" data-bind="ejNumericTextbox: {value:yZoomPosition , minValue: 0 ,maxValue:1 ,  incrementStep: 0.1,decimalPlaces: 4, width: '100px', enableStrictMode:true }" data-bind="value:yZoomPosition" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+ <script type="text/javascript">
+    $(function () 
+	{
+        var obj = 
+		[
+            { "EmployeeID": 1, "Value":200 },
+            { "EmployeeID": 2, "Value":150 },
+            { "EmployeeID": 3, "Value":80 },
+            { "EmployeeID": 4, "Value":140  },
+            { "EmployeeID": 5, "Value":100 },
+            { "EmployeeID": 6, "Value":180 },
+            { "EmployeeID": 7, "Value":190  },
+			{ "EmployeeID": 8, "Value":200  },
+            { "EmployeeID": 9, "Value":250  }
+        ];
+		
+        $("#sampleProperties").ejPropertiesPanel();
+		
+        $(".e-ejinputtext").ejNumericTextbox();
+		
+        window.employeeView = 
+		{ 
+			enable: ko.observable(true),
+			xZoomFactor:ko.observable(1),
+			yZoomFactor:ko.observable(1),
+			xZoomPosition:ko.observable(0),
+			yZoomPosition:ko.observable(0),
+			dataSource: ko.observableArray(obj)
+        };
+        ko.applyBindings(employeeView);
+    });
+ </script>
+ <style>
+    .e-waitpopup-pane
+	{
+        background-color:transparent
+	}
+	.content-container-fluid
+	{
+        margin-top:16px
+    }
+ </style>
+ </body>
+</html>

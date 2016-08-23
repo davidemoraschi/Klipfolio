@@ -1,0 +1,146 @@
+﻿<!doctype html>
+
+<html>
+<head>
+    <title>Essential Studio for JavaScript : Dialog - API's</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="../themes/bootstrap.min.css" rel="stylesheet" />
+    <link href="../themes/default-theme/ej.widgets.all.min.css" rel="stylesheet" />
+    <link href="../themes/default.css" rel="stylesheet" />
+    <link href="../themes/default-responsive.css" rel="stylesheet" />
+    <!--[if lt IE 9]>
+    <script src="../scripts/jquery-1.11.3.min.js" type="text/javascript"></script>
+    <![endif]-->
+    <!--[if gte IE 9]><!-->
+    <script src="../scripts/jquery-2.1.4.min.js" type="text/javascript"></script>
+    <!--<![endif]-->
+    <script src="../scripts/jquery.easing.1.3.min.js" type="text/javascript"></script>
+    <script src="../scripts/ej.web.all.min.js" type="text/javascript"></script>
+    <script src="../scripts/properties.js" type="text/javascript"></script>
+</head>
+<body>
+
+    <div class="content-container-fluid">
+        <div class="row">
+            <div class="cols-sample-area">
+                <input class="e-btn" type="button" style="display: none" id="btnOpen" value="Click to open dialog" />
+                <div class="control">
+                    <div id="dialogAPI" title="Essential Grid">
+                        <p>
+                            Essential Grid for ASP.NET MVC is a <span>lightweight, AJAX-enabled, high-performance grid component</span> built especially to suit the programming model of the ASP.NET MVC framework.
+                        </p>
+                        <p>It has a rich feature set that includes <span>hierarchies, grouping, sorting, paging, data binding, editing, filtering, and several built-in styles.</span> </p>
+                        <p>Essential Grid is designed for performance and can easily handle millions of records. </p>
+                        <p>AJAX is extensively used to reduce traffic—only the required data is sent between the client and server, minimizing data transfer and response time.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="sampleProperties">
+                <div class="prop-grid">
+                    <div class="row">
+                        <div class="col-md-3">
+                            Dialog Open
+                        </div>
+                        <div class="col-md-3">
+                            <input type="button" id="btnDialogOpen" class="e-btn" value="Dialog Open" />
+                        </div>
+                        <div class="col-md-3">
+                            Dialog Close
+                        </div>
+                        <div class="col-md-3">
+                            <input type="button" id="btnDialogClose" class="e-btn" value="Dialog Close" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            Dialog IsOpened
+                        </div>
+                        <div class="col-md-3">
+                            <input type="button" id="btnDialogIsOpen" class="e-btn" value="Dialog IsOpen" />
+                        </div>
+                        <div class="col-md-3">
+                            Dialog Destroy
+                        </div>
+                        <div class="col-md-3">
+                            <input type="checkbox" id="chkDestroy" class="e-togglebtn" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        var eDialog;
+        $(function () {
+            // declaration
+            $("#dialogAPI").ejDialog({
+                content: ".cols-sample-area",
+                close: "onDialogClose"
+            });
+            eDialog = $("#dialogAPI").data("ejDialog");
+            $("#btnOpen").click(function () {
+			if(eDialog.model){
+                $("#dialogAPI").ejDialog("open");
+                $("#btnOpen").hide();
+				}
+            });
+            $("#btnDialogOpen").ejButton({ "click": "onOpen" ,width: "95px"});
+            $("#btnDialogClose").ejButton({ "click": "onClose" ,width: "95px"});
+            $("#btnDialogIsOpen").ejButton({ "click": "onIsOpen" ,width: "95px"});
+            $("#btnDialogDestroy").ejButton({ "click": "onDestroy",width: "95px" });
+            $("#chkDestroy").ejToggleButton({ "change": "onDestoryRestore", "defaultText": "Destory", "activeText": "Restore",width: "107px" });
+        });
+        function onDialogClose(args) {
+            $("#btnOpen").show();
+        }
+        function onOpen() {
+		if(eDialog.model){
+            eDialog.open();
+            $("#btnOpen").hide();
+			}
+        }
+        function onClose() {
+            eDialog.close();
+        }
+        function onIsOpen() {
+		if(eDialog.model){
+            var _isopen = eDialog.isOpened();
+            if (_isopen)
+                alert("Dialog Open");
+            else
+                alert("Dialog Closed");
+		 }
+		 else
+			alert("Dialog is in Destoryed state");
+        }
+        function onDestoryRestore(args) {
+            if (args.isChecked){
+                $("#dialogAPI").ejDialog("destroy");
+				$("#btnOpen").hide();
+        }				
+            else {
+                $("#dialogAPI").ejDialog({
+                    content: ".cols-sample-area",
+                    close: "onDialogClose"
+                });
+                eDialog = $("#dialogAPI").data("ejDialog");
+            }
+        }
+    </script>
+    <style class="cssStyles">
+        #dialogAPI span
+        {
+            color: skyblue;
+        }
+
+        .control
+        {
+            height: 400px;
+        }
+    </style>
+</body>
+<script type="text/javascript">
+    $("#sampleProperties").ejPropertiesPanel();
+</script>
+</html>

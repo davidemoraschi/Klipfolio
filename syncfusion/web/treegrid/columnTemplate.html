@@ -1,0 +1,96 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title>Essential Studio for JavaScript : TreeGrid</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="utf-8" />
+    <link href="../themes/bootstrap.min.css" rel="stylesheet" />
+    <link href="../themes/default-theme/ej.widgets.all.min.css" rel="stylesheet" />
+    <link href="../themes/default.css" rel="stylesheet" />
+    <link href="../themes/default-responsive.css" rel="stylesheet" />
+    <link href="../themes/responsive-css/ej.responsive.css" rel="stylesheet" />
+    <!--[if lt IE 9]>
+     <script type="text/javascript" src="../scripts/jquery-1.11.3.min.js" ></script>
+    <![endif]-->
+    <!--[if gte IE 9]><!-->
+    <script type="text/javascript" src="../scripts/jquery-2.1.4.min.js" ></script>
+    <!--<![endif]-->
+    <script src="../scripts/jquery.globalize.min.js"></script>
+    <script src="../scripts/jsrender.min.js"></script>
+    <script src="../scripts/ej.web.all.min.js" type="text/javascript"></script>
+    <script src="../scripts/properties.js" type="text/javascript"></script>
+    <script src="scripts/data.js" type="text/javascript"></script>
+</head>
+
+<body>
+    <div class="content-container-fluid">
+        <div class="row">
+            <div class="cols-sample-area">
+                <div id="TreeGridContainer" style="height:350px;"></div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/x-jsrender" id="customColumnTemplate">
+        <div style='height:20px;' unselectable='on'>
+            {{if hasChildRecords}}<div class='intend' style='height:1px; float:left; width:{{:level*20}}px; display:inline-block;'></div>
+            {{else !hasChildRecords}}
+            <div class='intend' style='height:1px; float:left; width:{{:(level)*20}}px; display:inline-block;'></div>
+            {{/if}}
+            <div class='{{if expanded}}e-treegridexpand {{else hasChildRecords}}e-treegridcollapse {{/if}} {{if level===4}}e-doc{{/if}}' style='height:20px;width:30px;margin:auto;float:left;margin-left:10px;
+       style=' float left;display:inline-block; unselectable='on'></div>
+            <div class='e-cell' style='display:inline-block;width:100%' unselectable='on'>{{:#data['Name']}}</div>
+        </div>
+    </script>
+
+    <style type="text/css">
+        .e-treegrid .e-treegridexpand {
+            background-image: url(../images/treegrid/folder-open.png);
+            background-repeat: no-repeat;
+            width: 14px;
+            height: 14px;
+        }
+
+        .e-treegrid .e-treegridcollapse {
+            background-image: url(../images/treegrid/Folder.png);
+            background-repeat: no-repeat;
+            width: 14px;
+            height: 14px;
+        }
+
+        .e-treegrid .e-doc {
+            background-image: url(../images/treegrid/Document.png);
+            background-repeat: no-repeat;
+            width: 14px;
+            height: 14px;
+        }
+
+        .e-treegrid .e-treegridexpand:before {
+            content: none;
+        }
+
+        .e-treegrid .e-treegridcollapse:before {
+            content: none;
+        }
+    </style>
+
+    <script type="text/javascript">
+
+        $(function () {
+
+            $("#TreeGridContainer").ejTreeGrid({
+                dataSource: treeGridDataSource,
+                enableResize: true,
+                childMapping: "Children",
+                columns: [{ field: "Name", headerText: "Name", isTemplateColumn: true, templateID: "customColumnTemplate" },
+                          { field: "Type", headerText: "Type" },
+                          { field: "DateCreated", headerText: "Date Created" },
+                          { field: "DateModified", headerText: "Date Modified" }]
+            })
+        });
+
+    </script>
+</body>
+
+</html>

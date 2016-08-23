@@ -1,0 +1,411 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Schedule JS API</title>
+    <meta name="viewport" charset="utf-8" content="width=device-width, initial-scale=1.0" />
+    <link href="../themes/bootstrap.min.css" rel="stylesheet" />
+    <link href="../themes/default-theme/ej.widgets.all.min.css" rel="stylesheet" />
+    <link href="../themes/default.css" rel="stylesheet" />
+    <link href="../themes/default-responsive.css" rel="stylesheet" />
+    <link href="../themes/responsive-css/ej.responsive.css" rel="stylesheet" />
+    <!--[if lt IE 9]>
+     <script type="text/javascript" src="../scripts/jquery-1.11.3.min.js" ></script>
+    <![endif]-->
+    <!--[if gte IE 9]><!-->
+    <script type="text/javascript" src="../scripts/jquery-2.1.4.min.js" ></script>
+    <!--<![endif]-->
+    <script src="../scripts/jquery.easing.1.3.min.js"></script>
+    <script src="../scripts/jquery.globalize.min.js"></script>
+    <script src="../scripts/jsondata.min.js"></script>
+    <script src="../scripts/jsrender.min.js"></script>
+    <script src="../scripts/ej.web.all.min.js" type="text/javascript"></script>
+    <script src="../scripts/properties.js" type="text/javascript"></script>
+    <script src="../scripts/jsonscheduledata.js" type="text/javascript"></script>
+</head>
+<body>
+    <div class="content-container-fluid">
+        <div class="row">
+            <div class="cols-sample-area">
+                <div style="float: left" id="Schedule1">
+                </div>
+            </div>
+            <div id="sampleProperties">
+                <div class="prop-grid">
+                    <div class="row">
+                        <div class="col-md-3">
+                            CurrentDate
+                        </div>
+                        <div class="col-md-3"></div>
+                        <div class="col-md-3">
+                            <input type="text" id="scheduledate" />
+                        </div>
+                        <div class="col-md-3"></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            Min Date
+                        </div>
+						<div class="col-md-3"></div>
+                        <div class="col-md-3">
+                            <input type="text" id="mindate" />
+                        </div>
+						<div class="col-md-3"></div>
+                     </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            Max Date
+                        </div>
+						<div class="col-md-3"></div>
+                        <div class="col-md-3">
+                            <input type="text" id="maxdate" />
+                        </div>
+						<div class="col-md-3"></div>
+                    </div>					
+                    <div class="row">
+                        <div class="col-md-3">                           
+                                 DateFormat
+                        </div>
+                        <div class="col-md-3">
+                            <select class="e-ddl" id="dateformat">
+                                <option value="MM/dd/yyyy">Default - MM/dd/yyyy</option>
+                                <option value="d M, y">Short - d M, y</option>
+                                <option value="d MM, y">Medium - d MM, y</option>
+                                <option value="dddd, d MMMM, yy">Full-dddd,d MMMM,yy</option>
+                                <option value="yyyy-MM-dd">UTC - yyyy-MM-dd</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            Business start hour
+                        </div>
+                        <div class="col-md-3">
+                            <input id="businessstart" type="text" />
+                            <div id="businessstartlist">
+                                <ul>
+                                    <li>0</li>
+                                    <li>1</li>
+                                    <li>2</li>
+                                    <li>3</li>
+                                    <li>4</li>
+                                    <li>5</li>
+                                    <li>6</li>
+                                    <li>7</li>
+                                    <li>8</li>
+                                    <li>9</li>
+                                    <li>10</li>
+                                    <li>11</li>
+                                    <li>12</li>
+                                    <li>13</li>
+                                    <li>14</li>
+                                    <li>15</li>
+                                    <li>16</li>
+                                    <li>17</li>
+                                    <li>18</li>
+                                    <li>19</li>
+                                    <li>20</li>
+                                    <li>21</li>
+                                    <li>22</li>
+                                    <li>23</li>
+                                    <li>24</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <br/>
+                <div class="row">
+                    <div class="col-md-3">
+                        Business end hour
+                    </div>
+                    <div class="col-md-3">
+                        <input id="businessend" type="text" />
+                        <div id="businessendlist">
+                            <ul>
+                                <li>0</li>
+                                <li>1</li>
+                                <li>2</li>
+                                <li>3</li>
+                                <li>4</li>
+                                <li>5</li>
+                                <li>6</li>
+                                <li>7</li>
+                                <li>8</li>
+                                <li>9</li>
+                                <li>10</li>
+                                <li>11</li>
+                                <li>12</li>
+                                <li>13</li>
+                                <li>14</li>
+                                <li>15</li>
+                                <li>16</li>
+                                <li>17</li>
+                                <li>18</li>
+                                <li>19</li>
+                                <li>20</li>
+                                <li>21</li>
+                                <li>22</li>
+                                <li>23</li>
+                                <li>24</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                    <br/>
+					<div class="row">
+                        <div class="col-md-3">
+                            Hightlight Business Hours
+                        </div>
+                        <div class="col-md-3">
+                            <input type="checkbox" class="nodetext" id="businesshour" />
+                        </div>
+                    </div>
+					<br/>
+                    <div class="row">
+                        <div class="col-md-3">
+                            Read Only
+                        </div>
+                        <div class="col-md-3">
+                            <input type="checkbox" class="nodetext" id="readonly" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            Show/Hide AllDay row
+                        </div>
+                        <div class="col-md-3">
+                            <input type="checkbox" class="nodetext" id="alldayrow" />
+                        </div>
+                    </div>
+					 <div class="row">
+                        <div class="col-md-3">
+                            Disable TimeScale
+                        </div>
+                        <div class="col-md-3">
+                            <input type="checkbox" class="nodetext" id="timeScale" />
+                        </div>
+                    </div>
+                     <div class="row">
+                        <div class="col-md-3">
+                            Show/Hide Appointment Priority
+                        </div>
+                        <div class="col-md-3">
+                            <input type="checkbox" class="nodetext" id="appointmentpriority" />
+                        </div>
+                    </div>
+                    <br/>
+                <div class="row">
+                    <div class="col-md-3">
+                        Active view
+                    </div>
+                    <div class="col-md-3">
+                        <select name="selectIndex" class="e-ddl" id="scheduleView">
+                            <option value="day">Day view</option>
+                            <option value="week">Week view</option>
+                            <option value="workweek">Workweek view</option>
+                            <option value="month">Month view</option>
+                        </select>
+                    </div>
+                </div>
+				<br/>
+				<div class="row">
+                        <div class="col-md-3">
+                            Start Time
+                        </div>
+                        <div class="col-md-3">
+                            <input type="text" id="stime" />
+                        </div></div>
+					<div class="row">	
+						<div class="col-md-3">
+                            End Time
+                        </div>
+                        <div class="col-md-3">
+                            <input type="text" id="etime" />
+                        </div>
+                    </div><br/>
+				<div class="row">
+						 <div class="col-md-3">
+                            Cell Width
+                        </div>
+						<div class="col-md-3">
+                            <input type="text" id="cellwidth"/>
+                        </div>	</div><br/>
+					<div class="row">
+					<div class="col-md-3">
+                            Cell Height
+                        </div>
+						 <div class="col-md-3">
+                            <input type="text" id="cellheight"/>
+                        </div>	
+					</div>	<br/>
+					  <div class="row">
+                        <div class="col-md-3">
+                            <button class="e-btn" id="submit">Submit</button>
+                        </div>
+                    </div>	
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        var obj;
+        $(function () {
+            var dManager = ej.DataManager(window.API).executeLocal(ej.Query().take(10));
+            $("#sampleProperties").ejPropertiesPanel();
+            $("#Schedule1").ejSchedule({
+                width: "100%",
+                height: "525px",
+				startHour: 0,
+				endHour: 24,
+                timeMode:"24",
+                currentDate: new Date(2014, 4, 5),
+                prioritySettings:{enable:true},
+                appointmentSettings: {
+                    dataSource: dManager,
+                    id: "Id",
+                    subject: "Subject",
+                    startTime: "StartTime",
+                    endTime: "EndTime",
+                    description: "Description",
+                    priority:"Priority",
+                    allDay: "AllDay",
+                    recurrence: "Recurrence",
+                    recurrenceRule: "RecurrenceRule"
+                }
+            });
+            obj = $("#Schedule1").data("ejSchedule");
+			$("#cellwidth").ejNumericTextbox({name: "cellwidth", value: 100,width:110});
+		    $("#cellheight").ejNumericTextbox({name: "cellheight", value: 60,width:110});
+	        $("#stime").ejNumericTextbox(
+                {
+                    name: "numeric",
+                    value: 0,
+                    width:110,
+                    minValue: 0,
+                    maxValue: 24,
+					enableStrictMode:true
+                });
+                $("#etime").ejNumericTextbox(
+                {
+                    name: "numeric",
+                    value: 24,
+                    width: 110,
+                    minValue: 0,
+                    maxValue: 24,
+					enableStrictMode:true
+					});
+                $("#submit").ejButton({
+                    width: "80px",
+                    height: "25px",
+                    click: "changeTime"
+                });
+				$("#mindate").ejDatePicker({select: "selectedDate1",width: "110px",value: new Date("2013/3/24")});
+				$("#maxdate").ejDatePicker({select: "selectedDate2",width: "110px",value: new Date("2014/05/13")});
+            $("#dateformat").ejDropDownList({ width: "110px", change: "onChange", selectedItemIndex: 0});
+            $("#scheduleView").ejDropDownList({ selectedItemIndex: 1, select: "viewchange", width: "110px" });
+            $("#businessstart").ejDropDownList({ targetID: "businessstartlist", selectedItemIndex: 9, select: "businessstart", width: "110px" });
+            $("#businessend").ejDropDownList({ targetID: "businessendlist", selectedItemIndex: 18, select: "businessend", width: "110px" });
+            $("#businesshour").ejCheckBox({ change: "businesshour", checked: true });
+            $("#readonly").ejCheckBox({ change: "readOnly", checked: false });
+            $("#alldayrow").ejCheckBox({ change: "allDayRow", checked: true });
+			$("#timeScale").ejCheckBox({ change: "timeScale", checked: false });
+            $("#appointmentpriority").ejCheckBox({ change: "appointmentPriority", checked: true });
+            $("#scheduledate").ejDatePicker({ value: new Date("2014/05/05"), select: "datechange", width: "110px"});
+           
+        });
+		var maxDatepicker = null;
+        var minDatepicker = null;
+		var currentdate=null;
+		function selectedDate1(sender) {
+            $(function () {
+                maxDatepicker = $("#maxdate").data("ejDatePicker");
+				currentdate=$("#scheduledate").data("ejDatePicker");
+                minDatepicker = $("#mindate").data("ejDatePicker");
+                maxDatepicker.setModel({ "minDate": new Date(sender.value) });
+				
+				currentdate.setModel({ "minDate": new Date(sender.value) });
+            });
+
+        }
+		function selectedDate2(sender) {
+            $(function () {
+			    currentdate=$("#scheduledate").data("ejDatePicker");
+                minDatepicker = $("#mindate").data("ejDatePicker");
+                minDatepicker.setModel({ "maxDate": new Date(sender.value) });
+				currentdate.setModel({ "maxDate": new Date(sender.value) });
+            });
+        }
+		
+        function onChange(args) {
+            $("#Schedule1").ejSchedule({ dateFormat: args.value });
+            $("#scheduledate").ejDatePicker({ dateFormat: args.value });
+			$("#mindate").ejDatePicker({ dateFormat: args.value });
+			$("#maxdate").ejDatePicker({ dateFormat: args.value });
+        }
+         function changeTime() {
+                if (parseInt($("#stime").val()) < parseInt($("#etime").val()))
+                    $("#Schedule1").ejSchedule({
+					startHour: parseInt($("#stime").val()),
+					endHour: parseInt($("#etime").val()),
+					currentDate:$("#scheduledate").val(),
+					cellWidth:$("#cellwidth").val(),
+					cellHeight:$("#cellheight").val(),
+					minDate:$("#mindate").val(),
+					maxDate:$("#maxdate").val()});
+                else {
+                    alert("Start hour should be less than end hour");
+                }
+            }	
+		function viewchange(args) {
+            $("#Schedule1").ejSchedule({ currentView: args.value });
+        }
+
+        function businessstart(args) {
+            if (args.itemId < obj.model.businessEndHour)
+                $("#Schedule1").ejSchedule({ businessStartHour: args.itemId });
+            else
+                alert("Start time should be less than end time.");
+        }
+        function businessend(args) {
+            if (args.itemId > obj.model.businessStartHour)
+                $("#Schedule1").ejSchedule({ businessEndHour: args.itemId });
+            else
+                alert("End time should be greater than start time.");
+
+        }
+        function businesshour(args) {
+            if (args.isChecked)
+                $("#Schedule1").ejSchedule({ highlightBusinessHours: true });
+            else
+                $("#Schedule1").ejSchedule({ highlightBusinessHours: false });
+        }
+        function readOnly(args) {
+            if (args.isChecked)
+                $("#Schedule1").ejSchedule({ readOnly: true });
+            else
+                $("#Schedule1").ejSchedule({ readOnly: false });
+        }
+        function allDayRow(args) {
+            if (args.isChecked)
+                $("#Schedule1").ejSchedule({ showAllDayRow: true });
+            else
+                $("#Schedule1").ejSchedule({ showAllDayRow: false });
+        }
+		function timeScale(args) {
+            if (args.isChecked)
+                $("#Schedule1").ejSchedule({ showTimeScale: false });
+            else
+                $("#Schedule1").ejSchedule({ showTimeScale: true });
+        }
+        function datechange(args) {
+            $("#Schedule1").ejSchedule({currentDate: args.value});
+        }
+        function appointmentPriority(args) {
+            if (args.isChecked)
+                $("#Schedule1").ejSchedule({ prioritySettings: { enable: true } });
+            else
+                $("#Schedule1").ejSchedule({ prioritySettings: { enable: false } });
+        }
+
+    </script>
+</body>
+</html>

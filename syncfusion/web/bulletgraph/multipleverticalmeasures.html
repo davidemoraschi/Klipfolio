@@ -1,0 +1,152 @@
+﻿<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Essential Studio for JavaScript : Vertical Bullet Graph - Mulitple Feature Measures</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" charset="utf-8">
+    <link href="../themes/bootstrap.min.css" rel="stylesheet">
+    <link href="../themes/default-theme/ej.widgets.all.min.css" rel="stylesheet" />
+    <link href="../themes/default.css" rel="stylesheet" />
+    <link href="../themes/default-responsive.css" rel="stylesheet" />
+    <!--[if lt IE 9]>
+      <script src="../scripts/jquery-1.11.3.min.js" type="text/javascript"></script>
+    <!--<![endif]-->
+    <!--[if gte IE 9]><!-->
+      <script src="../scripts/jquery-2.1.4.min.js" type="text/javascript"></script>
+    <!--<![endif]-->
+    <script src="../scripts/jsrender.min.js" type="text/javascript"></script>
+    <script src="../scripts/ej.web.all.min.js" type="text/javascript"></script>
+</head>
+<body>
+<div class="content-container-fluid">
+        <div class="row">
+            <div class="cols-sample-area" align="center">
+                <div id="BulletGraph">
+                </div>
+            </div>
+        </div>
+ </div>
+
+<script type="text/javascript">
+    $(function () {
+        var localData = [{
+            value: 8, comparativeMeasureValue: 7.5,
+            category: 1
+        },
+                {
+                    value: 9, comparativeMeasureValue: 5,
+                    category: 2
+                },
+                {
+                    value: 6.5, comparativeMeasureValue: 6,
+                    category: 3
+                },
+                {
+                    value: 8, comparativeMeasureValue: 8,
+                    category: 4
+                },
+                {
+                    value: 6, comparativeMeasureValue: 5,
+                    category: 5
+                },
+                {
+                    value: 7.5, comparativeMeasureValue: 6,
+                    category: 6
+                },
+                {
+                    value: 9, comparativeMeasureValue: 9,
+                    category: 7
+                },
+                {
+                    value: 8, comparativeMeasureValue: 5,
+                    category: 8
+                },
+                {
+                    value: 5, comparativeMeasureValue: 6,
+                    category: 9
+                },
+                {
+                    value: 9, comparativeMeasureValue: 8,
+                    category: 10
+                }];
+        $("#BulletGraph").ejBulletGraph({ height: 540, enableAnimation: true, qualitativeRangeSize: 320,
+            quantitativeScaleLength: 475, tooltipSettings :{ visible : true, template: "Tooltip"}, orientation: ej.BulletGraph.Orientation.Vertical,
+            flowDirection: ej.BulletGraph.FlowDirection.Backward,
+            quantitativeScale: {
+                location: { x: 10, y: 10 },
+                minimum: 0,
+                maximum: 10,
+                interval: 2,
+                
+                minorTicksPerInterval: 3,
+                majorTickSize: 15,
+                minorTickSize: 7,
+                tickPosition: ej.BulletGraph.TickPosition.Near,
+                labels: {
+                    labelPosition: ej.BulletGraph.LabelPosition.Above
+                },
+                featuredMeasureBarStrokeThickness: 10
+            },
+            enableAnimation: true,
+            fields: { dataSource: localData, category: "category",
+                featureMeasure: "value",
+                comparativeMeasure: "comparativeMeasureValue"
+            },
+            qualitativeRanges: [{
+                rangeEnd: 4, rangeOpacity: 1
+            }, {
+                rangeEnd: 7, rangeOpacity: 1
+            }, {
+                rangeEnd: 10, rangeOpacity: 1
+            }],
+            caption: { textAngle: 90,
+                location: { x: -17, y: 170 }, text: "Revenue YTD", font: { color: null, fontFamily: 'Segoe UI', fontStyle: 'Normal', size: '12px', fontWeight: 'regular', opacity: 1 }, //'#707070'
+                subTitle: { textAngle: 90,
+                    text: "$ in Thousands", location: { x: -20, y: 185 }, font: { color: null, fontFamily: 'Segoe UI', fontStyle: 'Normal ', size: '12px', fontWeight: 'regular', opacity: 1} //'#707070'
+                }
+            }
+
+
+        });
+    });
+</script>
+<div id="Tooltip" style="display:none; width:125px;padding-top: 10px;padding-bottom:10px">
+<div style="background-color:Silver;">       
+                <div align="center" style="font-weight:bold">
+                    Sales
+                </div>                
+           <table>
+           <tr>
+                <td>
+                    Current:
+                </td>
+                <td>
+                    {{:currentValue}}
+                </td>
+               
+            </tr>
+            <tr>
+                <td>
+                    Target:
+                </td>
+                <td>
+                    {{:targetValue}}
+                </td>
+               
+            </tr>
+             <tr>
+                <td>
+                    Category:
+                </td>
+                <td >
+                    {{:category}}
+                </td>
+               
+            </tr>
+                          
+        </table>    
+   </div>
+        
+    </div>
+</body>
+</html>

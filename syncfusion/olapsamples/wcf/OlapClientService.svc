@@ -1,0 +1,1 @@
+﻿<%@ ServiceHost Language="C#" Debug="true" Service="sample.OlapClientService" CodeBehind="OlapClientService.svc.cs" %>

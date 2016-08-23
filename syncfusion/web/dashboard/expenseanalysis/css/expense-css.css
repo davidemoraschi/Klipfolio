@@ -1,0 +1,432 @@
+﻿html, body {
+    width: 100%;
+    margin: 0;
+}
+
+body {
+    font-family: Segoe UI;
+    font-size: 14px;
+    background-image: url("../../../themes/images/right side BG texture.png");
+}
+
+.sample-title {
+    background-color: #000000;
+    height: 100px;
+}
+
+.e-values p, .spend-div p {
+    margin: 0px;
+}
+#ExpenseGrid_dialogEdit
+{
+padding-bottom:10px;
+}
+.samplediv {
+    background-color: white;
+    border: 1px solid #D9DEDD;
+    height: auto;
+    min-height: 406px;
+    min-width: 620px;
+    width: auto;
+}
+
+.text-title {
+    background: url("../images/title-text.png") no-repeat scroll 0 0 transparent;
+    float: left;
+    height: 50px;
+    margin-top: -90px;
+    width: 350px;
+}
+
+.t-image-text {
+    color: rgb(219, 219, 228);
+}
+
+#ExpenseChart {
+    margin-top: -70px;
+}
+
+.chart-back-button {
+    margin: 10px 0px 0 10px;
+}
+
+#t-image-text {
+    float: right;
+    margin-right: 35px;
+    margin-top: 35px;
+    color: white;
+}
+
+.e-value-table {
+    background: #fafafa; /* Old browsers */
+    background: -moz-linear-gradient(top, #fafafa 0%, #ededed 97%, #ececec 99%, #dedede 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#fafafa), color-stop(97%,#ededed), color-stop(99%,#ececec), color-stop(100%,#dedede)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top, #fafafa 0%,#ededed 97%,#ececec 99%,#dedede 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top, #fafafa 0%,#ededed 97%,#ececec 99%,#dedede 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top, #fafafa 0%,#ededed 97%,#ececec 99%,#dedede 100%); /* IE10+ */
+    background: linear-gradient(to bottom, #fafafa 0%,#ededed 97%,#ececec 99%,#dedede 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fafafa', endColorstr='#dedede',GradientType=0 ); /* IE6-9 */
+}
+
+.sample-container {
+    height: 800px;
+}
+
+#control-container {
+    height: 700px;
+    margin: 0 auto;
+    width: 90%;
+}
+
+.container {
+    
+    margin: 0 auto;
+}
+
+.chart-inner {
+    width: 100%;
+    
+    border-width: 1px;
+    border-style: solid;
+    border-color: #E1E1E1;
+}
+
+.grid-container {
+    border-style: none;
+    border-width: 0;
+    border-color: #E1E1E1;
+}
+
+.chart-container {
+    display: block;
+    width: 98%;
+	margin:10px;
+    background-color: white;
+}
+
+#control-panel {
+    background-color: white;
+    padding: 20px;
+}
+
+.chartgridtable{
+background-color: white;
+border-width: 1px;
+    border-style: solid;
+    border-color: #E1E1E1;
+}
+
+.expense-value-table {
+    float: left;
+}
+
+
+
+.e-values, .left-image, .e-title {
+    height: 136px;
+}
+.sideborder {
+  border-right: solid 1px lightgray;
+}
+.initborder{
+border-radius:12px;
+	border: solid 1px lightgray;
+	margin-top:20px;
+}
+
+.headerdiv{
+
+
+}
+
+.e-values {
+    border-radius:12px;
+    background-image: -ms-linear-gradient(top, #FAFAFA 0%, #EBEBEB 100%);
+
+/* Mozilla Firefox */ 
+background-image: -moz-linear-gradient(top, #FAFAFA 0%, #EBEBEB 100%);
+
+/* Opera */ 
+background-image: -o-linear-gradient(top, #FAFAFA 0%, #EBEBEB 100%);
+
+/* Webkit (Safari/Chrome 10) */ 
+background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #FAFAFA), color-stop(1, #EBEBEB));
+
+/* Webkit (Chrome 11+) */ 
+background-image: -webkit-linear-gradient(top, #FAFAFA 0%, #EBEBEB 100%);
+
+/* W3C Markup, IE10 Release Preview */ 
+background-image: linear-gradient(to bottom, #FAFAFA 0%, #EBEBEB 100%);
+    background-repeat: no-repeat;
+	
+   
+}
+
+.left-image {
+    width: 150px;
+    background: url("../images/left-image.png") no-repeat scroll 0 0 transparent;
+}
+
+.e-title {
+    padding-top: 15px;
+}
+
+.pos-amt-td, .neg-amt-td, .bal-amt-td {
+    height: 120px;
+    text-align: center;
+    width: 230px;
+}
+.spend-div{
+
+margin-top:5%;
+
+}
+
+.spend-div > table td {
+    height: 100px;
+    border: 1px solid #cccccc;
+	padding:15px;
+    width:80%;
+	
+}
+
+.add-image {
+    background: url("../images/add_normal.png") no-repeat scroll 0 0 transparent;
+}
+
+    .add-image:hover {
+        background: url("../images/add_hover.png") no-repeat scroll 0 0 transparent;
+    }
+
+.ddlmonth-control {
+    float: right;
+    margin-right: 10px;
+}
+
+.month-td {
+    width: 80%;
+}
+
+#add-filter-table {
+    width: 100%;
+}
+
+.add-image {
+    width: 50px;
+    height: 50px;
+    float: right;
+	margin-left:10px;
+}
+
+.pos-amt {
+    color: #669900;
+}
+
+.neg-amt {
+    color: #ED1515;
+}
+
+.bal-amt {
+    color: #EF7C14;
+}
+
+.pos-amt, .neg-amt, .bal-amt {
+    font-size: 22px;
+}
+
+.pos-text, .neg-text, .bal-text {
+    font-size: 18px;
+	font-weight:normal;
+}
+
+.e-name {
+    font-family: 'Segoe UI';
+    font-size: 24px;
+    color: #424242;
+	font-weight:normal;
+}
+
+.e-phone {
+    font-size: 15px;
+    color: #929499;
+	font-weight:normal;
+}
+
+.e-mail {
+    font-size: 12px;
+    color: #929499;
+	font-weight:normal;
+}
+
+.most-spent-text, .least-spent-text, .avg-spent-text {
+    font-size: 19px;
+    color: #333333;
+}
+
+.most-spent-amt, .least-spent-amt, .avg-spent-amt {
+    font-size: 24px;
+    font-weight: lighter;
+}
+
+.samplediv {
+    width: auto;
+}
+
+.sample-t {
+    color: #424242;
+    font-size: 24px;
+	font-weight:normal;
+}
+
+.e-grid .rowcell, .e-grid .emptycell {
+    border-color: #BABABA;
+    color: #757575;
+}
+
+.e-grid {
+    color: #757575;
+    font-size: 13px;
+}
+
+.e-grid .numericitem {
+    border-right: 1px solid #C4C4C4;
+}
+
+.e-grid .gridheader {
+    color: #FFFFFF;
+    font-size: 21px;
+    border-bottom: 1px solid #BABABA;
+    border-top: 0 solid #BABABA;
+}
+
+.e-grid .headercell, .e-grid .grouptopleftcell, .e-grid .toprightcell, .e-grid .topleftcell, .e-grid.cloneproperties, .e-grid .togglecontainer, .e-grid .currentitem, .e-grid .currentitem:hover {
+    background: #fb5154; /* Old browsers */
+    background: -moz-linear-gradient(top, #fb5154 0%, #ea4649 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#fb5154), color-stop(100%,#ea4649)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top, #fb5154 0%,#ea4649 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top, #fb5154 0%,#ea4649 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top, #fb5154 0%,#ea4649 100%); /* IE10+ */
+    background: linear-gradient(to bottom, #fb5154 0%,#ea4649 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fb5154', endColorstr='#ea4649',GradientType=0 ); /* IE6-9 */
+    border-width: 1px 0 0 1px;
+}
+
+.samplesec {
+    width: inherit;
+}
+.imagetile{
+margin-top:20px;
+margin-bottom:20px;
+}
+.samplename {
+    color: #727272;
+    font-size: 18px;
+    background-color: #EDEDED;
+    display: inline-block;
+    line-height: 40px;
+    padding-left: 1%;
+    text-shadow: 0 1px #FFFFFF;
+    vertical-align: middle;
+    width: 100%;
+}
+
+.e-grid .rowcell, .e-grid .emptycell {
+    border-color: #BABABA;
+}
+
+.e-grid {
+    color: #9B9B9B;
+    font-size: 13px;
+}
+
+    .e-grid .gridheader {
+        color: #FFFFFF;
+        font-size: 21px;
+    }
+
+    .e-grid .headercell, .e-grid .numericitem:hover, .e-dialog .e-dialog-header, .e-grid .grouptopleftcell, .e-grid .toprightcell, .e-grid .topleftcell, .e-grid.cloneproperties, .e-grid .togglecontainer, .e-grid .currentitem, .e-grid .currentitem:hover,
+    .e-button.e-bgdefault:hover, .e-button.e-bgdefault {
+        background: #fb5154; /* Old browsers */
+        background: -moz-linear-gradient(top, #fb5154 0%, #ea4649 100%); /* FF3.6+ */
+        background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#fb5154), color-stop(100%,#ea4649)); /* Chrome,Safari4+ */
+        background: -webkit-linear-gradient(top, #fb5154 0%,#ea4649 100%); /* Chrome10+,Safari5.1+ */
+        background: -o-linear-gradient(top, #fb5154 0%,#ea4649 100%); /* Opera 11.10+ */
+        background: -ms-linear-gradient(top, #fb5154 0%,#ea4649 100%); /* IE10+ */
+        background: linear-gradient(to bottom, #fb5154 0%,#ea4649 100%); /* W3C */
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fb5154', endColorstr='#ea4649',GradientType=0 ); /* IE6-9 */
+    }
+
+        .e-button.e-bgdefault:hover, .e-button.e-bgdefault {
+            color: #FFFFFF;
+        }
+
+.e-dialog #ExpenseGridEditForm div {
+   
+}
+
+.expensegridborder{
+margin:10px;
+}
+
+.e-dialog .e-dialog-icon:hover {
+    background: none;
+}
+
+.e-dialog .e-dialog-content input {
+    background-color: rgba(237, 237, 237, 0.42);
+}
+
+.e-dialog .e-dialog-title {
+    color: #8E8E8E;
+    font-size: 14px;
+}
+
+.e-grid-core .firstpage:hover,
+.e-grid-core .prevpage:hover,
+.e-grid-core .lastpage:hover,
+.e-grid-core .nextpage:hover {
+    background-color: #fb5154;
+}
+
+.samplesec {
+    width: inherit;
+}
+
+.samplename {
+    color: #727272;
+    font-size: 18px;
+}
+
+.e-grid .selectionbackground {
+    background-color: #4C4C4C;
+    color: #FFFFFF;
+}
+
+.expense-container {
+    background-image: url('../../../themes/images/right side BG texture.png');
+    padding-bottom: 80px;
+    height: 100px;
+}
+
+.e-dialog .e-dialog-header, .e-dialog.metroblue .e-dialog-header {
+    background: #fafafa; /* Old browsers */
+    background: -moz-linear-gradient(top, #fafafa 0%, #ededed 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#fafafa), color-stop(100%,#ededed)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top, #fafafa 0%,#ededed 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top, #fafafa 0%,#ededed 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top, #fafafa 0%,#ededed 100%); /* IE10+ */
+    background: linear-gradient(to bottom, #fafafa 0%,#ededed 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fafafa', endColorstr='#ededed',GradientType=0 ); /* IE6-9 */
+    font-size: 14px;
+    border-color: #CCCCCC;
+    /*color:#B2B2B2;*/
+}
+
+.e-dialog-content.e-dialog {
+    color: #B2B2B2;
+    font-size: 16px;
+}
+
+.add-filter-panel {
+   
+}

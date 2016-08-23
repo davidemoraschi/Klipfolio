@@ -1,0 +1,106 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Project Management Organizational Chart</title>
+    <link href="../themes/default-theme/ej.widgets.all.min.css" rel="stylesheet" />
+    <link href="../themes/default.css" rel="stylesheet" />
+    <!--[if lt IE 9]>
+         <script src="../scripts/jquery-1.11.3.min.js" type="text/javascript"></script>
+     <!--<![endif]-->
+    <!--[if gte IE 9]><!-->
+    <script src="../scripts/jquery-2.1.4.min.js" type="text/javascript"></script>
+    <!--<![endif]-->
+    <script src="../scripts/jquery.easing.1.3.min.js"></script>
+    <script src="../scripts/ej.web.all.min.js"></script>
+    <style>
+        #content
+        {
+            width: 160px;
+            height: 80px;
+            display: block;
+            position: absolute;
+            pointer-events: none;
+            text-align: left;
+            vertical-align: bottom;
+            margin-top: -100px;
+        }
+    </style>
+</head>
+<body>
+    <div class="content-container-fluid">      
+        <div class="row">                
+            <div class="cols-sample-area"> 
+                <div id="diagram"></div>
+            </div>
+        </div>
+    </div>
+    <script>
+        var data = [
+        { "Id": "parent", "Function": "Project Management","Color":"#0b4a6b" },
+        { "Id": "1", "Function": "R&D Team", "Phase": "parent", "Color": "#3a7582" },
+        { "Id": "3", "Function": "Philosophy", "Phase": "1", "Color": "#68a4d7"},
+        { "Id": "4", "Function": " Organization", "Phase": "1", "Color": "#68a4d7" },
+        { "Id": "5", "Function": "Technology", "Phase": "1", "Color": "#68a4d7" },
+        { "Id": "7", "Function": " Funding", "Phase": "1", "Color": "#68a4d7" },
+        { "Id": "8", "Function": "Resource Allocation", "Phase": "1", "Color": "#68a4d7" },
+        { "Id": "9", "Function": "Targeting", "Phase": "1", "Color": "#68a4d7" },
+        { "Id": "11", "Function": "Evaluation", "Phase": "1", "Color": "#68a4d7" },
+        { "Id": "156", "Function": "HR Team", "Phase": "parent", "Color": "#9e4c9d" },
+        { "Id": "13", "Function": "Recruitment", "Phase": "156", "Color": "#bd80b7" },       
+        { "Id": "112", "Function": "Employee Relation", "Phase": "156", "Color": "#bd80b7" },
+        { "Id": "17", "Function": "Production & Sales Team", "Phase": "parent", "Color": "#22897d" },
+        { "Id": "119", "Function": "Design", "Phase": "17", "Color": "#35b482" },
+        { "Id": "19", "Function": "Operation", "Phase": "17", "Color": "#35b482" },
+        { "Id": "20", "Function": "Support", "Phase": "17", "Color": "#35b482" },
+        { "Id": "21", "Function": "Quality Assurance", "Phase": "17", "Color": "#35b482" },
+        { "Id": "23", "Function": "Customer Interaction", "Phase": "17", "Color": "#35b482" },
+        { "Id": "24", "Function": "Support and Maintanence", "Phase": "17", "Color": "#35b482" },
+        { "Id": "25", "Function": "Task Coordination", "Phase": "17", "Color": "#35b482" }
+        ];
+
+        //creating the node template
+        function nodeTemplate(diagram, node) {
+            node.labels[0].text = node.Function;
+            node.fillColor = node.Color;
+        }
+        if (!(ej.browserInfo().name === "msie" && Number(ej.browserInfo().version) < 9)) {
+            $("#diagram").ejDiagram({
+                width: "100%", height: "600px",
+                //use automatic layout to arranging elements on the page
+                layout: {
+                    type: "organizationalchart", marginY: 50, horizontalSpacing: 40, verticalSpacing: 40
+                },
+                defaultSettings: {
+                    //set the default properties of the nodes.
+                    node: {
+                        width: 130, height: 40, shape: "rectangle", borderColor: "transparent",
+                        labels: [
+                            {
+                                name: "label1", fontColor: "#ffffff"
+                            }
+                        ]
+                    },
+                    //set the default properties of the connectors.
+                    connector: { segments: [{ "type": "orthogonal" }], targetDecorator: { shape: "none" }, lineColor: "#003D3D" }
+                },
+                //initialize the node template.
+                nodeTemplate: nodeTemplate,
+                tool: ej.datavisualization.Diagram.Tool.ZoomPan,
+                snapSettings: { snapConstraints: ej.datavisualization.Diagram.SnapConstraints.None },
+                pageSettings: { scrollLimit: "diagram" },
+                enableContextMenu: false,
+                //configure data source for diagram
+                dataSourceSettings: {
+                    id: "Id", parent: "Phase",
+                    //specifies the dataSource
+                    dataSource: data
+                }
+            });
+        }
+        else {
+            alert("Diagram will not be supported in IE Version < 9");
+        }
+      
+    </script>
+</body>
+</html>
